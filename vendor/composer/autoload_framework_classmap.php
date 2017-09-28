@@ -2509,8 +2509,6 @@ return array(
     'tad\\WPBrowser\\Services\\WP\\Bootstrapper' => $vendorDir . '/lucatume/wp-browser-commons/src/tad/WPBrowser/Services/WP/Bootstrapper.php', 
     'tad\\WPBrowser\\Template\\Data' => $vendorDir . '/lucatume/wp-browser/src/tad/WPBrowser/Template/Data.php', 
     'tad_DI52_Container' => $vendorDir . '/lucatume/di52/src/tad/DI52/Container.php', 
-    'tad_DI52_ContainerInterface' => $vendorDir . '/lucatume/di52/src/tad/DI52/ContainerInterface.php', 
-    'tad_DI52_ProtectedValue' => $vendorDir . '/lucatume/di52/src/tad/DI52/ProtectedValue.php', 
     'tad_DI52_ServiceProvider' => $vendorDir . '/lucatume/di52/src/tad/DI52/ServiceProvider.php', 
     'tad_DI52_ServiceProviderInterface' => $vendorDir . '/lucatume/di52/src/tad/DI52/ServiceProviderInterface.php', 
     'xrstf\\Composer52\\AutoloadGenerator' => $vendorDir . '/xrstf/composer-php52/lib/xrstf/Composer52/AutoloadGenerator.php', 
