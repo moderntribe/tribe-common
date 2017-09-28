@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [2.0.9] - 2017-09-26
+### Fixed
+- issue with `setVar` method where, in some instances, variable values could not be overridden
+
 ## [2.0.8] - 2017-07-18
 ### Fixed
 - check for file existence in autoload script (thanks @truongwp)
@@ -153,7 +157,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - array resolution support for the Array Access API.
 - the changelog.
 
-[Unreleased]: https://github.com/lucatume/di52/compare/2.0.8...HEAD
+[Unreleased]: https://github.com/lucatume/di52/compare/2.0.9...HEAD
+[2.0.9]: https://github.com/lucatume/di52/compare/2.0.8...2.0.9
 [2.0.8]: https://github.com/lucatume/di52/compare/2.0.7...2.0.8
 [2.0.7]: https://github.com/lucatume/di52/compare/2.0.6...2.0.7
 [2.0.6]: https://github.com/lucatume/di52/compare/2.0.5...2.0.6

@@ -166,6 +166,8 @@ class tad_DI52_Container implements ArrayAccess {
 			$value = $value->getValue();
 		}
 
+		$this->offsetUnset($offset);
+
 		$this->singletons[$offset] = $offset;
 
 		if (isset($this->protected[$offset])) {
