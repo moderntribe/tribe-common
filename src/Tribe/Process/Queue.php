@@ -314,6 +314,8 @@ abstract class Tribe__Process__Queue extends WP_Background_Process {
 			'last_update' => time(),
 		);
 
+		$this->id = $key;
+
 		/**
 		 * Filters the information that will be saved to the database for this queue type.
 		 *
@@ -327,7 +329,6 @@ abstract class Tribe__Process__Queue extends WP_Background_Process {
 		set_transient( $this->get_meta_key( $key ), $save_data );
 
 		$this->did_save = true;
-		$this->id       = $key;
 
 		return $this;
 	}
