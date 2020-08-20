@@ -56,7 +56,7 @@ class Tribe__Plugins_API {
 				'active_installs' => 20000,
 			),
 			'events-calendar-pro' => array(
-				'title' => __( 'Events Calendar PRO', 'tribe-common' ),
+				'title' => __( 'Events Calendar Pro', 'tribe-common' ),
 				'slug' => 'events-calendar-pro',
 				'link' => 'https://m.tri.be/1ai-',
 				'description' => __( 'Power up your calendar with Pro', 'tribe-common' ),

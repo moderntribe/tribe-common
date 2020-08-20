@@ -63,20 +63,23 @@
 	 *
 	 * ----------------------------------------------------------------------------- */
 
+	.tribe-common-form-control-checkbox,
+	.tribe-common-form-control-radio {
+		display: flex;
+		align-items: flex-start;
+	}
+
 	.tribe-common-form-control-checkbox__label,
 	.tribe-common-form-control-radio__label {
 		cursor: pointer;
-		display: inline-block;
-		margin-left: 11px;
-		vertical-align: middle;
+		margin-left: 15px;
 	}
 
 	.tribe-common-form-control-checkbox__input,
 	.tribe-common-form-control-radio__input {
 		cursor: pointer;
-		display: inline-block;
-		margin: 0;
-		vertical-align: middle;
+		flex: none;
+		margin: 1px 0 0;
 	}
 
 
@@ -106,7 +109,7 @@
 	#top .main_color & {
 
 		.tribe-common-form-control-checkbox__input {
-			display: inline-block;
+			margin: 1px 0 0;
 		}
 	}
 

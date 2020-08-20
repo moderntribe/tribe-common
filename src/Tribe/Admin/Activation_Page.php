@@ -235,12 +235,25 @@ class Tribe__Admin__Activation_Page {
 			$this->current_context = 'welcome';
 		} elseif ( isset( $_GET[ $this->update_slug ] ) ) {
 			$this->current_context = 'update';
+		} else {
+			return;
 		}
 
-		if ( ! empty( $this->current_context ) ) {
-			$this->disable_default_settings_page();
-			add_action( Tribe__Settings::instance()->admin_page, array( $this, 'display_page' ) );
-		}
+		$this->disable_default_settings_page();
+		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
+		add_action( Tribe__Settings::instance()->admin_page, array( $this, 'display_page' ) );
+	}
+
+	/**
+	 * Hooked to admin_body_class to add a class for the update or welcome page
+	 *
+	 * @param string $classes a space separated string of classes to be added to body
+	 *
+	 * @return string
+	 */
+	public function admin_body_class( $classes ) {
+		$classes .= ' tribe-' . $this->current_context;
+		return $classes;
 	}
 
 	/**

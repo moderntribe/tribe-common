@@ -402,6 +402,23 @@ var tribe_dropdowns = window.tribe_dropdowns || {};
 			};
 		}
 
+		// Attach dropdown to container in DOM.
+		if ( $select.is( '[data-attach-container]' ) ) {
+			$.fn.select2.amd.define(
+				'CustomDropdownAdapter',
+				[
+					'select2/utils',
+					'select2/dropdown',
+					'select2/dropdown/attachContainer',
+				],
+				function( utils, dropdown, attachContainer ) {
+					return utils.Decorate( dropdown, attachContainer );
+				}
+			);
+
+			args.dropdownAdapter = $.fn.select2.amd.require( 'CustomDropdownAdapter' );
+		}
+
 		// Save data on Dropdown
 		$select.data( 'dropdown', args );
 

@@ -19,8 +19,10 @@ foreach ( $products as $product ) {
 	<div class="tribe-header">
 		<div class="content-wrapper">
 			<div class="logo-word-mark">
-				<img src="<?php echo esc_url( tribe_resource_url( 'images/icons/horns.svg', false, null, $main ) ); ?>" alt="<?php esc_attr_e( 'TEC Logo', 'tribe-common' ); ?>" />
-				<h1><span>TEC</span>&nbsp;<?php esc_html_e( 'Add-Ons', 'tribe-common' ); ?></h1>
+				<img
+					src="<?php echo esc_url( tribe_resource_url( 'images/logo/tec-brand.svg', false, null, $main ) ); ?>"
+					alt="<?php esc_attr_e( 'The Events Calendar brand logo', 'tribe-common' ); ?>"
+				/>
 			</div>
 
 			<ul>
@@ -32,6 +34,11 @@ foreach ( $products as $product ) {
 	</div>
 
 	<div id="tribe-all-solutions" class="tribe-content">
+		<img
+			class="tribe-events-admin-graphic"
+			src="<?php echo esc_url( tribe_resource_url( 'images/header/all-solutions.jpg', false, null, $main ) ); ?>"
+			alt="<?php esc_attr_e( 'Shapes and lines for visual interest', 'tribe-common' ); ?>"
+		/>
 		<div class="content-wrapper">
 			<div class="addon-grid">
 				<?php foreach ( $all_products as $status => $some_products ) : ?>
@@ -89,6 +96,11 @@ foreach ( $products as $product ) {
 	</div>
 
 	<div id="tribe-bundles" class="tribe-content">
+		<img
+			class="tribe-events-admin-graphic"
+			src="<?php echo esc_url( tribe_resource_url( 'images/header/bundles.jpg', false, null, $main ) ); ?>"
+			alt="<?php esc_attr_e( 'Shapes and lines for visual interest', 'tribe-common' ); ?>"
+		/>
 		<div class="content-wrapper">
 			<div class="addon-grid">
 				<h2><?php esc_html_e( 'The plugins you need at one discounted price', 'tribe-common' ); ?></h2>
@@ -142,10 +154,15 @@ foreach ( $products as $product ) {
 	</div>
 
 	<div id="tribe-extensions" class="tribe-content">
+		<img
+			class="tribe-events-admin-graphic"
+			src="<?php echo esc_url( tribe_resource_url( 'images/header/extensions.jpg', false, null, $main ) ); ?>"
+			alt="<?php esc_attr_e( 'Shapes and lines for visual interest', 'tribe-common' ); ?>"
+		/>
 		<div class="content-wrapper">
 			<div class="addon-grid">
 				<h2><?php esc_html_e( 'Free extensions to power up your plugins', 'tribe-common' ); ?></h2>
-				<p><?php esc_html_e( 'Extensions are quick solutions our team came up with to solve specific issues you may need. (Just a note - extensions are not covered by our support team.)', 'tribe-common' ); ?></p>
+				<p><?php esc_html_e( 'Extensions are quick solutions our team came up with to solve specific issues you may need. (Note - extensions are not covered by our support team.)', 'tribe-common' ); ?></p>
 				<?php foreach ( $extensions as $extension ) : ?>
 					<div class="tribe-addon">
 						<div class="headline">
@@ -172,7 +189,7 @@ foreach ( $products as $product ) {
 
 </div>
 
-<?php // this is inline jQuery / javascript for extra simiplicity */ ?>
+<?php // this is inline jQuery / javascript for extra simplicity */ ?>
 <script type="text/javascript">
 	jQuery( document ).ready( function($) {
 		var current_tab = "#tribe-all-solutions";

@@ -7,6 +7,13 @@
 * Fix - Added IE11 compatibility for the toggles styles using `tribe-common-form-control-toggle` CSS class. [ET-865]
 * Tweak - Improve regular expressions used to parse UTC timezones by removing non-required grouping and characters. [TCMN-68]
 
+= [4.12.7] TBD =
+
+* Tweak - Allow SelectWoo dropdown to be attached to the container via the `data-attach-container` attribute. [FBAR-129]
+* Tweak - Adjust the border radius of the form checkbox styles. [FBAR-126]
+* Tweak - Adjust the layout styles for tribe common checkboxes and radios. [FBAR-126] [FBAR-127]
+* Fix - Correctly handle array format query arguments while generating clean, or canonical, URLs; this solves some issues with Filter Bar and Views v2 where filters would be dropped when changing Views, paginating or using the datepicker. [FBAR-74, FBAR-85, FBAR-86]
+
 = [4.12.6.1] 2020-08-17 =
 
 * Fix - Pass extra props down to Modal component to allow addition of extra properties. [GTRIA-275]

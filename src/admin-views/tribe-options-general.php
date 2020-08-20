@@ -3,7 +3,11 @@
 $generalTabFields = [
 	'info-start'                    => [
 		'type' => 'html',
-		'html' => '<div id="modern-tribe-info"><img src="' . plugins_url( 'resources/images/modern-tribe@2x.png', dirname( __FILE__ ) ) . '" alt="Modern Tribe Inc." title="Modern Tribe Inc.">',
+		'html' => '<div id="modern-tribe-info">
+					<img
+						src="' . plugins_url( 'resources/images/logo/tec-brand.svg', dirname( __FILE__ ) ) . '"
+						alt="' . esc_attr( 'The Events Calendar brand logo', 'tribe-common' ) . '"
+					/>',
 	],
 	'event-tickets-info' => [
 		'type'        => 'html',

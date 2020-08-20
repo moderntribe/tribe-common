@@ -166,7 +166,7 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 					'logo' => 'images/logo/bundle-event-marketing.svg',
 					'link' => 'https://m.tri.be/1aj3',
 					'discount' => __( 'Save over 20%', 'tribe-common' ),
-					'description' => __( 'Ticket sales, attendee management, and email marketing for your events.', 'tribe-common' ),
+					'description' => __( 'Ticket sales, attendee management, and email marketing for your events', 'tribe-common' ),
 					'includes' => [
 						'events-calendar-pro',
 						'event-tickets-plus',

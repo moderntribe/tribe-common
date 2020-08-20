@@ -247,9 +247,7 @@ table.plugins {
 }
 
 #modern-tribe-info img {
-	height: 18px;
 	margin: 10px 0;
-	width: 250px;
 }
 
 #modern-tribe-info ul {
@@ -917,32 +915,11 @@ only screen and (min-device-pixel-ratio: 2) {
 	}
 }
 
-/* = TEC Welcome & Update Pages // Displays after installation & plugin update
+/* = Update Pages // Displays after plugin update
 ===============================================================================*/
 
-.tribe_welcome_page,
 .tribe_update_page {
 	max-width: 850px;
-}
-
-.tribe_welcome_page {
-
-	&.wrap h1 {
-		font-size: 3em;
-		line-height: 1.2;
-		margin-top: 1em;
-
-		&:before {
-			color: #555d66;
-			content: '\f145';
-			font-family: dashicons;
-			font-size: 0.9em;
-			line-height: 1;
-			margin-right: 5px;
-			position: relative;
-			top: 4px;
-		}
-	}
 }
 
 .tribe-half-column {
@@ -971,20 +948,12 @@ only screen and (min-device-pixel-ratio: 2) {
 	width: 50%;
 }
 
-.tribe_welcome_page h2,
-.tribe_welcome_page .tribe-half-column h4 {
-	font-size: 24px;
-	line-height: 1.2;
-	margin-bottom: 20px;
-}
-
 .tribe_update_page h2 {
 	font-size: 30px;
 	line-height: 1.2;
 	margin-bottom: 20px;
 }
 
-.tribe_welcome_page h3,
 .tribe_update_page h3 {
 	font-size: 24px;
 	font-weight: 400;
@@ -992,7 +961,6 @@ only screen and (min-device-pixel-ratio: 2) {
 	margin-top: 0;
 }
 
-.tribe_welcome_page h4,
 .tribe_update_page h4 {
 	font-size: 18px;
 	font-weight: 600;
@@ -1000,67 +968,13 @@ only screen and (min-device-pixel-ratio: 2) {
 	margin: 0;
 }
 
-.tribe_welcome_page p,
 .tribe_update_page p {
 	font-size: 15px;
 }
 
-.tribe_welcome_page li {
-	font-size: 14px;
-	margin-bottom: 10px;
-}
-
-p.tribe-welcome-message {
+p.tribe-update-message {
 	font-size: 18px;
 	font-weight: 400;
-}
-
-.tribe_welcome_page .tribe-half-column h4 {
-	margin-top: 1em;
-
-	/* "Calendar" dashicon */
-	&:before {
-		color: #555d66;
-		content: '\f145';
-		font-family: dashicons;
-		font-size: 21px;
-		line-height: 1;
-		margin-right: 10px;
-		position: relative;
-		top: 2px;
-	}
-
-	/* "Life preserver" dashicon */
-	&[data-tribe-icon="dashicons-sos"] {
-
-		&:before {
-			content: '\f468';
-		}
-	}
-
-	/* "Graduation cap" dashicon */
-	&[data-tribe-icon="dashicons-welcome-learn-more"] {
-
-		&:before {
-			content: '\f118';
-		}
-	}
-
-	/* "Megaphone" dashicon */
-	&[data-tribe-icon="dashicons-megaphone"] {
-
-		&:before {
-			content: '\f488';
-		}
-	}
-
-	/* "Heart" dashicon */
-	&[data-tribe-icon="dashicons-heart"] {
-
-		&:before {
-			content: '\f487';
-		}
-	}
 }
 
 .tribe_update_page h4:before {
@@ -1073,32 +987,14 @@ p.tribe-welcome-message {
 	top: 5px;
 }
 
-.tribe-welcome-video-wrapper {
-	height: 0;
-	margin-bottom: 40px;
-	padding-bottom: 56.25%; /* 16:9 */
-	padding-top: 25px;
-	position: relative;
-}
-
-.tribe-welcome-video-wrapper iframe {
-	height: 100%;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
-}
-
 a.tribe-rating-link {
 	text-decoration: none;
 }
 
-.tribe-welcome-links,
 .tribe-update-links {
 	margin-top: 30px;
 }
 
-.tribe_welcome_page li:before,
 .tribe_update_page li:before {
 	content: '\2022';
 	padding-right: 3px;
@@ -1131,7 +1027,6 @@ a.tribe-rating-link {
 		width: 100%;
 	}
 }
-
 
 @media screen and ( max-width: 782px ) {
 
@@ -1740,5 +1635,527 @@ Credit to https://github.com/jensjns/wp-admin-red-button
 	.column-updated,
 	.column-downloaded {
 		display: none;
+	}
+}
+
+
+/* = TEC Welcome & new BEM tribe admin styles
+==============================================*/
+body.tribe-welcome {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: white;
+
+	/* hide WordPress update notices on this page */
+	.update-nag {
+		display: none;
+	}
+
+	#wpcontent {
+		padding: 0;
+	}
+
+	/* this is a temporary hack until the Update page and Event Tickets Welcome are re-factored */
+	.tribe_settings {
+		margin: 0;
+
+		& > h1 {
+			display: none;
+		}
+	}
+
+	#wpfooter {
+		display: none;
+	}
+
+	#wpbody-content {
+		padding-bottom: 25px;
+	}
+}
+
+
+.tribe-events-admin-content-wrapper {
+	font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+	font-style: normal;
+	margin: 0 auto;
+	padding: 20px;
+	width: calc( 100% - 40px );
+
+	@media screen and (min-width: 710px) {
+		width: 670px;
+	}
+
+	@media screen and (min-width: 1217px) {
+		width: 100%;
+		max-width: 1060px;
+	}
+}
+
+.tribe-events-admin-card {
+	background: #FFFFFF;
+	border: 1px solid #E1E1E4;
+	box-sizing: border-box;
+	border-radius: 16px;
+	display: block;
+	margin: 0 auto 36px auto;
+	padding: 27px;
+	text-align: center;
+}
+
+.tribe-events-admin-card--1up {
+	width: 100%;
+
+	/* treat the one-up card like a three-up card at the middle break */
+	@media screen and (min-width: 710px) {
+		display: inline-block;
+		width: calc( 50% - 18px );
+		margin-left: 32px;
+
+		.tribe-events-admin-card__description {
+			height: 71px;
+		}
+
+		.tribe-events-admin-card__image {
+			margin-bottom: 28px;
+		}
+	}
+
+	@media screen and (min-width: 1217px) {
+		margin: 0 0 36px 0;
+		padding: 33px 44px 30px 44px;
+		text-align: left;
+		width: 1012px;
+
+		.tribe-events-admin-card__description {
+			height: auto;
+		}
+
+		.tribe-events-admin-card__image {
+			float: left;
+			margin: 0 48px 10px 0;
+		}
+
+	}
+}
+
+.tribe-events-admin-card--2up {
+
+	.tribe-events-admin-card__title {
+		max-width: 260px;
+	}
+
+	@media screen and (min-width: 710px) {
+		display: inline-block;
+		width: calc(50% - 20px);
+
+		&.tribe-events-admin-card--first {
+			margin-right: 36px;
+		}
+
+		&.tribe-events-admin-card--last {
+			margin-right: 0;
+		}
+
+		.tribe-events-admin-card__image {
+			height: 100px;
+			margin-bottom: 12px;
+		}
+
+		.tribe-events-admin-card__title {
+			max-width: 340px;
+			margin-bottom: 27px;
+		}
+	}
+
+	@media screen and (min-width: 1217px) {
+		margin-right: 36px;
+		width: 486px;
+	}
+}
+
+.tribe-events-admin-card--3up {
+
+	@media screen and (min-width: 710px) {
+		display: inline-block;
+		margin-bottom: 32px;
+		width: calc( 50% - 18px );
+
+		&.tribe-events-admin-card--first {
+			margin-right: 32px;
+		}
+
+		&.tribe-events-admin-card--middle {
+			margin-right: 0;
+		}
+	}
+
+	@media screen and (min-width: 1217px) {
+		width: 310px;
+
+		&.tribe-events-admin-card--first {
+			margin-right: 36px;
+		}
+
+		&.tribe-events-admin-card--middle {
+			margin-right: 36px;
+		}
+
+		&.tribe-events-admin-card--last {
+			margin-right: 0;
+		}
+	}
+
+	.tribe-events-admin-card__description {
+		height: 71px;
+	}
+
+	.tribe-events-admin-card__image {
+		margin-bottom: 28px;
+	}
+}
+
+.tribe-events-admin-card--promo-blue {
+	background-color: #3D54FF;
+	background-image: url("../images/welcome/promo.jpg");
+
+	@media screen and (min-width: 710px) {
+		display: block;
+		margin-left: 0;
+		min-height: 170px;
+		width: 100%;
+	}
+
+	@media screen and (min-width: 1217px) {
+		min-height: 150px;
+	}
+
+	.tribe-events-admin-card__description {
+		color: white;
+		font-size: 16px;
+		text-align: left;
+		margin-bottom: 16px;
+
+		@media screen and (min-width: 710px) {
+			float: left;
+			max-width: 300px;
+		}
+
+		@media screen and (min-width: 1217px) {
+			max-width: 450px;
+		}
+
+	}
+
+	.tribe-events-admin-card__title {
+		text-align: left;
+		color: white;
+	}
+}
+
+.tribe-events-admin-graphic {
+	position: absolute;
+	top: 106px;
+	right: 0;
+	z-index: -1;
+
+	@media screen and (min-width: 710px) {
+		top: 0;
+		max-width: 250px;
+	}
+
+	@media screen and (min-width: 1217px) {
+		max-width: none;
+	}
+}
+
+.tribe-events-admin-graphic--desktop-only {
+	display: none;
+
+	@media screen and (min-width: 710px) {
+		display: block;
+	}
+}
+
+.tribe-events-admin-graphic--mobile-only {
+	display: block;
+
+	@media screen and (min-width: 710px) {
+		display: none;
+	}
+}
+
+.tribe-events-admin-card__form {
+	position: relative;
+
+	@media screen and (min-width: 710px) {
+		float: right;
+		width: 300px;
+	}
+
+	@media screen and (min-width: 1217px) {
+		width: 365px;
+	}
+}
+
+/* including the specificity on input type to override base WP admin styles */
+input[type="email"].tribe-events-admin-card__input {
+	background: #FFFFFF;
+	border: 1px solid #E1E1E4;
+	box-sizing: border-box;
+	border-radius: 16px;
+	font-size: 14px;
+	height: 54px;
+
+	@media screen and (min-width: 710px) {
+		width: 300px;
+	}
+
+	@media screen and (min-width: 1217px) {
+		width: 365px;
+	}
+
+	&::placeholder {
+		color: rgba(15, 16, 49, 0.72);
+		letter-spacing: 0.5px;
+		padding-left: 10px;
+	}
+}
+
+.tribe-events-admin-card__button {
+	background-color: white;
+	border: none;
+	color: #3D54FF;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	line-height: 16px;
+	position: absolute;
+	right: 20px;
+	text-transform: uppercase;
+	top: 17px;
+
+	&:hover {
+		color: #161B7D;
+	}
+}
+
+.tribe-events-admin-card__description {
+	color: #000000;
+
+	font-size: 14px;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 22px;
+	margin-top: 16px;
+}
+
+.tribe-events-admin-card__image {
+	display: block;
+	margin: 0 auto 0 auto;
+	height: 100px;
+}
+
+.tribe-events-admin-card__link {
+	color: #3D54FF;
+	display: inline-block;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: bold;
+	line-height: 18px;
+	margin-top: 24px;
+	position: relative;
+	text-decoration: none;
+
+	&:hover {
+		color: #161B7D;
+	}
+
+	&:after {
+		border-style: solid;
+		border-width: 0 0 1px;
+		bottom: -4px;
+		content: '';
+		left: 0;
+		position: absolute;
+		width: 100%;
+	}
+}
+
+.tribe-events-admin-card__title {
+	color: #0F1031;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 23px;
+	margin: auto;
+
+	@media screen and (min-width: 710px) {
+		font-size: 20px;
+		line-height: 23px;
+	}
+}
+
+.tribe-events-admin-card-grid {
+	max-width: 1048px;
+}
+
+.tribe-events-admin-quick-nav {
+	background: #FFFFFF;
+	border-radius: 16px;
+	border: 1px solid #E1E1E4;
+	box-sizing: border-box;
+	display: block;
+	margin: 40px 0 78px 0;
+	padding: 18px 23px 2px 23px;
+
+	@media screen and (min-width: 710px) {
+		border-radius: 100px;
+		margin: 24px 0 94px 0;
+		padding: 0;
+		height: 54px;
+		width: 620px;
+	}
+}
+
+.tribe-events-admin-quick-nav__link {
+	color: #3D54FF;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 18px;
+	text-align: center;
+	text-decoration: none;
+
+	&:hover {
+		color: #161B7D;
+	}
+}
+.tribe-events-admin-quick-nav__link-item {
+	display: block;
+	padding-bottom: 19px;
+
+	@media screen and (min-width: 710px) {
+		display: inline-block;
+		padding: 18px 10px 0 10px;
+	}
+}
+
+.tribe-events-admin-quick-nav__links {
+	display: inline;
+}
+
+.tribe-events-admin-quick-nav__title {
+	color: rgba(15, 16, 49, 0.72);
+	display: inline-block;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 16px;
+	padding-bottom: 14px;
+	text-transform: uppercase;
+
+	@media screen and (min-width: 710px) {
+		padding: 19px 6px 17px 32px;
+	}
+}
+
+.tribe-events-admin-section-header {
+	color: #000000;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 28px;
+	margin: 21px 0 24px 0;
+
+	@media screen and (min-width: 710px) {
+		font-size: 28px;
+		line-height: 32px;
+		margin-bottom: 21px;
+	}
+}
+
+.tribe-events-admin-title {
+	padding-top: 14px;
+
+	@media screen and (min-width: 710px) {
+		padding-top: 50px;
+	}
+}
+
+.tribe-events-admin-title__description {
+	color: #0F1031;
+	font-size: 16px;
+	font-weight: normal;
+	line-height: 24px;
+	max-width: 584px;
+	padding-top: 15px;
+
+	@media screen and (min-width: 710px) {
+		padding-top: 15px;
+	}
+}
+
+.tribe-events-admin-title__heading {
+	color: #0F1031;
+	display: inline-block;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 28px;
+	margin: 5px 0 0 0;
+
+	@media screen and (min-width: 710px) {
+		font-size: 48px;
+		line-height: 55px;
+		margin: 0;
+	}
+}
+
+.tribe-events-admin-title__logo {
+	margin-right: 8px;
+	vertical-align: top;
+	width: 34px;
+
+	@media screen and (min-width: 710px) {
+		margin-right: 14px;
+		padding-top: 5px;
+		width: 40px;
+	}
+}
+
+/* -- Freemius tweaks -- */
+body.tribe-welcome #fs_connect {
+	border: 1px solid #E1E1E4;
+	box-sizing: border-box;
+	border-radius: 16px;
+	margin-left: 22px;
+	box-shadow: none;
+
+	.fs-actions {
+		background-color: transparent;
+	}
+
+	.fs-permissions {
+		border-top: 1px solid #E1E1E4;
+		margin: 0 16px;
+	}
+
+	button {
+		background-color: #3D54FF;
+		border-color: #3D54FF;
+	}
+
+	.button-secondary {
+		border-color: #3D54FF;
+		color: #3D54FF;
+		background: white;
+	}
+
+	a {
+		color: #3D54FF;
+
+		&:focus {
+			box-shadow: none;
+			outline: none;
+		}
+
+		&:hover {
+			color: #161B7D;
+		}
 	}
 }
