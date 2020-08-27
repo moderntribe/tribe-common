@@ -1,14 +1,9 @@
 <?php
-/**
- * Shortcodes manager for Tribe plugins.
- *
- * @package Tribe\Shortcode
- * @since   4.12.0
- */
+
 namespace Tribe\Shortcode;
 
 /**
- * Class Shortcode Manager.
+ * Shortcodes manager for Tribe plugins.
  *
  * @since  4.12.0
  *
@@ -26,7 +21,7 @@ class Manager {
 		$shortcodes = [];
 
 		/**
-		 * Allow the registering of shortcodes into the our Tribe plugins.
+		 * Allow the registering of shortcodes into our Tribe plugins.
 		 *
 		 * @since  4.12.0
 		 *
