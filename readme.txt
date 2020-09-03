@@ -4,6 +4,7 @@
 
 = [4.12.10] TBD =
 
+* Fix - Update escaping of textarea fields so slashes before quotes and raw HTML entities are not displayed. [CE-72]
 
 = [4.12.8] 2020-08-26 =
 

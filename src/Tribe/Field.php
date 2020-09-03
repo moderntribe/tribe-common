@@ -481,7 +481,7 @@ if ( ! class_exists( 'Tribe__Field' ) ) {
 			$field .= $this->do_field_name();
 			$field .= $this->do_field_attributes();
 			$field .= '>';
-			$field .= esc_html( stripslashes( $this->value ) );
+			$field .= esc_textarea( html_entity_decode( stripslashes( $this->value ) ) );
 			$field .= '</textarea>';
 			$field .= $this->do_screen_reader_label();
 			$field .= $this->do_field_div_end();
