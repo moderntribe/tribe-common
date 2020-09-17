@@ -349,7 +349,16 @@ if ( ! class_exists( 'Tribe__Field' ) ) {
 		 */
 		public function do_field_value() {
 			$return = '';
-			if ( $this->value ) {
+
+			if ( 
+				// License type fields shouldn't allow displaying empty values.
+				! empty( $this->value )
+				// Allow text fields to display '0' value, such as what to display for Free ticket.
+				|| (
+					'text' === $this->type
+					&& '' !== $this->value
+				)
+			) {
 				$return = ' value="' . $this->value . '"';
 			}
 

@@ -4,6 +4,7 @@
 
 = [4.12.9] TBD =
 
+* Tweak - Allow text fields to display strings that evaluate to empty, such as a zero string (`'0'`). Useful for a setting asking what the display value of a free ticket should be. [TCMN-66]
 * Tweak - Move border style button styles to border-small and add various border button styles that match the solid button style. [FBAR-143]
 * Tweak - Add the common views folder to the `Tribe__Template` lookup folders, the folder will be searched for matching template files only if no plugin-provided template was found. [FBAR-148]
 * Tweak - Add the `tribe_template_common_path` filter to allow controlling the path of the template file provided by common. [FBAR-148]
