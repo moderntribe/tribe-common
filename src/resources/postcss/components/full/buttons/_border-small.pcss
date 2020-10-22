@@ -1,0 +1,55 @@
+.tribe-common {
+	/* -----------------------------------------------------------------------------
+	 *
+	 * Button: Border Small
+	 *
+	 * Example:
+	 * <button class="tribe-common-c-btn-border-small">...</button>
+	 * <a href="#" class="tribe-common-c-btn-border-small">...</a>
+	 *
+	 * ----------------------------------------------------------------------------- */
+
+	.tribe-common-c-btn-border-small,
+	a.tribe-common-c-btn-border-small {
+		@mixin button-border-small;
+
+		color: var(--color-text-secondary);
+		padding: 14px 20px 14px;
+		width: 100%;
+
+		.tribe-common--breakpoint-medium& {
+			padding: 6px 15px;
+			width: auto;
+		}
+
+		&:active,
+		&:focus,
+		&:hover {
+			color: var(--color-text-primary);
+		}
+
+		&:disabled {
+			color: var(--color-text-disabled)
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 *
+	 * Button: Border Small - Theme Overrides
+	 *
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------------------------------------
+	 * Theme Overrides - Twenty Seventeen
+	 * ------------------------------------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-c-btn-border-small {
+
+			&:hover {
+				background-color: var(--color-background);
+			}
+		}
+	}
+}

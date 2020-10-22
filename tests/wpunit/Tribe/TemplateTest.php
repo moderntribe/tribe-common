@@ -267,4 +267,164 @@ class TemplateTest extends \Codeception\TestCase\WPTestCase {
 		$this->assertNotContains( '<div class="test">%%after_container_open%%', $html );
 		$this->assertStringEndsNotWith( '%%before_container_close%%</div>', $html );
 	}
+
+	/**
+	 * It should add common template path when looking for files
+	 *
+	 * @test
+	 */
+	public function should_add_common_template_path_when_looking_for_files() {
+		$template = new class extends Template {
+			protected $template_base_path = __DIR__ . '/test-plugin';
+			protected $folder = [ 'src', 'views' ];
+		};
+		/*
+		 * We're not creating real template files (beyond the point), but want to ensure common path is included among
+		 * the paths to search for the template files: the assertion will happen during the filtering.
+		 */
+		$assert = function ( array $folders ) {
+			$this->assertEquals( [ 'plugin', 'common' ], array_keys( $folders ),
+				'There should be a plugin and a common folder.' );
+			$this->assertGreaterThan( $folders['plugin']['priority'], $folders['common']['priority'],
+				'Common folder should be looked up after the plugin folder.' );
+			$this->assertEquals( \Tribe__Main::instance()->plugin_path . 'src/views', $folders['common']['path'] );
+		};
+		add_filter( 'tribe_template_path_list', $assert, PHP_INT_MAX );
+
+		// What we look for is not really relevant: the assertions happens before.
+		$template->get_template_file( [ 'foo', 'bar', 'component' ] );
+	}
+
+	/**
+	 * It should not add common template path if common lookup is disabled
+	 *
+	 * @test
+	 */
+	public function should_not_add_common_template_path_if_common_lookup_is_disabled() {
+		$template = new class extends Template {
+			protected $template_base_path = __DIR__ . '/test-plugin';
+			protected $folder = [ 'src', 'views' ];
+			protected $common_lookup = false;
+		};
+		$assert = function ( array $folders ) {
+			$this->assertEquals( [ 'plugin' ], array_keys( $folders ),
+				'There should be a plugin folder only.' );
+		};
+		add_filter( 'tribe_template_path_list', $assert, PHP_INT_MAX );
+
+		// What we look for is not really relevant: the assertions happens before.
+		$template->get_template_file( [ 'foo', 'bar', 'component' ] );
+	}
+
+	/**
+	 * It should allow setting aliases for the folder paths
+	 *
+	 * @test
+	 */
+	public function should_allow_setting_aliases_for_the_folder_paths_w_common_lookup() {
+		$template = new class extends Template {
+			protected $template_base_path = __DIR__ . '/test-plugin';
+			protected $folder = [ 'src', 'views' ];
+			protected $common_lookup = true;
+		};
+	}
+
+	/**
+	 * It should allow setting aliases for the folder paths w/o common lookup
+	 *
+	 * Here we simulate the case where a template extending class is looking up a versioned path (v4_2), but would like
+	 * to fall back on the version root too (v4).
+	 *
+	 * @test
+	 */
+	public function should_allow_setting_aliases_for_the_folder_paths_w_o_common_lookup() {
+		$template = new class extends Template {
+			protected $template_base_path = __DIR__ . '/test-plugin';
+			protected $folder = [ 'src', 'views', 'v4_2' ];
+			protected $common_lookup = false;
+			protected $aliases = [ 'v4_2' => 'v4' ];
+		};
+
+		$assert = function ( array $folders ) {
+			$this->assertEquals( [ 'plugin', 'plugin_v4' ], array_keys( $folders ),
+				'There should be two plugin folders.' );
+			$this->assertEquals( __DIR__ . '/test-plugin/src/views/v4_2', $folders['plugin']['path'] );
+			$this->assertEquals( __DIR__ . '/test-plugin/src/views/v4', $folders['plugin_v4']['path'] );
+			$this->assertEquals(
+				(int) $folders['plugin']['priority'] + 1,
+				$folders['plugin_v4']['priority'],
+				'Aliases should be loaded at original priority+1'
+			);
+		};
+		add_filter( 'tribe_template_path_list', $assert, PHP_INT_MAX );
+
+		// What we look for is not really relevant: the assertions happens before.
+		$template->get_template_file( [ 'foo', 'bar', 'component' ] );
+	}
+
+	/**
+	 * It should allow setting aliases w/ common lookup
+	 *
+	 * @test
+	 */
+	public function should_allow_setting_aliases_w_common_lookup() {
+		$template = new class extends Template {
+			protected $template_base_path = __DIR__ . '/test-plugin';
+			protected $folder = [ 'src', 'views', 'v4_2' ];
+			protected $common_lookup = true;
+			protected $aliases = [ 'v4_2' => 'v4' ];
+		};
+
+		$assert = function ( array $folders ) {
+			$this->assertEquals( [ 'plugin', 'common', 'plugin_v4', 'common_v4' ], array_keys( $folders ),
+				'There should be two plugin and two common folders.' );
+			$this->assertEquals( __DIR__ . '/test-plugin/src/views/v4_2', $folders['plugin']['path'] );
+			$this->assertEquals( __DIR__ . '/test-plugin/src/views/v4', $folders['plugin_v4']['path'] );
+			$this->assertEquals( \Tribe__Main::instance()->plugin_path . 'src/views/v4_2', $folders['common']['path'] );
+			$this->assertEquals( \Tribe__Main::instance()->plugin_path . 'src/views/v4', $folders['common_v4']['path'] );
+			$this->assertEquals(
+				(int) $folders['common']['priority'] + 1,
+				$folders['common_v4']['priority'],
+				'Common aliases should be loaded at original priority+1'
+			);
+		};
+		add_filter( 'tribe_template_path_list', $assert, PHP_INT_MAX );
+
+		// What we look for is not really relevant: the assertions happens before.
+		$template->get_template_file( [ 'foo', 'bar', 'component' ] );
+	}
+
+	/**
+	 * It should allow using aliases to rewrite path fragments
+	 *
+	 * Here we simulate the instance where the new version of the templates (v3_1) changed to use `templates/v3_1` where
+	 * the old version used `views/v3`.
+	 * Furthermore, this test will check if the DIRECTORY_SEPARATOR normalization will work.
+	 *
+	 * @test
+	 */
+	public function should_allow_using_aliases_to_rewrite_path_fragments() {
+		$template = new class extends Template {
+			protected $template_base_path = __DIR__ . '/test-plugin';
+			protected $folder = [ 'src', 'templates', 'v3_1' ];
+			protected $common_lookup = true;
+			// Note: the aliases use Windows DIRECTORY_SEPARATOR as the tests will likely run on *nix machines.
+			protected $aliases = [ 'templates\v3_1' => 'views\v3' ];
+		};
+
+		$assert = function ( array $folders ) {
+			$this->assertEquals( [ 'plugin', 'common', 'plugin_views\v3', 'common_views\v3' ], array_keys( $folders ),
+				'There should be two plugin and two common folders.' );
+			$this->assertEquals( __DIR__ . '/test-plugin/src/templates/v3_1', $folders['plugin']['path'] );
+			$this->assertEquals( __DIR__ . '/test-plugin/src/views/v3', $folders['plugin_views\v3']['path'] );
+			$this->assertEquals( \Tribe__Main::instance()->plugin_path . 'src/templates/v3_1',
+				$folders['common']['path'] );
+			$this->assertEquals( \Tribe__Main::instance()->plugin_path . 'src/views/v3',
+				$folders['common_views\v3']['path'] );
+		};
+		add_filter( 'tribe_template_path_list', $assert, PHP_INT_MAX );
+
+		// What we look for is not really relevant: the assertions happens before.
+		$template->get_template_file( [ 'foo', 'bar', 'component' ] );
+	}
 }

@@ -645,6 +645,7 @@ function tribe_asset_enqueue_group( $group ) {
  * Function to include more the one asset, based on `tribe_asset`
  *
  * @since 4.3
+ * @since 4.12.10 Added support for overriding arguments for individual assets.
  *
  * @param  object   $origin     The main Object for the plugin you are enqueueing the script/style for
  * @param  array    $assets     {
@@ -676,7 +677,14 @@ function tribe_assets( $origin, $assets, $action = null, $arguments = array() ) 
 		$file = $asset[1];
 		$deps = ! empty( $asset[2] ) ? $asset[2] : array();
 
-		$registered[] = tribe_asset( $origin, $slug, $file, $deps, $action, $arguments );
+		// Support the asset having a custom action.
+		$asset_action = ! empty( $asset[3] ) ? $asset[3] : $action;
+
+		// Support the asset having custom arguments and merge them with the original ones.
+		$asset_arguments = ! empty( $asset[4] ) ? array_merge( $arguments, $asset[4] ) : $arguments;
+
+		$registered[] = tribe_asset( $origin, $slug, $file, $deps, $asset_action, $asset_arguments );
+
 	}
 
 	return $registered;
@@ -797,5 +805,22 @@ if ( ! function_exists( 'tribe_asset_print_group' ) ) {
 		$assets     = tribe( 'assets' );
 
 		return $assets->print_group($group, $echo);
+	}
+}
+
+if ( ! function_exists( 'tribe_doing_shortcode' ) ) {
+	/**
+	 * Check whether a specific shortcode is being run.
+	 *
+	 * This is limited to only shortcodes registered with Tribe\Shortcode\Manager.
+	 *
+	 * @since 4.12.10
+	 *
+	 * @param null|string $tag The shortcode tag name, or null to check if doing any shortcode.
+	 *
+	 * @return bool Whether the shortcode is currently being run.
+	 */
+	function tribe_doing_shortcode( $tag = null ) {
+		return tribe( 'shortcode.manager' )->is_doing_shortcode( $tag );
 	}
 }

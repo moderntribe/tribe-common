@@ -44,6 +44,28 @@ class Tribe__Admin__Activation_Page {
 	}
 
 	/**
+	 * Determines if we are currently on the Welcome page.
+	 *
+	 * @since 4.12.11
+	 *
+	 * @return bool
+	 */
+	public function is_welcome_page() {
+		return isset( $_GET[ $this->welcome_slug ] );
+	}
+
+	/**
+	 * Determines if we are currently on the update page.
+	 *
+	 * @since 4.12.11
+	 *
+	 * @return bool
+	 */
+	public function is_update_page() {
+		return isset( $_GET[ $this->update_slug ] );
+	}
+
+	/**
 	 * Listen for opportunities to show update and welcome splash pages.
 	 */
 	public function hooks() {

@@ -24,15 +24,15 @@ class Tribe__Ajax__Dropdown {
 	 *
 	 * @since  4.6
 	 *
-	 * @param  string $search Search string from Select2
-	 * @param  int    $page   When we deal with pagination
-	 * @param  array  $args   Which arguments we got from the Template
-	 * @param  string $source What source it is
+	 * @param  string|array $search Search string from Select2
+	 * @param  int          $page   When we deal with pagination
+	 * @param  array        $args   Which arguments we got from the Template
+	 * @param  string       $source What source it is
 	 *
 	 * @return array
 	 */
 	public function search_terms( $search, $page, $args, $source ) {
-		$data = array();
+		$data = [];
 
 		if ( empty( $args['taxonomy'] ) ) {
 			$this->error( esc_attr__( 'Cannot look for Terms without a taxonomy', 'tribe-common' ) );
@@ -43,7 +43,13 @@ class Tribe__Ajax__Dropdown {
 		$args['hide_empty'] = isset( $args['hide_empty'] ) ? $args['hide_empty'] : false;
 
 		if ( ! empty( $search ) ) {
-			$args['search'] = $search;
+			if ( ! is_array( $search ) ) {
+				// For older pieces that still use Select2 format.
+				$args['search'] = $search;
+			} else {
+				// Newer SelectWoo uses a new search format.
+				$args['search'] = $search['term'];
+			}
 		}
 
 		// On versions older than 4.5 taxonomy goes as an Param
@@ -53,7 +59,7 @@ class Tribe__Ajax__Dropdown {
 			$terms = get_terms( $args );
 		}
 
-		$results = array();
+		$results = [];
 
 		// Respect the parent/child_of argument if set
 		$parent = ! empty( $args['child_of'] ) ? (int) $args['child_of'] : 0;
@@ -67,7 +73,7 @@ class Tribe__Ajax__Dropdown {
 				// Prep for Select2
 				$term->id          = $term->term_id;
 				$term->text        = $term->name;
-				$term->breadcrumbs = array();
+				$term->breadcrumbs = [];
 
 				if ( 0 !== (int) $term->parent ) {
 					$ancestors = get_ancestors( $term->id, $term->taxonomy );

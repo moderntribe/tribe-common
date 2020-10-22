@@ -2,8 +2,15 @@
 
 namespace Tribe\functions;
 
-class utilsTest extends \Codeception\TestCase\WPTestCase {
+use PHPUnit\Framework\AssertionFailedError;
 
+class Test_Class_With_Instance_Fetch_Method {
+	public static function get_instance() {
+		return new static;
+	}
+}
+
+class utilsTest extends \Codeception\TestCase\WPTestCase {
 	public function urls() {
 		return [
 			[ 'http://some.dev', 'foo', 'http://some.dev/foo/' ],
@@ -61,23 +68,71 @@ class utilsTest extends \Codeception\TestCase\WPTestCase {
 			[ 'http://some.dev?bar=baz&another=value', 'some/foo', 'http://some.dev/some/foo/?bar=baz&another=value' ],
 			[ 'http://some.dev/?bar=baz&another=value', 'some/foo', 'http://some.dev/some/foo/?bar=baz&another=value' ],
 			[ 'http://some.dev?bar=baz&another=value', 'some/foo/', 'http://some.dev/some/foo/?bar=baz&another=value' ],
-			[ 'http://some.dev/?bar=baz&another=value', 'some/foo/', 'http://some.dev/some/foo/?bar=baz&another=value' ],
+			[
+				'http://some.dev/?bar=baz&another=value',
+				'some/foo/',
+				'http://some.dev/some/foo/?bar=baz&another=value'
+			],
 			[ 'http://some.dev?bar=baz&another=value', '/some/foo', 'http://some.dev/some/foo/?bar=baz&another=value' ],
-			[ 'http://some.dev/?bar=baz&another=value', '/some/foo', 'http://some.dev/some/foo/?bar=baz&another=value' ],
-			[ 'http://some.dev?bar=baz&another=value', '/some/foo/', 'http://some.dev/some/foo/?bar=baz&another=value' ],
-			[ 'http://some.dev/?bar=baz&another=value', '/some/foo/', 'http://some.dev/some/foo/?bar=baz&another=value' ],
+			[
+				'http://some.dev/?bar=baz&another=value',
+				'/some/foo',
+				'http://some.dev/some/foo/?bar=baz&another=value'
+			],
+			[
+				'http://some.dev?bar=baz&another=value',
+				'/some/foo/',
+				'http://some.dev/some/foo/?bar=baz&another=value'
+			],
+			[
+				'http://some.dev/?bar=baz&another=value',
+				'/some/foo/',
+				'http://some.dev/some/foo/?bar=baz&another=value'
+			],
 			[ 'http://some.dev#frag', 'some/foo', 'http://some.dev/some/foo/#frag' ],
 			[ 'http://some.dev#frag', 'some/foo/', 'http://some.dev/some/foo/#frag' ],
 			[ 'http://some.dev#frag', '/some/foo', 'http://some.dev/some/foo/#frag' ],
 			[ 'http://some.dev#frag', '/some/foo/', 'http://some.dev/some/foo/#frag' ],
-			[ 'http://some.dev?bar=baz&another=value#p1', 'some/foo', 'http://some.dev/some/foo/?bar=baz&another=value#p1' ],
-			[ 'http://some.dev/?bar=baz&another=value#p1', 'some/foo', 'http://some.dev/some/foo/?bar=baz&another=value#p1' ],
-			[ 'http://some.dev?bar=baz&another=value#p1', 'some/foo/', 'http://some.dev/some/foo/?bar=baz&another=value#p1' ],
-			[ 'http://some.dev/?bar=baz&another=value#p1', 'some/foo/', 'http://some.dev/some/foo/?bar=baz&another=value#p1' ],
-			[ 'http://some.dev?bar=baz&another=value#p1', '/some/foo', 'http://some.dev/some/foo/?bar=baz&another=value#p1' ],
-			[ 'http://some.dev/?bar=baz&another=value#p1', '/some/foo', 'http://some.dev/some/foo/?bar=baz&another=value#p1' ],
-			[ 'http://some.dev?bar=baz&another=value#p1', '/some/foo/', 'http://some.dev/some/foo/?bar=baz&another=value#p1' ],
-			[ 'http://some.dev/?bar=baz&another=value#p1', '/some/foo/', 'http://some.dev/some/foo/?bar=baz&another=value#p1' ],
+			[
+				'http://some.dev?bar=baz&another=value#p1',
+				'some/foo',
+				'http://some.dev/some/foo/?bar=baz&another=value#p1'
+			],
+			[
+				'http://some.dev/?bar=baz&another=value#p1',
+				'some/foo',
+				'http://some.dev/some/foo/?bar=baz&another=value#p1'
+			],
+			[
+				'http://some.dev?bar=baz&another=value#p1',
+				'some/foo/',
+				'http://some.dev/some/foo/?bar=baz&another=value#p1'
+			],
+			[
+				'http://some.dev/?bar=baz&another=value#p1',
+				'some/foo/',
+				'http://some.dev/some/foo/?bar=baz&another=value#p1'
+			],
+			[
+				'http://some.dev?bar=baz&another=value#p1',
+				'/some/foo',
+				'http://some.dev/some/foo/?bar=baz&another=value#p1'
+			],
+			[
+				'http://some.dev/?bar=baz&another=value#p1',
+				'/some/foo',
+				'http://some.dev/some/foo/?bar=baz&another=value#p1'
+			],
+			[
+				'http://some.dev?bar=baz&another=value#p1',
+				'/some/foo/',
+				'http://some.dev/some/foo/?bar=baz&another=value#p1'
+			],
+			[
+				'http://some.dev/?bar=baz&another=value#p1',
+				'/some/foo/',
+				'http://some.dev/some/foo/?bar=baz&another=value#p1'
+			],
 		];
 	}
 
@@ -253,5 +308,144 @@ class utilsTest extends \Codeception\TestCase\WPTestCase {
 	 */
 	public function test_tribe_get_query_var( $input, $query_arg, $expected, $default = null ) {
 		$this->assertEquals( $expected, tribe_get_query_var( $input, $query_arg, $default ) );
+	}
+
+	/**
+	 * @dataProvider provider_get_successful_class_instance
+	 */
+	public function test_successfully_getting_a_class_instance( $class ) {
+		if ( $class instanceof \Closure ) {
+			$class = $class();
+		}
+		$this->assertTrue( is_object( tribe_get_class_instance( $class ) ) );
+	}
+
+	/**
+	 * Different ways to successfully get a class instance.
+	 *
+	 * @return Generator
+	 * @see \tribe_get_class_instance()
+	 *
+	 */
+	public function provider_get_successful_class_instance() {
+		yield 'class slug registered with tribe()' => [ 'assets' ];
+		yield 'class string not registered with tribe()' => [ 'Tribe__App_Shop' ];
+
+		// WordPress is still not loaded at this stage, delay the build to the test case, when WP will be loaded.
+		yield 'instantiated class object' => [
+			static function () {
+				return new \Tribe__App_Shop();
+			}
+		];
+
+		yield 'class string that has get_instance()' => [ '\\Tribe\\functions\\Test_Class_With_Instance_Fetch_Method' ];
+	}
+
+	/**
+	 * @dataProvider provider_get_unsuccessful_class_instance
+	 */
+	public function test_unsuccessfully_getting_a_class_instance( $class ) {
+		$this->assertNull( tribe_get_class_instance( $class ) );
+	}
+
+	/**
+	 * Different ways to fail at getting a class instance (should all return null).
+	 *
+	 * @return Generator
+	 * @see \tribe_get_class_instance()
+	 *
+	 */
+	public function provider_get_unsuccessful_class_instance() {
+		yield 'empty string' => [ '' ];
+		yield 'string that is neither an existing class name nor slug' => [ 'ABC_123_XYZ' ];
+		yield 'neither an object nor a string' => [ [] ];
+	}
+
+	/**
+	 * It should allow running a callback detaching filters.
+	 *
+	 * @test
+	 */
+	public function should_allow_running_a_callback_detaching_filters() {
+		add_filter( 'test_filter', '__return_false' );
+		$callback = static function () {
+			return apply_filters( 'test_filter', 23 );
+		};
+
+		$value = tribe_without_filters( [ 'test_filter' ], $callback );
+
+		$this->assertEquals( 23, $value );
+	}
+
+	/**
+	 * It should allow running a callback detaching actions.
+	 *
+	 * @test
+	 */
+	public function should_allow_running_a_callback_detaching_actions() {
+		add_action( 'test_action', static function () {
+			throw new AssertionFailedError( 'I should not be called!' );
+		} );
+		$callback = static function () {
+			do_action( 'test_action' );
+
+			return 23;
+		};
+
+		$value = tribe_without_filters( [ 'test_action' ], $callback );
+
+		$this->assertEquals( 23, $value );
+	}
+
+	/**
+	 * It should allow running a callback detaching filters and actions.
+	 *
+	 * @test
+	 */
+	public function should_allow_running_a_callback_detaching_filters_and_actions() {
+		add_action( 'test_action', static function () {
+			throw new AssertionFailedError( 'I should not be called!' );
+		} );
+		add_filter( 'test_filter', static function () {
+			throw new AssertionFailedError( 'I should not be called!' );
+		} );
+		$callback = static function () {
+			do_action( 'test_action' );
+
+			return apply_filters( 'test_filter', 23 );
+		};
+
+		$value = tribe_without_filters( [ 'test_action', 'test_filter' ], $callback );
+
+		$this->assertEquals( 23, $value );
+	}
+
+	/**
+	 * It should not detach filters that are not in the list of filters to suspend.
+	 *
+	 * @test
+	 */
+	public function should_not_detach_filters_that_are_not_in_the_list_of_filters_to_suspend() {
+		add_action( 'test_action', static function () {
+			throw new AssertionFailedError( 'I should not be called!' );
+		} );
+		add_filter( 'test_filter', static function () {
+			throw new AssertionFailedError( 'I should not be called!' );
+		} );
+		$action_2_called = false;
+		add_action( 'test_action_2', static function () use ( &$action_2_called ) {
+			$action_2_called = true;
+		} );
+		$callback = static function () {
+			do_action( 'test_action' );
+			do_action( 'test_action_2' );
+
+			return apply_filters( 'test_filter', 23 );
+		};
+
+		$value = tribe_without_filters( [ 'test_action', 'test_filter' ], $callback );
+
+		$this->assertEquals( 23, $value );
+		$this->assertTrue( $action_2_called );
 	}
 }

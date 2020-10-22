@@ -13,21 +13,75 @@
 	a.tribe-common-c-btn-border {
 		@mixin button-border;
 
-		color: var(--color-text-secondary);
-		padding: 14px 20px 14px;
+		color: var(--color-accent-primary);
+		padding: 11px 20px 11px;
+		width: 100%;
 
 		.tribe-common--breakpoint-medium& {
-			padding: 6px 15px;
+			width: auto;
 		}
 
-		&:active,
 		&:focus,
 		&:hover {
+			color: var(--color-background);
+			background-color: var(--color-accent-primary);
+		}
+
+		&:active {
+			opacity: 0.9;
+		}
+	}
+
+	/* -----------------------------------------------------------------------------
+	 *
+	 * Button: Border Secondary
+	 *
+	 * Example:
+	 * <button class="tribe-common-c-btn-border tribe-common-c-btn-border--secondary">...</button>
+	 * <a href="#" class="tribe-common-c-btn-border tribe-common-c-btn-border--secondary">...</a>
+	 *
+	 * ----------------------------------------------------------------------------- */
+
+	.tribe-common-c-btn-border--secondary,
+	a.tribe-common-c-btn-border--secondary {
+		border-color: var(--color-accent-secondary);
+		color: var(--color-accent-secondary);
+
+		&:focus,
+		&:hover {
+			background-color: var(--color-accent-secondary);
+		}
+
+		&:active {
+			opacity: 0.9;
+		}
+	}
+
+	/* -----------------------------------------------------------------------------
+	 *
+	 * Button: Border Alt
+	 *
+	 * Example:
+	 * <button class="tribe-common-c-btn-border tribe-common-c-btn-border--alt">...</button>
+	 * <a href="#" class="tribe-common-c-btn-border tribe-common-c-btn-border--alt">...</a>
+	 *
+	 * ----------------------------------------------------------------------------- */
+
+	.tribe-common-c-btn-border--alt,
+	a.tribe-common-c-btn-border--alt {
+		border-color: var(--color-border-secondary);
+		color: var(--color-text-primary);
+		font-weight: var(--font-weight-regular);
+
+		&:focus,
+		&:hover {
+			border-color: var(--color-border-active);
+			background-color: var(--color-background);
 			color: var(--color-text-primary);
 		}
 
-		&:disabled {
-			color: var(--color-text-disabled)
+		&:active {
+			opacity: 0.9;
 		}
 	}
 
@@ -45,7 +99,50 @@
 
 		.tribe-common-c-btn-border {
 
-			&:hover {
+			&:hover,
+			&:focus {
+				background-color: var(--color-accent-primary);
+			}
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 *
+	 * Button: Border Secondary - Theme Overrides
+	 *
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------------------------------------
+	 * Theme Overrides - Twenty Seventeen
+	 * ------------------------------------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-c-btn-border--secondary {
+
+			&:hover,
+			&:focus {
+				background-color: var(--color-accent-secondary);
+			}
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 *
+	 * Button: Border Alt - Theme Overrides
+	 *
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------------------------------------
+	 * Theme Overrides - Twenty Seventeen
+	 * ------------------------------------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-c-btn-border--alt {
+
+			&:hover,
+			&:focus {
 				background-color: var(--color-background);
 			}
 		}

@@ -2,17 +2,41 @@
 
 == Changelog ==
 
-= [4.12.8] TBD =
+= [4.12.11] 2020-10-19 =
+
+* Fix - Dropdown AJAX search for taxonomy terms properly using SelectWoo search formatting, used in Community Events tags and Event categories. [CE-96]
+* Language - 0 new strings added, 7 updated, 1 fuzzied, and 0 obsoleted
+
+= [4.12.10] 2020-09-28 =
+
+* Tweak - Adjust SelectWoo dropdown container attachment to include search and minimum results for search. [FBAR-139]
+* Tweak - Move border style button styles to border-small and add various border button styles that match the solid button style. [FBAR-143]
+* Tweak - Add the common views folder to the `Tribe__Template` lookup folders, the folder will be searched for matching template files only if no plugin-provided template was found. [FBAR-148]
+* Tweak - Add the `tribe_template_common_path` filter to allow controlling the path of the template file provided by common. [FBAR-148]
+* Tweak - Add the `tribe_without_filters` function to run a callback or closure suspending a set of filters and actions. [TEC-3579]
+* Tweak - Added hover and focus colors, update default colors to make them accessible. [FBAR-165]
+* Fix - Prevent `register_rest_route` from throwing notices related to `permission_callback` (props @hanswitteprins)
+* Language - 0 new strings added, 2 updated, 1 fuzzied, and 0 obsoleted
+
+= [4.12.9] 2020-09-21 =
+
+* Tweak - Added Support for overriding individual arguments while registering group assets using `tribe_assets`. [TCMN-88]
+* Tweak - Introduce the `tribe_doing_shortcode()` template tag to check if one of our shortcodes is being done. [ET-904]
+* Language - 0 new strings added, 0 updated, 1 fuzzied, and 0 obsoleted
+
+= [4.12.8] 2020-08-26 =
 
 * Fix - Added IE11 compatibility for the toggles styles using `tribe-common-form-control-toggle` CSS class. [ET-865]
 * Tweak - Improve regular expressions used to parse UTC timezones by removing non-required grouping and characters. [TCMN-68]
+* Language - 0 new strings added, 0 updated, 1 fuzzied, and 0 obsoleted
 
-= [4.12.7] TBD =
+= [4.12.7] 2020-08-24 =
 
 * Tweak - Allow SelectWoo dropdown to be attached to the container via the `data-attach-container` attribute. [FBAR-129]
 * Tweak - Adjust the border radius of the form checkbox styles. [FBAR-126]
 * Tweak - Adjust the layout styles for tribe common checkboxes and radios. [FBAR-126] [FBAR-127]
 * Fix - Correctly handle array format query arguments while generating clean, or canonical, URLs; this solves some issues with Filter Bar and Views v2 where filters would be dropped when changing Views, paginating or using the datepicker. [FBAR-74, FBAR-85, FBAR-86]
+* Language - 3 new strings added, 30 updated, 3 fuzzied, and 1 obsoleted
 
 = [4.12.6.1] 2020-08-17 =
 

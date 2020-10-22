@@ -113,7 +113,7 @@ before_script:
   - cd $PLUGIN_DIR
   # Reset HARD first to avoid changes we might have done while updating TEC stopping the checkout.
   - git reset HEAD --hard && git checkout origin/$CURRENT_BRANCH
-  - composer update
+  - composer install
 
   # get to the common dir
   - cd $PLUGIN_DIR
@@ -127,3 +127,4 @@ script:
   - codecept run wpunit
   - codecept run muwpunit
   - codecept run dependency
+  - codecept run snapshots

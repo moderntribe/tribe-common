@@ -6,7 +6,7 @@
 	 * Example (Checkboxes):
 	 * <fieldset>
 	 *   <legend>Legend for Checkboxes</legend>
-	 *   <div class="tribe-common-form-control-checkbox-radio-group">
+	 *   <div class="tribe-common-form-control-checkbox-checkbox-group">
 	 *     <div class="tribe-common-form-control-checkbox">
 	 *       <input
 	 *         class="tribe-common-form-control-checkbox__input"
@@ -72,7 +72,9 @@
 	.tribe-common-form-control-radio__label {
 		@mixin desktop-body-2;
 
-		color: var(--color-text-secondary);
+		&:hover {
+			opacity: var(--opacity-icon-hover);
+		}
 	}
 
 	.tribe-common-form-control-checkbox__input,
@@ -87,7 +89,8 @@
 		&:active,
 		&:focus,
 		&:hover {
-			border: 1px solid var(--form-color-border-active);
+			border-color: var(--form-color-border-active);
+			opacity: var(--opacity-icon-hover);
 		}
 
 		&:checked {
@@ -116,6 +119,14 @@
 			transform: translate(-50%, -50%);
 			width: 12px;
 		}
+
+		&:focus,
+		&:hover {
+
+			+ .tribe-common-form-control-checkbox__label {
+				opacity: var(--opacity-icon-hover);
+			}
+		}
 	}
 
 	/* -----------------------------------------------------------------------------
@@ -137,6 +148,14 @@
 			transform: translate(-50%, -50%);
 			width: 8px;
 		}
+
+		&:focus,
+		&:hover {
+
+			+ .tribe-common-form-control-radio__label {
+				opacity: var(--opacity-icon-hover);
+			}
+		}
 	}
 
 	/* -----------------------------------------------------------------------------
@@ -148,6 +167,16 @@
 	/* -----------------------------------------------------------------------------
 	 * Form Control: Checkboxes Theme Overrides
 	 * ----------------------------------------------------------------------------- */
+
+	 .tribe-theme-twentytwenty & {
+
+		.tribe-common-form-control-checkbox__input {
+
+			&:checked:before {
+				margin: 0;
+			}
+		}
+	 }
 
 	/* -----------------------------------------------------------------------------
 	 * Theme Overrides - Enfold

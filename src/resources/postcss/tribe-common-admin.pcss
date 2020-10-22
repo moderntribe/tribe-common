@@ -1671,6 +1671,11 @@ body.tribe-welcome {
 	#wpbody-content {
 		padding-bottom: 25px;
 	}
+
+	/* hide our dependency errors so we don't make a bad first impression */
+	.tribe-dependency-error {
+		display: none;
+	}
 }
 
 
@@ -1735,6 +1740,21 @@ body.tribe-welcome {
 			margin: 0 48px 10px 0;
 		}
 
+	}
+}
+
+.tribe-events-admin-video {
+	-webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+	-webkit-transform: rotate(0.000001deg);
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	border-radius: 16px;
+	height: 200px; /* this is overridden by JS, but is a starting point for less flicker */
+	margin-bottom: 72px;
+	overflow: hidden;
+
+	iframe {
+		width: 100%;
 	}
 }
 
@@ -2007,12 +2027,13 @@ input[type="email"].tribe-events-admin-card__input {
 	margin: 40px 0 78px 0;
 	padding: 18px 23px 2px 23px;
 
-	@media screen and (min-width: 710px) {
+	@media screen and (min-width: 1217px) {
+		display: inline-block;
 		border-radius: 100px;
 		margin: 24px 0 94px 0;
-		padding: 0;
+		max-width: 1010px;
+		padding: 0 36px 0 0;
 		height: 54px;
-		width: 620px;
 	}
 }
 
@@ -2032,7 +2053,7 @@ input[type="email"].tribe-events-admin-card__input {
 	display: block;
 	padding-bottom: 19px;
 
-	@media screen and (min-width: 710px) {
+	@media screen and (min-width: 1217px) {
 		display: inline-block;
 		padding: 18px 10px 0 10px;
 	}
@@ -2051,7 +2072,7 @@ input[type="email"].tribe-events-admin-card__input {
 	padding-bottom: 14px;
 	text-transform: uppercase;
 
-	@media screen and (min-width: 710px) {
+	@media screen and (min-width: 1217px) {
 		padding: 19px 6px 17px 32px;
 	}
 }
@@ -2117,6 +2138,84 @@ input[type="email"].tribe-events-admin-card__input {
 		width: 40px;
 	}
 }
+
+.tribe-events-admin-notice {
+	background-color: #3D54FF;
+	height: 65px;
+
+	.tribe-events-admin-content-wrapper {
+		padding-top: 8px;
+		padding-bottom: 0;
+	}
+
+	p {
+		color: #fff;
+		display: inline-block;
+		font-family: Helvetica;
+		font-size: 16px;
+		line-height: 18px;
+		margin-top: 0px;
+		padding-bottom: 12px;
+		padding-left: 16px;
+		vertical-align: middle;
+		width: calc(100% - 60px);
+	}
+}
+
+.tribe-events-admin-notice__logo {
+	display: inline-block;
+}
+
+/* -- Event Tickets tweaks for welcome screen -- */
+.tribe-events-admin-tickets {
+
+	.tribe-events-admin-section-header {
+		font-size: 28px;
+		line-height: 32px;
+	}
+
+	.tribe-events-admin-graphic--desktop-only {
+		width: 365px;
+	}
+
+	.tribe-events-admin-graphic--mobile-only {
+		width: 300px;
+		top: 230px;
+	}
+
+	.tribe-events-admin-title__heading {
+		margin-top: 0;
+	}
+
+	.tribe-events-admin-card__title {
+		@media screen and (min-width: 710px) {
+			font-size: 18px;
+		}
+	}
+
+	.tribe-events-admin-card--2up .tribe-events-admin-card__title {
+		@media screen and (min-width: 710px) {
+			font-size: 18px;
+			height: 66px;
+		}
+
+		@media screen and (min-width: 1217px) {
+			height: auto;
+		}
+	}
+
+	.tribe-events-admin-title__logo {
+		margin-right: 4px;
+		width: 32px;
+
+		@media screen and (min-width: 710px) {
+			margin-right: 8px;
+			padding-top: 4px;
+			width: 60px;
+		}
+	}
+}
+
 
 /* -- Freemius tweaks -- */
 body.tribe-welcome #fs_connect {

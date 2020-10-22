@@ -94,6 +94,25 @@ class Tribe__Template {
 	protected $template_current_file_path;
 
 	/**
+	 * Whether to look for template files in common or not; defaults to true.
+	 *
+	 * @since 4.12.10
+	 *
+	 * @var bool
+	 */
+	protected $common_lookup = true;
+
+	/**
+	 * A map of aliases to add a rewritten version of the paths to the template lists.
+	 * The map has format `original => alias`.
+	 *
+	 * @since 4.12.10
+	 *
+	 * @var array<string,string>
+	 */
+	protected $aliases = [];
+
+	/**
 	 * Configures the class origin plugin path
 	 *
 	 * @since  4.6.2
@@ -487,17 +506,29 @@ class Tribe__Template {
 	 * Fetches the folders in which we will look for a given file
 	 *
 	 * @since  4.7.20
+	 * @since 4.12.10 Add support for common lookup.
 	 *
-	 * @return array
+	 * @return array<string,array> A list of possible locations for the template file.
 	 */
 	protected function get_template_path_list() {
 		$folders = [];
 
 		$folders['plugin'] = [
-			'id'        => 'plugin',
-			'priority'  => 20,
-			'path'      => $this->get_template_plugin_path(),
+			'id'       => 'plugin',
+			'priority' => 20,
+			'path'     => $this->get_template_plugin_path(),
 		];
+
+		if ( $this->common_lookup ) {
+			// After the plugin (due to priority) look into Common too.
+			$folders['common'] = [
+				'id'       => 'common',
+				'priority' => 100,
+				'path'     => $this->get_template_common_path(),
+			];
+		}
+
+		$folders = array_merge( $folders, $this->apply_aliases( $folders ) );
 
 		/**
 		 * Allows filtering of the list of folders in which we will look for the
@@ -1253,4 +1284,84 @@ class Tribe__Template {
 		return $matches;
 	}
 
+	/**
+	 * Fetches the path for locating files in the Common folder part of the plugin that is currently providing it.
+	 *
+	 * Note: the Common path will be dependent on the version that is loaded from the plugin that is bundling it.
+	 * E.g. if both TEC and ET are active (both will bundle Common) and the ET version of Common has been loaded as
+	 * most recent and the ET version of Common does not have a template file, then the template file will not be found.
+	 * This will allow versioning the existence and nature of the template files part of common.
+	 *
+	 * @since 4.12.10
+	 *
+	 * @return string The absolute path, with no guarantee of its existence, to the Common version of the template file.
+	 */
+	protected function get_template_common_path() {
+		// As base path use the current location of Common, remove the trailing slash.
+		$common_abs_path = untrailingslashit( Tribe__Main::instance()->plugin_path );
+		$path            = array_merge( (array) $common_abs_path, $this->folder );
+
+		// Implode to avoid problems on Windows hosts.
+		$path = implode( DIRECTORY_SEPARATOR, $path );
+
+		/**
+		 * Allows filtering the path to a template provided by Common.
+		 *
+		 * @since  4.12.10
+		 *
+		 * @param string $path     Complete path to include the base folder of common part of the plugin.
+		 * @param self   $template Current instance of the Tribe__Template.
+		 */
+		return apply_filters( 'tribe_template_common_path', $path, $this );
+	}
+
+	/**
+	 * Sets the aliases the template should use.
+	 *
+	 * @since 4.12.10
+	 *
+	 * @param array<string,string> $aliases A map of aliases that should be used to add lookup locations, in the format
+	 *                                      `[ original => alias ]`;
+	 *
+	 * @return static This instance, for method chaining.
+	 */
+	public function set_aliases( array $aliases = [] ) {
+		$this->aliases = $aliases;
+
+		return $this;
+	}
+
+	/**
+	 * Applies the template path aliases, if any, to a list of folders.
+	 *
+	 * @since 4.12.10
+	 *
+	 * @param array<string,array> $folders The list of folder to apply the aliases to, if any.
+	 *
+	 * @return array<string,array> The list of new folder entries to add to the folders, in the same input format of the
+	 *                             folders.
+	 */
+	protected function apply_aliases( array $folders ) {
+		$new_folders = [];
+		if ( ! empty( $this->aliases ) ) {
+			foreach ( $folders as $folder_name => $folder ) {
+				$original_path = $folder['path'];
+				foreach ( $this->aliases as $original => $alias ) {
+					// Since an alias could be a path, we take care to handle it with the current directory separator.
+					list( $normalized_original, $normalized_alias ) = str_replace(['\\','/'] , DIRECTORY_SEPARATOR, [ $original, $alias ] );
+					if ( false === strpos( $original_path, $normalized_original ) ) {
+						continue;
+					}
+
+					$alias_path = str_replace( $normalized_original, $normalized_alias, $original_path );
+
+					$new                                        = $folder;
+					$new['path']                                = $alias_path;
+					$new['priority']                            = (int) $new['priority'] + 1;
+					$new_folders[ $folder_name . '_' . $alias ] = $new;
+				}
+			}
+		}
+		return $new_folders;
+	}
 }

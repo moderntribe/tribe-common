@@ -85,15 +85,6 @@ class AutoloaderTest extends Unit {
 		);
 	}
 
-	public function cc_namespace_data_provider() {
-		return [
-			'w/ leading slash'              => [ '\\Tribe\\CCNested' ],
-			'w/o leading slash'             => [ 'Tribe\\CCNested' ],
-			'w/ trailing slash'             => [ 'Tribe\\CCNested\\' ],
-			'w/ leading and trailing slash' => [ '\\Tribe\\CCNested\\' ],
-		];
-	}
-
 	/**
 	 * It should correctly locate classes in camelcase namespaces
 	 *
@@ -136,6 +127,15 @@ class AutoloaderTest extends Unit {
 		);
 	}
 
+	public function cc_namespace_data_provider() {
+		return [
+			'w/ leading slash'              => [ '\\Tribe\\CCNested' ],
+			'w/o leading slash'             => [ 'Tribe\\CCNested' ],
+			'w/ trailing slash'             => [ 'Tribe\\CCNested\\' ],
+			'w/ leading and trailing slash' => [ '\\Tribe\\CCNested\\' ],
+		];
+	}
+
 	/**
 	 * It should correctly get prefix by slug.
 	 *
@@ -147,9 +147,8 @@ class AutoloaderTest extends Unit {
 		$autoloader->register_prefix( $prefix, codecept_data_dir( 'Tribe/CCNested' ), 'ccnested' );
 
 		// Confirm prefix is normalized already.
-		$this->assertEquals(
-			trim( $prefix, '\\' ) . '\\',
-			$autoloader->get_prefix_by_slug( $prefix )
-		);
+		$prefix_by_slug = $autoloader->get_prefix_by_slug( 'ccnested' );
+
+		$this->assertEquals( trim( $prefix, '\\' ) . '\\', $prefix_by_slug );
 	}
 }

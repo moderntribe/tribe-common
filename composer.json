@@ -18,7 +18,8 @@
     "moderntribe/tribe-testing-facilities": "dev-master",
     "phpunit/phpunit": "~6.0",
     "wp-cli/checksum-command": "1.0.5",
-    "wp-coding-standards/wpcs": "^2.1"
+    "wp-coding-standards/wpcs": "^2.1",
+    "lucatume/codeception-snapshot-assertions": "^0.2.4"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

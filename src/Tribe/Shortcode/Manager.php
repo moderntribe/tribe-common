@@ -5,6 +5,7 @@
  * @package Tribe\Shortcode
  * @since   4.12.0
  */
+
 namespace Tribe\Shortcode;
 
 /**
@@ -15,6 +16,16 @@ namespace Tribe\Shortcode;
  * @package Tribe\Shortcode
  */
 class Manager {
+
+	/**
+	 * Current shortcodes.
+	 *
+	 * @since 4.12.9
+	 *
+	 * @var array $current_shortcode An array containing the current shortcodes being executed.
+	 */
+	public $current_shortcode = [];
+
 	/**
 	 * Get the list of shortcodes available for handling.
 	 *
@@ -103,5 +114,69 @@ class Manager {
 		$instance->setup( $arguments, $content );
 
 		return $instance->get_html();
+	}
+
+	/**
+	 * Filter `pre_do_shortcode_tag` to add the current shortcode.
+	 *
+	 * @since 4.12.9
+	 *
+	 * @param bool|string $return      Short-circuit return value. Either false or the value to replace the shortcode with.
+	 * @param string      $tag         Shortcode name.
+	 * @param array       $attr        Shortcode attributes array,
+	 * @param array       $m           Regular expression match array.
+	 *
+	 * @return bool|string Short-circuit return value.
+	 */
+	public function filter_pre_do_shortcode_tag( $return, $tag, $attr, $m ) {
+		if ( ! $this->is_shortcode_registered( $tag ) ) {
+			return $return;
+		}
+
+		// Add to the doing shortcode.
+		$this->current_shortcode[] = $tag;
+
+		return $return;
+	}
+
+	/**
+	 * Filter `do_shortcode_tag` to remove the shortcode from the `$tribe_current_shortcode` list.
+	 *
+	 * @since 4.12.9
+	 *
+	 * @param string       $output Shortcode output.
+	 * @param string       $tag    Shortcode name.
+	 * @param array|string $attr   Shortcode attributes array or empty string.
+	 * @param array        $m      Regular expression match array.
+	 *
+	 * @return string Shortcode output.
+	 */
+	public function filter_do_shortcode_tag( $output, $tag, $attr, $m ) {
+		if ( ! $this->is_shortcode_registered( $tag ) ) {
+			return $output;
+		}
+
+		if ( isset( $this->current_shortcode[ $tag ] ) ) {
+			unset( $this->current_shortcode[ $tag ] );
+		}
+
+		return $output;
+	}
+
+	/**
+	 * Check if a shortcode is being done.
+	 *
+	 * @since 4.12.9
+	 *
+	 * @param null|string $tag The shortcode tag name, or null to check if doing any shortcode.
+	 *
+	 * @return bool If the shortcode is being done or not.
+	 */
+	public function is_doing_shortcode( $tag = null ) {
+		if ( null === $tag ) {
+			return ! empty( $this->current_shortcode );
+		}
+
+		return in_array( $tag, $this->current_shortcode, true );
 	}
 }
