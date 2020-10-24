@@ -1049,11 +1049,11 @@ class ContextTest extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 * It should allow whitelisting the state values to produce
+	 * It should allow safe listing the state values to produce
 	 *
 	 * @test
 	 */
-	public function should_allow_whitelisting_the_state_values_to_produce() {
+	public function should_allow_safe_listing_the_state_values_to_produce() {
 		$context = tribe_context()->set_locations( [
 			'one' => [
 				'read'          => [
@@ -1087,11 +1087,11 @@ class ContextTest extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 * It should allow blacklisting the state values to produce
+	 * It should allow block listing the state values to produce
 	 *
 	 * @test
 	 */
-	public function should_allow_blacklisting_the_state_values_to_produce() {
+	public function should_allow_block_listing_the_state_values_to_produce() {
 		$context = tribe_context()->set_locations( [
 			'one' => [
 				'read'          => [
@@ -1125,11 +1125,11 @@ class ContextTest extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 * It should allow whitelisting the global context keys to write
+	 * It should allow safe listing the global context keys to write
 	 *
 	 * @test
 	 */
-	public function should_allow_whitelisting_the_global_context_keys_to_write() {
+	public function should_allow_safe_listing_the_global_context_keys_to_write() {
 		$context = tribe_context()->set_locations( [
 			'one'   => [
 				'read'  => [
@@ -1177,11 +1177,11 @@ class ContextTest extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 * It should allow blacklisting the global context keys to write
+	 * It should allow block listing the global context keys to write
 	 *
 	 * @test
 	 */
-	public function should_allow_blacklisting_the_global_context_keys_to_write() {
+	public function should_allow_block_listing_the_global_context_keys_to_write() {
 		$context = tribe_context()->set_locations( [
 			'one'   => [
 				'read'  => [
@@ -1367,12 +1367,12 @@ class ContextTest extends \Codeception\TestCase\WPTestCase {
 	}
 
 	/**
-	 * It should allow whitelisting types
+	 * It should allow safe listing types
 	 *
 	 * @test
 	 * @depends should_allow_mapping_locations_to_read
 	 */
-	public function should_allow_whitelisting_types( Context $context ) {
+	public function should_allow_safe_listing_types( Context $context ) {
 		$mapped = $context->map_to_read( [ 'foo' => 23, 'baz' => 89, 'someOther' => 2389 ], Context::REQUEST_VAR );
 
 		$this->assertEquals( [

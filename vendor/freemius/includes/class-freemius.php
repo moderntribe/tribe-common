@@ -4120,7 +4120,7 @@
                 return false;
             }
 
-            $blacklist = array(
+            $block_list = array(
                 'admin.',
                 'webmaster.',
                 'localhost.',
@@ -4131,8 +4131,8 @@
                 'staging.',
             );
 
-            // Make sure domain is not one of the blacklisted.
-            foreach ( $blacklist as $invalid ) {
+            // Make sure domain is not one of the block listed.
+            foreach ( $block_list as $invalid ) {
                 if ( 0 === strpos( $parts[1], $invalid ) ) {
                     return false;
                 }
@@ -4173,7 +4173,7 @@
             $install_previous_title  = $this->esc_html_inline( 'Let\'s try your previous version', 'install-previous-title' );
             $install_previous_desc   = $this->esc_html_inline( 'Uninstall this version and install the previous one.', 'install-previous-desc' );
             $fix_issue_title         = $this->esc_html_inline( 'Yes - I\'m giving you a chance to fix it', 'fix-issue-title' );
-            $fix_issue_desc          = $this->esc_html_inline( 'We will do our best to whitelist your server and resolve this issue ASAP. You will get a follow-up email to %s once we have an update.', 'fix-issue-desc' );
+            $fix_issue_desc          = $this->esc_html_inline( 'We will do our best to add your server to the safe list and resolve this issue ASAP. You will get a follow-up email to %s once we have an update.', 'fix-issue-desc' );
             /* translators: %s: product title (e.g. "Awesome Plugin" requires an access to...) */
             $x_requires_access_to_api    = $this->esc_html_inline( '%s requires an access to our API.', 'x-requires-access-to-api' );
             $sysadmin_title              = $this->esc_html_inline( 'I\'m a system administrator', 'sysadmin-title' );
@@ -4293,7 +4293,7 @@
                                     '<b>%s</b> - %s',
                                     $sysadmin_title,
                                     sprintf(
-                                        $this->esc_html_inline( 'Great, please whitelist the following domains: %s. Once you are done, deactivate the %s and activate it again.', 'squid-sysadmin-desc' ),
+                                        $this->esc_html_inline( 'Great, please add the following domains: %s to your safe list. Once you are done, deactivate the %s and activate it again.', 'squid-sysadmin-desc' ),
                                         // We use a filter since the plugin might require additional API connectivity.
                                         '<b>' . implode( ', ', $this->apply_filters( 'api_domains', array(
                                             'api.freemius.com',

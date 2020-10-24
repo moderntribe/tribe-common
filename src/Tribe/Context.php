@@ -833,20 +833,20 @@ class Tribe__Context {
 	 * write location is an option, to the database.
 	 * With great power comes great responsibility: think a lot before using this.
 	 *
-	 * @param array|null $fields    An optional whitelist or blacklist of fields to write
-	 *                              depending on the value of the `$whitelist` parameter;
+	 * @param array|null $fields    An optional safe list or block list of fields to write
+	 *                              depending on the value of the `$safe_list` parameter;
 	 *                              defaults to writing all available fields.
-	 * @param bool       $whitelist Whether the list of fields provided in the `$fields`
-	 *                              parameter should be treated as a whitelist (`true`) or
-	 *                              blacklist (`false`).
+	 * @param bool       $safe_list Whether the list of fields provided in the `$fields`
+	 *                              parameter should be part of the safe list (`true`) or
+	 *                              block list (`false`).
 	 *
 	 * @since 4.9.5
 	 */
-	public function dangerously_set_global_context( array $fields = null, $whitelist = true ) {
+	public function dangerously_set_global_context( array $fields = null, $safe_list = true ) {
 		$locations = $this->get_locations();
 
 		if ( null !== $fields ) {
-			$locations = $whitelist
+			$locations = $safe_list
 				? array_intersect_key( $locations, array_combine( $fields, $fields ) )
 				: array_diff_key( $locations, array_combine( $fields, $fields ) );
 		}
@@ -1164,23 +1164,23 @@ class Tribe__Context {
 	 * This method is a filtered wrapper around the the `Tribe__Context::to_array` method to allow the
 	 * customization of the format when producing a store-compatible state.
 	 *
-	 * @param array|null $fields    An optional whitelist or blacklist of fields to include
-	 *                              depending on the value of the `$whitelist` parameter;
+	 * @param array|null $fields    An optional safe list or block list of fields to include
+	 *                              depending on the value of the `$safe_list` parameter;
 	 *                              defaults to returning all available fields.
-	 * @param bool       $whitelist Whether the list of fields provided in the `$fields`
-	 *                              parameter should be treated as a whitelist (`true`) or
-	 *                              blacklist (`false`).
+	 * @param bool       $safe_list Whether the list of fields provided in the `$fields`
+	 *                              parameter should be treated as a safe list (`true`) or
+	 *                              block list (`false`).
 	 *
 	 * @since 4.9.5
 	 *
 	 * @return array
 	 */
-	public function get_state( array $fields = null, $whitelist = true ) {
+	public function get_state( array $fields = null, $safe_list = true ) {
 		$state             = $this->to_array();
 		$is_global_context = tribe_context() === $this;
 
 		if ( null !== $fields ) {
-			$state = $whitelist
+			$state = $safe_list
 				? array_intersect_key( $state, array_combine( $fields, $fields ) )
 				: array_diff_key( $state, array_combine( $fields, $fields ) );
 		}
@@ -1218,18 +1218,18 @@ class Tribe__Context {
 	/**
 	 * Returns an array of ORM arguments generated from the current context values.
 	 *
-	 * @since 4.9.5
-	 *
-	 * @param array|null $fields    An optional whitelist or blacklist of fields to include
-	 *                              depending on the value of the `$whitelist` parameter;
+	 * @param array|null $fields    An optional safe list or block list of fields to include
+	 *                              depending on the value of the `$safe_list` parameter;
 	 *                              defaults to returning all available fields.
-	 * @param bool       $whitelist Whether the list of fields provided in the `$fields`
-	 *                              parameter should be treated as a whitelist (`true`) or
-	 *                              blacklist (`false`).
+	 * @param bool       $safe_list Whether the list of fields provided in the `$fields`
+	 *                              parameter should be treated as a safe list (`true`) or
+	 *                              block list (`false`).
+	 *
+	 * @since 4.9.5
 	 *
 	 * @return array A map of ORM fields produced from the context current values.
 	 */
-	public function get_orm_args( array $fields = null, $whitelist = true ) {
+	public function get_orm_args( array $fields = null, $safe_list = true ) {
 		$locations         = $this->get_locations();
 		$dump              = $this->to_array();
 		$orm_args          = array();
@@ -1257,7 +1257,7 @@ class Tribe__Context {
 			 * Only keep wanted fields, the filtering is done on the resolved aliases,
 			 * from the perspective of the client code that might ignore the source keys.
 			 */
-			$orm_args = $whitelist
+			$orm_args = $safe_list
 				? array_intersect_key( $orm_args, array_combine( $fields, $fields ) )
 				: array_diff_key( $orm_args, array_combine( $fields, $fields ) );
 		}

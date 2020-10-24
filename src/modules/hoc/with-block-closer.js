@@ -15,7 +15,7 @@ export const intercept = e => e.stopPropagation();
 
 export default ( WrappedComponent ) => {
 	/**
-	 * Prevents clicks on block or blacklisted DOM elements
+	 * Prevents clicks on block or blocked DOM elements
 	 * from closing the block
 	 *
 	 * @class WithBlockCloser
@@ -27,11 +27,11 @@ export default ( WrappedComponent ) => {
 		static propTypes = {
 			onClose: PropTypes.func,
 			onOpen: PropTypes.func,
-			classNameClickBlacklist: PropTypes.arrayOf( PropTypes.string ).isRequired,
+			classNameClickBlockList: PropTypes.arrayOf( PropTypes.string ).isRequired,
 		}
 
 		static defaultProps = {
-			classNameClickBlacklist: [ '.edit-post-sidebar' ],
+			classNameClickBlockList: [ '.edit-post-sidebar' ],
 			onClose: noop,
 			onOpen: noop,
 		}
@@ -90,8 +90,8 @@ export default ( WrappedComponent ) => {
 			this._removeEventListeners();
 		}
 
-		get blacklistedNodes() {
-			const classNames = this.props.classNameClickBlacklist.join( ', ' );
+		get blockListedNodes() {
+			const classNames = this.props.classNameClickBlockList.join( ', ' );
 			return Array.from( document.querySelectorAll( classNames ) );
 		}
 
@@ -100,9 +100,9 @@ export default ( WrappedComponent ) => {
 		}
 
 		_addEventListeners() {
-			// Intercept custom events bubbled in block or blacklisted nodes
+			// Intercept custom events bubbled in block or listed as blocked nodes
 			this.node.addEventListener( this._eventNamespace, this._interceptClickProxyEvent );
-			this.blacklistedNodes.forEach(
+			this.blockListedNodes.forEach(
 				node => node.addEventListener( this._eventNamespace, this._interceptClickProxyEvent )
 			);
 
@@ -117,7 +117,7 @@ export default ( WrappedComponent ) => {
 
 		_removeEventListeners() {
 			this.node.removeEventListener( this._eventNamespace, this._interceptClickProxyEvent );
-			this.blacklistedNodes.forEach(
+			this.blockListedNodes.forEach(
 				node => node.removeEventListener( this._eventNamespace, this._interceptClickProxyEvent )
 			);
 
