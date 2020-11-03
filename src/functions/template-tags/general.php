@@ -264,7 +264,7 @@ if ( ! function_exists( 'tribe_get_days_between' ) ) {
 if ( ! function_exists( 'tribe_prepare_for_json' ) ) {
 	/**
 	 * Function to prepare content for use as a value in a json encoded string destined for storage on a html data attribute.
-	 * Hence the double quote fun, especially in case they pass html encoded &quot; along. Any of those getting through to the data att will break jquery's parseJSON method.
+	 * Hence the double quote fun, especially in case they pass html encoded &quot; along. Any of those getting through to the data att will break jQuery's parseJSON method.
 	 * Themers can use this function to prepare data they may want to send to tribe_events_template_data() in the templates, and we use it in that function ourselves.
 	 *
 	 * @category Events
@@ -525,7 +525,7 @@ if ( ! function_exists( 'tribe_get_date_option' ) ) {
  * Shortcut for Tribe__Admin__Notices::register(), create a Admin Notice easily
  *
  * @param  string          $slug      Slug to save the notice
- * @param  callable|string $callback  A callable Method/Fuction to actually display the notice
+ * @param  callable|string $callback  A callable Method/Function to actually display the notice
  * @param  array           $arguments Arguments to Setup a notice
  * @param callable|null    $active_callback An optional callback that should return bool values
  *                                          to indicate whether the notice should display or not.

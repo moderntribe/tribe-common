@@ -539,8 +539,8 @@ class Tribe__Assets {
 		}
 
 		if ( isset( $arguments['translations']['domain'], $arguments['translations']['path'] ) ) {
-			$asset->translastions['domain'] = $arguments['translations']['domain'];
-			$asset->translastions['path']   = $arguments['translations']['path'];
+			$asset->translations['domain'] = $arguments['translations']['domain'];
+			$asset->translations['path']   = $arguments['translations']['path'];
 		}
 
 		/**

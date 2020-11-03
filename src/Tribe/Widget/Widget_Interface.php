@@ -128,16 +128,50 @@ interface Widget_Interface {
 	public function get_validated_arguments_map();
 
 	/**
+	 * Returns an array of admin fields for the widget.
+	 *
+	 * @since TBD
+	 *
+	 * @return array<string,mixed> The array of widget admin fields.
+	 */
+	public function get_admin_fields();
+
+	/**
+	 * Filter a widget's admin fields.
+	 *
+	 * @since TBD
+	 *
+	 * @param array<string,mixed> $admin_fields The array of widget admin fields.
+	 *
+	 * @return array<string,mixed> The array of widget admin fields.
+	 */
+	public function filter_admin_fields( $admin_fields );
+
+	/**
+	 * Filters a widget's updated instance.
+	 *
+	 * @since TBD
+	 *
+	 * @param array<string,mixed> $updated_instance The updated instance of the widget.
+	 * @param array<string,mixed> $new_instance The new values for the widget instance.
+	 *
+	 * @return array<string,mixed> The updated instance to be saved for the widget.
+	 */
+	public function filter_updated_instance( $updated_instance, $new_instance );
+
+	/**
 	 * Returns a widget arguments after been parsed.
 	 *
 	 * @since 5.12.12
 	 *
+	 * @param array<string,mixed> $instance Saved values for the widget instance.
+	 *
 	 * @return array<string,mixed> The widget arguments, as set by the user in the widget string.
 	 */
-	public function get_arguments();
+	public function get_arguments( array $instance = [] );
 
 	/**
-	 * Get a widget's arguments after they have been been parsed.
+	 * Filter a widget's arguments after they have been been parsed.
 	 *
 	 * @since 5.12.12
 	 *
@@ -186,7 +220,7 @@ interface Widget_Interface {
 	public function get_default_arguments();
 
 	/**
-	 * Get a widget's default arguments.
+	 * Filter a widget's default arguments.
 	 *
 	 * @since 5.12.12
 	 *
