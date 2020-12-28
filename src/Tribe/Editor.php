@@ -91,10 +91,10 @@ class Tribe__Editor {
 	 *
 	 * @return array
 	 */
-	public function add_support( $args = array() ) {
+	public function add_support( $args = [] ) {
 		// Make sure we have the Support argument and it's an array
 		if ( ! isset( $args['supports'] ) || ! is_array( $args['supports'] ) ) {
-			$args['supports'] = array();
+			$args['supports'] = [];
 		}
 
 		// Add Editor Support
@@ -114,13 +114,13 @@ class Tribe__Editor {
 	 *
 	 * @return array
 	 */
-	public function add_rest_support( $args = array() ) {
+	public function add_rest_support( $args = [] ) {
 		// Blocks Editor requires REST support
 		$args['show_in_rest'] = true;
 
 		// Make sure we have the Support argument and it's an array
 		if ( ! isset( $args['supports'] ) || ! is_array( $args['supports'] ) ) {
-			$args['supports'] = array();
+			$args['supports'] = [];
 		}
 
 		if ( ! in_array( 'revisions', $args['supports'] ) ) {
@@ -196,28 +196,30 @@ class Tribe__Editor {
 	 * @return bool
 	 */
 	public function is_classic_option_active() {
-		$valid_values = array( 'replace', 'classic' );
+		$valid_values = [ 'replace', 'classic' ];
 
 		return in_array( (string) get_option( 'classic-editor-replace' ), $valid_values, true );
 	}
 
 	/**
-	 * Detect if is the classic editor is forced activated via plugin or if it comes from a request
+	 * Detect if the classic editor is force-activated via plugin or if it comes from a request.
 	 *
 	 * @since 4.8
 	 *
 	 * @return bool
 	 */
 	public function is_classic_editor() {
-		$disabled_by_plugin        = $this->is_classic_plugin_active() && $this->is_classic_option_active();
+		$disabled_by_plugin = $this->is_classic_plugin_active() && $this->is_classic_option_active();
+
 		/**
-		 * Allow other addons to disabled classic editor based on options
+		 * Allow other addons to disable classic editor based on options.
 		 *
 		 * @since  4.8.5
 		 *
 		 * @param bool $classic_is_active Whether the classic editor should be used.
 		 */
-		$disabled_by_filter        = apply_filters( 'tribe_editor_classic_is_active', false );
+		$disabled_by_filter = apply_filters( 'tribe_editor_classic_is_active', false );
+
 		$is_classic_editor_request = tribe_get_request_var( 'classic-editor', null );
 
 		return $is_classic_editor_request || $disabled_by_plugin || $disabled_by_filter;

@@ -7,7 +7,7 @@ class Tribe__Admin__Notice__Plugin_Download {
 
 	private $plugin_path;
 
-	private $plugins_required = array();
+	private $plugins_required = [];
 
 	/**
 	 * @param string $plugin_path Path to the plugin file we're showing a notice for
@@ -17,7 +17,7 @@ class Tribe__Admin__Notice__Plugin_Download {
 
 		tribe_notice(
 			plugin_basename( $plugin_path ),
-			array( $this, 'show_inactive_plugins_alert' )
+			[ $this, 'show_inactive_plugins_alert' ]
 		);
 	}
 
@@ -60,7 +60,7 @@ class Tribe__Admin__Notice__Plugin_Download {
 		}
 
 		$plugin_data = get_plugin_data( $this->plugin_path );
-		$req_plugins = array();
+		$req_plugins = [];
 
 		if ( empty( $this->plugins_required ) ) {
 			return;
@@ -111,10 +111,10 @@ class Tribe__Admin__Notice__Plugin_Download {
 			$plugin_name[] = $plugin_data['Name'];
 		}
 
-		$allowed_html = array(
-			'strong' => array(),
-			'a'      => array( 'href' => array() ),
-		);
+		$allowed_html = [
+			'strong' => [],
+			'a'      => [ 'href' => [] ],
+		];
 
 		$plugin_names_clean_text = wp_kses( $this->implode_with_grammar( $plugin_name ), $allowed_html );
 		$req_plugin_names_clean_text = wp_kses( $this->implode_with_grammar( $req_plugins ), $allowed_html );

@@ -19,7 +19,7 @@ class Tribe__Main {
 	const OPTIONNAME          = 'tribe_events_calendar_options';
 	const OPTIONNAMENETWORK   = 'tribe_events_calendar_network_options';
 
-	const VERSION             = '4.12.13';
+	const VERSION             = '4.12.16';
 
 	const FEED_URL            = 'https://theeventscalendar.com/feed/';
 
@@ -67,12 +67,7 @@ class Tribe__Main {
 			return;
 		}
 
-		// the 5.2 compatible autoload file
-		if ( version_compare( PHP_VERSION, '5.2.17', '<=' ) ) {
-			require_once realpath( dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/autoload_52.php' );
-		} else {
-			require_once realpath( dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/autoload.php' );
-		}
+		require_once realpath( dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/autoload.php' );
 
 		// the DI container class
 		require_once dirname( __FILE__ ) . '/Container.php';
@@ -428,11 +423,14 @@ class Tribe__Main {
 		// Are we on the Plugins page?
 		$is_plugins = $helper->is_screen( 'plugins' );
 
+		// Are we on the Widgets page?
+		$is_widgets = $helper->is_screen( 'widgets' );
+
 		// Are we viewing a generic Tribe screen?
 		// Includes: Events > Settings, Events > Help, App Shop page, and more.
 		$is_tribe_screen = $helper->is_screen();
 
-		return $is_post_type || $is_plugins || $is_tribe_screen;
+		return $is_post_type || $is_plugins || $is_widgets || $is_tribe_screen;
 	}
 
 	/**
@@ -561,7 +559,7 @@ class Tribe__Main {
 		if ( 'plugins.php' !== $page ) {
 			return;
 		}
-		$notices = apply_filters( 'tribe_plugin_notices', array() );
+		$notices = apply_filters( 'tribe_plugin_notices', [] );
 		wp_localize_script( 'tribe-pue-notices', 'tribe_plugin_notices', $notices );
 	}
 

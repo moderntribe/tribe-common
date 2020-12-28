@@ -14,19 +14,19 @@ abstract class Tribe__Repository
 	/**
 	 * @var  array An array of keys that cannot be updated on this repository.
 	 */
-	protected static $blocked_keys = array(
+	protected static $blocked_keys = [
 		'ID',
 		'post_type',
 		'post_modified',
 		'post_modified_gmt',
 		'guid',
 		'comment_count',
-	);
+	];
 
 	/**
 	 * @var array A list of the default filters supported and implemented by the repository.
 	 */
-	protected static $default_modifiers = array(
+	protected static $default_modifiers = [
 		'p',
 		'author',
 		'author_name',
@@ -121,22 +121,22 @@ abstract class Tribe__Repository
 		'term_in',
 		'term_not_in',
 		'term_and',
-	);
+	];
 
 	/**
 	 * @var array An array of default arguments that will be applied to all queries.
 	 */
-	protected static $common_args = array(
+	protected static $common_args = [
 		'post_type'        => 'post',
 		'suppress_filters' => false,
-		'posts_per_page'   => - 1,
-	);
+		'posts_per_page'   => -1,
+	];
 
 	/**
 	 * @var array A list of query modifiers that will trigger a overriding merge, thus
 	 *            replacing previous values, when set multiple times.
 	 */
-	protected static $replacing_modifiers = array(
+	protected static $replacing_modifiers = [
 		'p',
 		'author',
 		'author_name',
@@ -191,20 +191,22 @@ abstract class Tribe__Repository
 		'guid',
 		'perm',
 		'order',
-	);
+	];
 
 	/**
 	 * @var int
 	 */
 	protected static $meta_alias = 0;
+
 	/**
 	 * @var array A list of keys that denote the value to check should be cast to array.
 	 */
-	protected static $multi_value_keys = array( 'IN', 'NOT IN', 'BETWEEN', 'NOT BETWEEN' );
+	protected static $multi_value_keys = [ 'IN', 'NOT IN', 'BETWEEN', 'NOT BETWEEN' ];
+
 	/**
 	 * @var array A map of SQL comparison operators to their human-readable counterpart.
 	 */
-	protected static $comparison_operators = array(
+	protected static $comparison_operators = [
 		'='           => 'equals',
 		'!='          => 'not-equals',
 		'>'           => 'gt',
@@ -221,7 +223,7 @@ abstract class Tribe__Repository
 		'NOT EXISTS'  => 'not-exists',
 		'REGEXP'      => 'regexp',
 		'NOT REGEXP'  => 'not-regexp',
-	);
+	];
 
 	/**
 	 * A counter to keep track, on the class level, of the aliases generated for the terms table
@@ -238,7 +240,7 @@ abstract class Tribe__Repository
 	/**
 	 * @var array The post IDs that will be updated.
 	 */
-	protected $ids = array();
+	protected $ids = [];
 	/**
 	 * @var bool Whether the post IDs to update have already been fetched or not.
 	 */
@@ -246,101 +248,114 @@ abstract class Tribe__Repository
 	/**
 	 * @var array The updates that will be saved to the database.
 	 */
-	protected $updates = array();
+	protected $updates = [];
 
 	/**
 	 * @var array A list of taxonomies this repository will recognize.
 	 */
-	protected $taxonomies = array();
+	protected $taxonomies = [];
 
 	/**
 	 * @var array A map detailing which fields should be converted from a
 	 *            GMT time and date to a local one.
 	 */
-	protected $to_local_time_map = array(
+	protected $to_local_time_map = [
 		'post_date_gmt' => 'post_date',
-	);
+	];
+
 	/**
 	 * @var array A map detailing which fields should be converted from a
 	 *            localized time and date to a GMT one.
 	 */
-	protected $to_gmt_map = array(
+	protected $to_gmt_map = [
 		'post_date' => 'post_date_gmt',
-	);
+	];
 
 	/**
 	 * @var array
 	 */
-	protected $default_args = array( 'post_type' => 'post' );
+	protected $default_args = [ 'post_type' => 'post' ];
+
 	/**
 	 * @var array An array of query modifying callbacks populated while applying
 	 *            the filters.
 	 */
-	protected $query_modifiers = array();
+	protected $query_modifiers = [];
+
 	/**
 	 * @var bool Whether the current query is void or not.
 	 */
 	protected $void_query = false;
+
 	/**
 	 * @var array An array of query arguments that will be populated while applying
 	 *            filters.
 	 */
-	protected $query_args = array(
-		'meta_query' => array( 'relation' => 'AND' ),
-		'tax_query'  => array( 'relation' => 'AND' ),
-		'date_query' => array( 'relation' => 'AND' ),
-	);
+	protected $query_args = [
+		'meta_query' => [ 'relation' => 'AND' ],
+		'tax_query'  => [ 'relation' => 'AND' ],
+		'date_query' => [ 'relation' => 'AND' ],
+	];
+
 	/**
 	 * @var array An array of query arguments that support 'relation'.
 	 */
-	protected $relation_query_args = array(
+	protected $relation_query_args = [
 		'meta_query',
 		'tax_query',
 		'date_query',
-	);
+	];
+
 	/**
 	 * @var WP_Query The current query object built and modified by the instance.
 	 */
 	protected $current_query;
+
 	/**
 	 * @var array An associative array of the filters that will be applied and the used values.
 	 */
-	protected $current_filters = array();
+	protected $current_filters = [];
+
 	/**
 	 * @var string|null The current filter being applied.
 	 */
 	protected $current_filter;
+
 	/**
 	 * @var Tribe__Repository__Query_Filters
 	 */
 	public $filter_query;
+
 	/**
 	 * @var string The filter that should be used to get a post by its primary key.
 	 */
 	protected $primary_key = 'p';
+
 	/**
 	 * @var array A map of callbacks in the shape [ <slug> => <callback|primitive> ]
 	 */
-	protected $schema = array();
+	protected $schema = [];
 
 	/**
 	 * @var array A map of schema slugs and their meta keys to be queried.
 	 */
-	protected $simple_meta_schema = array();
+	protected $simple_meta_schema = [];
 
 	/**
 	 * @var array A map of schema slugs and their taxonomies to be queried.
 	 */
-	protected $simple_tax_schema = array();
+	protected $simple_tax_schema = [];
 
 	/**
 	 * @var Tribe__Repository__Interface
 	 */
 	protected $main_repository;
+
 	/**
 	 * @var Tribe__Repository__Formatter_Interface
 	 */
 	protected $formatter;
+
 	/**
 	 * @var bool
 	 */
@@ -360,7 +375,7 @@ abstract class Tribe__Repository
 	 *
 	 * @var array
 	 */
-	protected $update_fields_aliases = array(
+	protected $update_fields_aliases = [
 		'title'       => 'post_title',
 		'content'     => 'post_content',
 		'description' => 'post_content',
@@ -374,7 +389,7 @@ abstract class Tribe__Repository
 		'date_utc'    => 'post_date_gmt',
 		'tag'         => 'post_tag',
 		'image'       => '_thumbnail_id',
-	);
+	];
 
 	/**
 	 * The default create args that will be used by the repository
@@ -423,9 +438,9 @@ abstract class Tribe__Repository
 	 */
 	public function __construct() {
 		$this->filter_query = new Tribe__Repository__Query_Filters();
-		$this->default_args = array_merge( array( 'posts_per_page' => - 1 ), $this->default_args );
-		$post_types         = (array) Tribe__Utils__Array::get( $this->default_args, 'post_type', array() );
-		$this->taxonomies   = get_taxonomies( array( 'object_type' => $post_types ), 'names' );
+		$this->default_args = array_merge( [ 'posts_per_page' => -1 ], $this->default_args );
+		$post_types         = (array) Tribe__Utils__Array::get( $this->default_args, 'post_type', [] );
+		$this->taxonomies   = get_taxonomies( [ 'object_type' => $post_types ], 'names' );
 
 		/**
 		 * Allow plugins to init their classes and setup hooks at the initial setup of a repository.
@@ -502,7 +517,8 @@ abstract class Tribe__Repository
 	 */
 	public function where( $key, $value = null ) {
 		$call_args = func_get_args();
-		return call_user_func_array( array( $this, 'by' ), $call_args );
+
+		return call_user_func_array( [ $this, 'by' ], $call_args );
 	}
 
 	/**
@@ -650,7 +666,7 @@ abstract class Tribe__Repository
 	 */
 	public function all() {
 		if ( $this->void_query ) {
-			return array();
+			return [];
 		}
 
 		$query = $this->build_query();
@@ -691,7 +707,7 @@ abstract class Tribe__Repository
 		 */
 		$formatted = $return_ids
 			? $results
-			: array_filter( array_map( array( $this, 'format_item' ), $results ) );
+			: array_filter( array_map( [ $this, 'format_item' ], $results ) );
 
 		// Reset the fields if required.
 		$query->set( 'fields', $original_fields_value );
@@ -722,7 +738,7 @@ abstract class Tribe__Repository
 	public function order( $order = 'ASC' ) {
 		$order = strtoupper( $order );
 
-		if ( ! in_array( $order, array( 'ASC', 'DESC' ), true ) ) {
+		if ( ! in_array( $order, [ 'ASC', 'DESC' ], true ) ) {
 			return $this;
 		}
 
@@ -754,7 +770,7 @@ abstract class Tribe__Repository
 	 * {@inheritdoc}
 	 */
 	public function permission( $permission ) {
-		if ( ! in_array( $permission, array( self::PERMISSION_READABLE, self::PERMISSION_EDITABLE ), true ) ) {
+		if ( ! in_array( $permission, [ self::PERMISSION_READABLE, self::PERMISSION_EDITABLE ], true ) ) {
 			return $this;
 		}
 
@@ -930,10 +946,10 @@ abstract class Tribe__Repository
 	 * {@inheritdoc}
 	 */
 	public function nth( $n ) {
-		$per_page = (int) Tribe__Utils__Array::get_in_any( array(
+		$per_page = (int) Tribe__Utils__Array::get_in_any( [
 			$this->query_args,
 			$this->default_args,
-		), 'posts_per_page', get_option( 'posts_per_page' ) );
+		], 'posts_per_page', get_option( 'posts_per_page' ) );
 
 		if ( - 1 !== $per_page && $n > $per_page ) {
 			return null;
@@ -1010,12 +1026,12 @@ abstract class Tribe__Repository
 		$matching_ids = $this->get_ids();
 
 		if ( empty( $matching_ids ) ) {
-			return array();
+			return [];
 		}
 
 		$spliced = array_splice( $matching_ids, 0, $n );
 
-		return $return_ids ? $spliced : array_map( array( $this, 'format_item' ), $spliced );
+		return $return_ids ? $spliced : array_map( [ $this, 'format_item' ], $spliced );
 	}
 
 	/**
@@ -1125,20 +1141,11 @@ abstract class Tribe__Repository
 					 */
 					$this->query_args = array_merge( $this->query_args, $query_modifier );
 				} else {
-					$query_args = $this->query_args;
-
-					// Handle relation separately because we do not want that to merge recursively
-					foreach ( $this->relation_query_args as $query_arg ) {
-						if ( isset( $query_args[ $query_arg ]['relation'], $query_modifier[ $query_arg ]['relation'] ) ) {
-							unset( $query_args[ $query_arg ]['relation'] );
-						}
-					}
-
 					/**
 					 * We do a recursive merge to allow "stacking" of same kind of queries;
-					 * e.g. two or more `tax_query`.
+					 * e.g. two or more `tax_query` or `meta_query` entries should merge into one.
 					 */
-					$this->query_args = array_merge_recursive( $query_args, $query_modifier );
+					$this->query_args = Arr::merge_recursive_query_vars( $this->query_args, $query_modifier );
 				}
 			} else {
 				/**
@@ -1186,18 +1193,18 @@ abstract class Tribe__Repository
 			if ( $this->has_default_modifier( $key ) ) {
 				// let's use the default filters normalizing the key first
 				$call_args[0]   = $this->normalize_key( $key );
-				$query_modifier = call_user_func_array( array( $this, 'apply_default_modifier' ), $call_args );
+				$query_modifier = call_user_func_array( [ $this, 'apply_default_modifier' ], $call_args );
 			} elseif ( 2 === count( $call_args ) ) {
 				// Pass query argument $key with the single value argument.
-				$query_modifier = array(
+				$query_modifier = [
 					$key => $call_args[1],
-				);
+				];
 			} else {
 				// More than two $call_args were sent (key, value), assume it was meant for a filter that was not defined yet.
 				throw Tribe__Repository__Usage_Error::because_the_read_filter_is_not_defined( $key, $this );
 			}
 		} else {
-			$query_modifier = call_user_func_array( array( $this, 'apply_modifier' ), $call_args );
+			$query_modifier = call_user_func_array( [ $this, 'apply_modifier' ], $call_args );
 		}
 
 		return $query_modifier;
@@ -1247,7 +1254,7 @@ abstract class Tribe__Repository
 		// `ID` to `id`
 		$normalized = strtolower( $key );
 
-		$post_prefixed = array(
+		$post_prefixed = [
 			'password',
 			'name__in',
 			'_in',
@@ -1262,7 +1269,7 @@ abstract class Tribe__Repository
 			'modified',
 			'modified_gmt',
 			'content_filtered',
-		);
+		];
 
 		if ( in_array( $key, $post_prefixed, true ) ) {
 			$normalized = 'post_' . $key;
@@ -1320,11 +1327,11 @@ abstract class Tribe__Repository
 		$to_update = $this->get_ids();
 
 		if ( empty( $to_update ) ) {
-			return $return_promise ? new Tribe__Promise() : array();
+			return $return_promise ? new Tribe__Promise() : [];
 		}
 
-		$exit     = array();
-		$postarrs = array();
+		$exit     = [];
+		$postarrs = [];
 
 		foreach ( $to_update as $id ) {
 			$postarrs[ $id ] = $this->filter_postarr_for_update( $this->build_postarr( $id ), $id );
@@ -1355,7 +1362,7 @@ abstract class Tribe__Repository
 	 */
 	public function get_ids() {
 		if ( $this->void_query ) {
-			return array();
+			return [];
 		}
 
 
@@ -1387,7 +1394,7 @@ abstract class Tribe__Repository
 			 * Extending classes might use this method to run sub-queries
 			 * and signal a void query; let's return an empty array.
 			 */
-			return array();
+			return [];
 		}
 	}
 
@@ -1533,7 +1540,7 @@ abstract class Tribe__Repository
 	public function where_meta_related_by( $meta_keys, $compare, $field = null, $values = null ) {
 		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_keys );
 
-		if ( ! in_array( $compare, array( 'EXISTS', 'NOT EXISTS' ), true ) ) {
+		if ( ! in_array( $compare, [ 'EXISTS', 'NOT EXISTS' ], true ) ) {
 			if ( empty( $field ) || empty( $values ) ) {
 				throw Tribe__Repository__Usage_Error::because_this_comparison_operator_requires_fields_and_values( $meta_keys, $compare, $this );
 			}
@@ -1591,7 +1598,7 @@ abstract class Tribe__Repository
 	public function where_meta_related_by_meta( $meta_keys, $compare, $meta_field = null, $meta_values = null, $or_not_exists = false ) {
 		$meta_keys = Tribe__Utils__Array::list_to_array( $meta_keys );
 
-		if ( ! in_array( $compare, array( 'EXISTS', 'NOT EXISTS' ), true ) ) {
+		if ( ! in_array( $compare, [ 'EXISTS', 'NOT EXISTS' ], true ) ) {
 			if ( empty( $meta_field ) || empty( $meta_values ) ) {
 				throw Tribe__Repository__Usage_Error::because_this_comparison_operator_requires_fields_and_values( $meta_keys, $compare, $this );
 			}
@@ -1678,7 +1685,7 @@ abstract class Tribe__Repository
 		$buffered_count = count( $buffered );
 
 		foreach ( $all_callbacks as $c ) {
-			call_user_func_array( array( $this, $c[0] ), array_slice( $c, 1 ) );
+			call_user_func_array( [ $this, $c[0] ], array_slice( $c, 1 ) );
 
 			if ( $buffered_count === count( $this->filter_query->get_buffered_where_clauses() ) ) {
 				throw Tribe__Repository__Usage_Error::because_where_or_should_only_be_used_with_methods_that_add_where_clauses( $c, $this );
@@ -1719,12 +1726,12 @@ abstract class Tribe__Repository
 	 * @param string|null  $by       The ->by() lookup to use (defaults to meta_regexp_or_like).
 	 */
 	public function add_simple_meta_schema_entry( $key, $meta_key, $by = null ) {
-		$this->schema[ $key ] = array( $this, 'filter_by_simple_meta_schema' );
+		$this->schema[ $key ] = [ $this, 'filter_by_simple_meta_schema' ];
 
-		$this->simple_meta_schema[ $key ] = array(
+		$this->simple_meta_schema[ $key ] = [
 			'meta_key' => $meta_key,
 			'by'       => $by,
-		);
+		];
 	}
 
 	/**
@@ -1737,12 +1744,12 @@ abstract class Tribe__Repository
 	 * @param string|null  $by       The ->by() lookup to use (defaults to term_in).
 	 */
 	public function add_simple_tax_schema_entry( $key, $taxonomy, $by = null ) {
-		$this->schema[ $key ] = array( $this, 'filter_by_simple_tax_schema' );
+		$this->schema[ $key ] = [ $this, 'filter_by_simple_tax_schema' ];
 
-		$this->simple_tax_schema[ $key ] = array(
+		$this->simple_tax_schema[ $key ] = [
 			'taxonomy' => $taxonomy,
 			'by'       => $by,
-		);
+		];
 	}
 
 	/**
@@ -1764,7 +1771,7 @@ abstract class Tribe__Repository
 	 * @throws Tribe__Repository__Usage_Error If a filter is called with wrong arguments.
 	 */
 	protected function apply_default_modifier( $key, $value ) {
-		$args = array();
+		$args = [];
 
 		$call_args = func_get_args();
 		$arg_1     = isset( $call_args[2] ) ? $call_args[2] : null;
@@ -1776,14 +1783,14 @@ abstract class Tribe__Repository
 		switch ( $key ) {
 			default:
 				// leverage built-in WP_Query filters
-				$args = array( $key => $value );
+				$args = [ $key => $value ];
 				break;
 			case 'ID':
 			case 'id':
-				$args = array( 'p' => $value );
+				$args = [ 'p' => $value ];
 				break;
 			case 'search':
-				$args = array( 's' => $value );
+				$args = [ 's' => $value ];
 				break;
 			case 'post_status':
 				$this->query_args['post_status'] = (array) $value;
@@ -1813,7 +1820,7 @@ abstract class Tribe__Repository
 				break;
 			case 'to_ping':
 				$this->filter_query->to_get_posts_to_ping( $value );
-				$args = array( 'to_ping' => $value );
+				$args = [ 'to_ping' => $value ];
 				break;
 			case 'post_modified':
 				$args = $this->get_posts_after( $value, 'post_modified' );
@@ -1828,7 +1835,7 @@ abstract class Tribe__Repository
 				$this->filter_query->to_get_posts_with_guid_like( $value );
 				break;
 			case 'menu_order':
-				$args = array( 'menu_order' => $value );
+				$args = [ 'menu_order' => $value ];
 				break;
 			case 'meta':
 			case 'meta_equals':
@@ -1990,7 +1997,7 @@ abstract class Tribe__Repository
 	 * @return array
 	 */
 	protected function get_posts_after( $value, $column = 'post_date' ) {
-		$timezone = in_array( $column, array( 'post_date_gmt', 'post_modified_gmt' ), true )
+		$timezone = in_array( $column, [ 'post_date_gmt', 'post_modified_gmt' ], true )
 			? 'UTC'
 			: Tribe__Timezones::generate_timezone_string_from_utc_offset( Tribe__Timezones::wp_timezone_string() );
 
@@ -2002,16 +2009,16 @@ abstract class Tribe__Repository
 
 		$array_key = sprintf( '%s-after', $column );
 
-		return array(
-			'date_query' => array(
+		return [
+			'date_query' => [
 				'relation' => 'AND',
-				$array_key => array(
+				$array_key => [
 					'inclusive' => true,
 					'column'    => $column,
 					'after'     => $date->format( 'Y-m-d H:i:s' ),
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -2025,7 +2032,7 @@ abstract class Tribe__Repository
 	 * @return array
 	 */
 	protected function get_posts_before( $value, $column = 'post_date' ) {
-		$timezone = in_array( $column, array( 'post_date_gmt', 'post_modified_gmt' ), true )
+		$timezone = in_array( $column, [ 'post_date_gmt', 'post_modified_gmt' ], true )
 			? 'UTC'
 			: Tribe__Timezones::generate_timezone_string_from_utc_offset( Tribe__Timezones::wp_timezone_string() );
 
@@ -2037,16 +2044,16 @@ abstract class Tribe__Repository
 
 		$array_key = sprintf( '%s-before', $column );
 
-		return array(
-			'date_query' => array(
+		return [
+			'date_query' => [
 				'relation' => 'AND',
-				$array_key => array(
+				$array_key => [
 					'inclusive' => true,
 					'column'    => $column,
 					'before'    => $date->format( 'Y-m-d H:i:s' ),
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -2071,16 +2078,16 @@ abstract class Tribe__Repository
 		if ( count( $meta_keys ) === 1 ) {
 			$array_key = $this->sql_slug( $meta_keys[0], $postfix );
 
-			$args = array(
-				'meta_query' => array(
-					$array_key => array(
+			$args = [
+				'meta_query' => [
+					$array_key => [
 						'key'     => $meta_keys[0],
 						'compare' => strtoupper( $compare ),
-					),
-				),
-			);
+					],
+				],
+			];
 
-			if ( ! in_array( $compare, array( 'EXISTS', 'NOT EXISTS' ), true ) ) {
+			if ( ! in_array( $compare, [ 'EXISTS', 'NOT EXISTS' ], true ) ) {
 				$args['meta_query'][ $array_key ]['value'] = $meta_value;
 			}
 
@@ -2167,22 +2174,22 @@ abstract class Tribe__Repository
 	 * @return array
 	 */
 	protected function build_tax_query( $taxonomy, $terms, $field, $operator ) {
-		if ( in_array( $operator, array( 'EXISTS', 'NOT EXISTS' ), true ) ) {
+		if ( in_array( $operator, [ 'EXISTS', 'NOT EXISTS' ], true ) ) {
 			$array_key = $this->sql_slug( $taxonomy, $operator );
 		} else {
 			$array_key = $this->sql_slug( $taxonomy, $field, $operator );
 		}
 
-		return array(
-			'tax_query' => array(
-				$array_key => array(
+		return [
+			'tax_query' => [
+				$array_key => [
 					'taxonomy' => $taxonomy,
 					'field'    => $field,
 					'terms'    => $terms,
 					'operator' => strtoupper( $operator ),
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -2226,12 +2233,12 @@ abstract class Tribe__Repository
 	public function prepare_interval( $values, $format = '%s', $operator = 'IN' ) {
 		$values = Tribe__Utils__Array::list_to_array( $values );
 
-		$prepared = array();
+		$prepared = [];
 		foreach ( $values as $value ) {
 			$prepared[] = $this->prepare_value( $value, $format );
 		}
 
-		return in_array( $operator, array( 'BETWEEN', 'NOT BETWEEN' ) )
+		return in_array( $operator, [ 'BETWEEN', 'NOT BETWEEN' ] )
 			? sprintf( '%s AND %s', $prepared[0], $prepared[1] )
 			: sprintf( '(%s)', implode( ',', $prepared ) );
 	}
@@ -2432,7 +2439,7 @@ abstract class Tribe__Repository
 		$to_delete = $this->get_ids();
 
 		if ( empty( $to_delete ) ) {
-			return $return_promise ? new Tribe__Promise() : array();
+			return $return_promise ? new Tribe__Promise() : [];
 		}
 
 
@@ -2862,10 +2869,10 @@ abstract class Tribe__Repository
 	 * {@inheritdoc}
 	 */
 	public function build_postarr( $id = null ) {
-		$postarr = array(
-			'tax_input'  => array(),
-			'meta_input' => array(),
-		);
+		$postarr = [
+			'tax_input'  => [],
+			'meta_input' => [],
+		];
 
 		/*
 		 * The check is lax here by design: we leave space for the client code
@@ -3042,7 +3049,7 @@ abstract class Tribe__Repository
 	/**
 	 * {@inheritdoc}
 	 */
-	public function filter( $args = array(), $operator = 'AND' ) {
+	public function filter( $args = [], $operator = 'AND' ) {
 		$list = new WP_List_Util( $this->all() );
 
 		return $list->filter( $args, $operator );
@@ -3051,7 +3058,7 @@ abstract class Tribe__Repository
 	/**
 	 * {@inheritdoc}
 	 */
-	public function sort( $orderby = array(), $order = 'ASC', $preserve_keys = false ) {
+	public function sort( $orderby = [], $order = 'ASC', $preserve_keys = false ) {
 		$list = new WP_List_Util( $this->all() );
 
 		return $list->sort( $orderby, $order, $preserve_keys );

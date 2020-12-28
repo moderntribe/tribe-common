@@ -10,9 +10,9 @@ class Tribe__PUE__Notices {
 	const EXPIRED_KEY = 'expired_key';
 	const STORE_KEY   = 'tribe_pue_key_notices';
 
-	protected $registered = array();
-	protected $saved_notices = array();
-	protected $notices = array();
+	protected $registered = [];
+	protected $saved_notices = [];
+	protected $notices = [];
 
 	protected $plugin_names = [
 		'pue_install_key_event_tickets_plus'       => 'Event Tickets Plus',
@@ -30,8 +30,8 @@ class Tribe__PUE__Notices {
 	 */
 	public function __construct() {
 		$this->populate();
-		add_action( 'current_screen', array( $this, 'setup_notices' ) );
-		add_action( 'tribe_pue_notices_save_notices', array( $this, 'maybe_undismiss_notices' ) );
+		add_action( 'current_screen', [ $this, 'setup_notices' ] );
+		add_action( 'tribe_pue_notices_save_notices', [ $this, 'maybe_undismiss_notices' ] );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Tribe__PUE__Notices {
 	 * groups.
 	 */
 	protected function populate() {
-		$this->saved_notices = (array) get_option( self::STORE_KEY, array() );
+		$this->saved_notices = (array) get_option( self::STORE_KEY, [] );
 
 		if ( empty( $this->saved_notices ) ) {
 			return;
@@ -193,7 +193,7 @@ class Tribe__PUE__Notices {
 	 */
 	public function setup_notices() {
 		// Don't allow this to run multiple times
-		remove_action( 'current_screen', array( $this, 'setup_notices' ) );
+		remove_action( 'current_screen', [ $this, 'setup_notices' ] );
 
 		// No need to display license key notices to users without appropriate capabilities
 		if ( ! current_user_can( 'install_plugins' ) ) {
@@ -205,7 +205,7 @@ class Tribe__PUE__Notices {
 				continue;
 			}
 
-			$callback = array( $this, 'render_' . $notice_type );
+			$callback = [ $this, 'render_' . $notice_type ];
 
 			if ( is_callable( $callback ) ) {
 				tribe_notice( 'pue_key-' . $notice_type, $callback, 'dismiss=1&type=warning' );
@@ -237,9 +237,9 @@ class Tribe__PUE__Notices {
 
 		$empty_keys = $wpdb->get_results( $sql, ARRAY_N );
 
-		$formatted_empty_keys = array();
+		$formatted_empty_keys = [];
 		foreach ( $empty_keys as $empty_key ) {
-			$empty_key              = Tribe__Utils__Array::get( $empty_key, array( 0 ) );
+			$empty_key              = Tribe__Utils__Array::get( $empty_key, [ 0 ] );
 			$formatted_empty_keys[] = Tribe__Utils__Array::get( $this->plugin_names, $empty_key );
 		}
 
@@ -380,7 +380,7 @@ class Tribe__PUE__Notices {
 	protected function render_notice( $slug, $inner_html ) {
 
 		// Enqueue the notice CSS.
-		tribe( 'assets' )->enqueue( array( 'tribe-common-admin' ) );
+		tribe( 'assets' )->enqueue( [ 'tribe-common-admin' ] );
 
 		$mascot = esc_url( Tribe__Main::instance()->plugin_url . 'src/resources/images/mascot.png' );
 

@@ -26,20 +26,20 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 		 *
 		 * @var array
 		 */
-		protected $must_escape = array(
+		protected $must_escape = [
 			'tribeEventsAfterHTML',
 			'tribeEventsBeforeHTML',
-		);
+		];
 
 		/**
 		 * Field prefixes here should be partially obfuscated before being printed.
 		 *
 		 * @var array
 		 */
-		protected $must_obfuscate_prefixes = array(
+		protected $must_obfuscate_prefixes = [
 			'pue_install_key_',
 			'google_maps_js_api_key',
-		);
+		];
 
 		private function __construct() {
 			/**
@@ -49,11 +49,11 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 			 */
 			$this->must_escape = (array) apply_filters( 'tribe_help_must_escape_fields', $this->must_escape );
 
-			add_action( 'tribe_help_pre_get_sections', array( $this, 'append_system_info' ), 10 );
-			add_action( 'delete_option_rewrite_rules', array( $this, 'log_rewrite_rule_purge' ) );
+			add_action( 'tribe_help_pre_get_sections', [ $this, 'append_system_info' ], 10 );
+			add_action( 'delete_option_rewrite_rules', [ $this, 'log_rewrite_rule_purge' ] );
 
-			add_action( 'rest_api_init', array( __CLASS__, 'create_sysinfo_endpoint' ) );
-			add_action( 'wp_ajax_tribe_toggle_sysinfo_optin', array( __CLASS__, 'ajax_sysinfo_optin' ) );
+			add_action( 'rest_api_init', [ __CLASS__, 'create_sysinfo_endpoint' ] );
+			add_action( 'wp_ajax_tribe_toggle_sysinfo_optin', [ __CLASS__, 'ajax_sysinfo_optin' ] );
 		}
 
 		/**
@@ -74,7 +74,7 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 			global $wpdb;
 			$user = wp_get_current_user();
 
-			$plugins = array();
+			$plugins = [];
 			if ( function_exists( 'get_plugin_data' ) ) {
 				$plugins_raw = wp_get_active_and_valid_plugins();
 				foreach ( $plugins_raw as $k => $v ) {
@@ -93,7 +93,7 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 				}
 			}
 
-			$network_plugins = array();
+			$network_plugins = [];
 			if ( is_multisite() && function_exists( 'get_plugin_data' ) ) {
 				$plugins_raw = wp_get_active_network_plugins();
 				foreach ( $plugins_raw as $k => $v ) {
@@ -112,7 +112,7 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 				}
 			}
 
-			$mu_plugins = array();
+			$mu_plugins = [];
 			if ( function_exists( 'get_mu_plugins' ) ) {
 				$mu_plugins_raw = get_mu_plugins();
 				foreach ( $mu_plugins_raw as $k => $v ) {
@@ -130,10 +130,10 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 				}
 			}
 
-			$keys = apply_filters( 'tribe-pue-install-keys', array() );
+			$keys = apply_filters( 'tribe-pue-install-keys', [] );
 			//Obfuscate the License Keys for Security
 			if ( is_array( $keys ) && ! empty( $keys ) ) {
-				$secure_keys = array();
+				$secure_keys = [];
 				foreach ( $keys as $plugin => $license ) {
 					$secure_keys[ $plugin ] = preg_replace( '/^(.{4}).*(.{4})$/', '$1' . str_repeat( '#', 32 ) . '$2', $license );
 				}
@@ -145,15 +145,15 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 			$server = explode( '/', reset( $server ) );
 
 			//PHP Information
-			$php_info = array();
-			$php_vars = array(
+			$php_info = [];
+			$php_vars = [
 				'max_execution_time',
 				'memory_limit',
 				'upload_max_filesize',
 				'post_max_size',
 				'display_errors',
 				'log_errors',
-			);
+			];
 
 			foreach ( $php_vars as $php_var ) {
 				if ( isset( $wpdb->qm_php_vars ) && isset( $wpdb->qm_php_vars[ $php_var ] ) ) {
@@ -176,7 +176,7 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 			}
 
 			$site_url = get_site_url();
-			$systeminfo = array(
+			$systeminfo = [
 				'Home URL'               => get_home_url(),
 				'Site URL'               => $site_url,
 				'Site Language'          => get_option( 'WPLANG' ) ? get_option( 'WPLANG' ) : esc_html__( 'English', 'tribe-common' ),
@@ -206,7 +206,7 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 				'Week Starts On'         => get_option( 'start_of_week' ),
 				'Common Library Dir'     => $GLOBALS['tribe-common-info']['dir'],
 				'Common Library Version' => $GLOBALS['tribe-common-info']['version'],
-			);
+			];
 
 			if ( $this->rewrite_rules_purged ) {
 				$systeminfo['rewrite rules purged'] = esc_html__( 'Rewrite rules were purged on load of this help page. Chances are there is a rewrite rule flush occurring in a plugin or theme!', 'tribe-common' );
@@ -262,7 +262,7 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 				} elseif ( is_array( $v ) && $is_numeric_array ) {
 					$output .= sprintf( '<dd class="support-stats-array"><ul><li>%s</li></ul></dd>', join( '</li><li>', $v ) );
 				} else {
-					$formatted_v = array();
+					$formatted_v = [];
 					foreach ( $v as $obj_key => $obj_val ) {
 						if ( in_array( $obj_key, $this->must_escape ) ) {
 							$obj_val = esc_html( $obj_val );
@@ -383,7 +383,7 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 				update_option( 'tribe_systeminfo_optin', $optin_key );
 
 				//Only Connect If a License Exists
-				$keys = apply_filters( 'tribe-pue-install-keys', array() );
+				$keys = apply_filters( 'tribe-pue-install-keys', [] );
 				if ( is_array( $keys ) && ! empty( $keys ) ) {
 					Tribe__Support::send_sysinfo_key( $optin_key );
 				} else {
@@ -412,7 +412,7 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 		 */
 		public static function send_sysinfo_key( $optin_key = null, $url = null, $remove = null, $pueadd = false ) {
 
-			$url   = $url ? $url : urlencode( str_replace( array( 'http://', 'https://' ), '', get_site_url() ) );
+			$url = $url ? $url : urlencode( str_replace( [ 'http://', 'https://' ], '', get_site_url() ) );
 
 			$teccom_url = 'https://theeventscalendar.com/';
 

@@ -25,13 +25,43 @@ $help->add_section_content( 'support', sprintf(
 // Creates the Extra Help section
 $help->add_section( 'extra-help', __( 'Getting More Help', 'tribe-common' ), 20 );
 $help->add_section_content( 'extra-help', __( 'While the resources above help solve a majority of the issues we see, there are times you might be looking for extra support. If you need assistance using our plugins and would like us to take a look, please follow these steps:', 'tribe-common' ), 0 );
-$help->add_section_content( 'extra-help', array(
-	'type' => 'ol',
-
-	sprintf( __( '%s. All of the common (and not-so-common) answers to questions we see are here. It’s often the fastest path to finding an answer!', 'tribe-common' ), '<strong><a href="http://m.tri.be/18j9" target="_blank">' . __( 'Check our Knowledgebase', 'tribe-common' ) . '</a></strong>' ),
-	sprintf( __( '%s. Testing for an existing conflict is the best start for in-depth troubleshooting. We will often ask you to follow these steps when opening a new thread, so doing this ahead of time will be super helpful.', 'tribe-common' ), '<strong><a href="http://m.tri.be/18jh" target="_blank">' . __( 'Test for a theme or plugin conflict', 'tribe-common' ) . '</a></strong>' ),
-	sprintf( __( '%s. There are very few issues we haven’t seen and it’s likely another user has already asked your question and gotten an answer from our support staff. While posting to the help desk is open only to paid customers, they are open for anyone to search and review.', 'tribe-common' ), '<strong><a href="http://m.tri.be/4w/" target="_blank">' . __( 'Search our support help desk', 'tribe-common' ) . '</a></strong>' ),
-), 10 );
+$help->add_section_content(
+	'extra-help',
+	[
+		'type' => 'ol',
+		sprintf(
+			__(
+				'%s. All of the common (and not-so-common) answers to questions we see are here. It’s often the fastest path to finding an answer!',
+				'tribe-common'
+			),
+			'<strong><a href="http://m.tri.be/18j9" target="_blank">' . __(
+				'Check our Knowledgebase',
+				'tribe-common'
+			) . '</a></strong>'
+		),
+		sprintf(
+			__(
+				'%s. Testing for an existing conflict is the best start for in-depth troubleshooting. We will often ask you to follow these steps when opening a new thread, so doing this ahead of time will be super helpful.',
+				'tribe-common'
+			),
+			'<strong><a href="http://m.tri.be/18jh" target="_blank">' . __(
+				'Test for a theme or plugin conflict',
+				'tribe-common'
+			) . '</a></strong>'
+		),
+		sprintf(
+			__(
+				'%s. There are very few issues we haven’t seen and it’s likely another user has already asked your question and gotten an answer from our support staff. While posting to the help desk is open only to paid customers, they are open for anyone to search and review.',
+				'tribe-common'
+			),
+			'<strong><a href="http://m.tri.be/4w/" target="_blank">' . __(
+				'Search our support help desk',
+				'tribe-common'
+			) . '</a></strong>'
+		),
+	],
+	10
+);
 
 // By default these three will be gathered
 $help->add_section_content( 'extra-help', __( 'Please note that all hands-on support is provided via the help desk. You can email or tweet at us… ​but we will probably point you back to the help desk 😄', 'tribe-common' ), 40 );

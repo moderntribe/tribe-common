@@ -15,8 +15,8 @@ class Tribe__Ajax__Dropdown {
 	 * @return void
 	 */
 	public function hook() {
-		add_action( 'wp_ajax_tribe_dropdown', array( $this, 'route' ) );
-		add_action( 'wp_ajax_nopriv_tribe_dropdown', array( $this, 'route' ) );
+		add_action( 'wp_ajax_tribe_dropdown', [ $this, 'route' ] );
+		add_action( 'wp_ajax_nopriv_tribe_dropdown', [ $this, 'route' ] );
 	}
 
 	/**
@@ -118,7 +118,7 @@ class Tribe__Ajax__Dropdown {
 		}
 
 		foreach ( $into as $term ) {
-			$term->children = array();
+			$term->children = [];
 			$this->sort_terms_hierarchically( $terms, $term->children, $term->term_id );
 		}
 	}
@@ -135,6 +135,9 @@ class Tribe__Ajax__Dropdown {
 	public function convert_children_to_array( $results ) {
 		if ( isset( $results->children ) ) {
 			$results->children = $this->convert_children_to_array( $results->children );
+			if ( empty( $results->children ) ) {
+				unset( $results->children );
+			}
 		} else {
 			foreach ( $results as $key => $item ) {
 				$item = $this->convert_children_to_array( $item );
@@ -142,7 +145,7 @@ class Tribe__Ajax__Dropdown {
 		}
 
 		if ( empty( $results ) ) {
-			return array();
+			return [];
 		}
 
 		return array_values( (array) $results );
@@ -157,12 +160,12 @@ class Tribe__Ajax__Dropdown {
 	 * @return object
 	 */
 	public function parse_params( $params ) {
-		$defaults = array(
+		$defaults = [
 			'search' => null,
 			'page'   => 0,
-			'args'   => array(),
+			'args'   => [],
 			'source' => null,
-		);
+		];
 
 		$arguments = wp_parse_args( $params, $defaults );
 
@@ -180,7 +183,7 @@ class Tribe__Ajax__Dropdown {
 	 */
 	public function route() {
 		// Push all POST params into a Default set of data
-		$args = $this->parse_params( empty( $_POST ) ? array() : $_POST );
+		$args = $this->parse_params( empty( $_POST ) ? [] : $_POST );
 
 		if ( empty( $args->source ) ) {
 			$this->error( esc_attr__( 'Missing data source for this dropdown', 'tribe-common' ) );
@@ -189,9 +192,9 @@ class Tribe__Ajax__Dropdown {
 		// Define a Filter to allow external calls to our Select2 Dropboxes
 		$filter = sanitize_key( 'tribe_dropdown_' . $args->source );
 		if ( has_filter( $filter ) ) {
-			$data = apply_filters( $filter, array(), $args->search, $args->page, $args->args, $args->source );
+			$data = apply_filters( $filter, [], $args->search, $args->page, $args->args, $args->source );
 		} else {
-			$data = call_user_func_array( array( $this, $args->source ), (array) $args );
+			$data = call_user_func_array( [ $this, $args->source ], (array) $args );
 		}
 
 		// if we got a empty dataset we return an error
@@ -213,7 +216,7 @@ class Tribe__Ajax__Dropdown {
 	private function success( $data ) {
 		// We need a Results item for Select2 Work
 		if ( ! isset( $data['results'] ) ) {
-			$data['results'] = array();
+			$data['results'] = [];
 		}
 
 		wp_send_json_success( $data );
@@ -228,10 +231,10 @@ class Tribe__Ajax__Dropdown {
 	 * @return void
 	 */
 	private function error( $message ) {
-		$data = array(
+		$data = [
 			'message' => $message,
-			'results' => array(),
-		);
+			'results' => [],
+		];
 		wp_send_json_error( $data );
 	}
 

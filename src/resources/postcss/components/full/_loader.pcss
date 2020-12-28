@@ -6,36 +6,40 @@
 	 *
 	 * Example:
 	 * <div class="tribe-events-view-loader__dots tribe-common-c-loader">
-	 *    <div class="tribe-common-c-loader__dot tribe-common-c-loader__dot--first"></div>
-	 *    <div class="tribe-common-c-loader__dot tribe-common-c-loader__dot--second"></div>
-	 *    <div class="tribe-common-c-loader__dot tribe-common-c-loader__dot--third"></div>
+	 *    <?php $this->template( 'components/icons/dot', [ 'classes' => [ 'tribe-common-c-loader__dot tribe-common-c-loader__dot--first' ] ] ); ?>
+	 *    <?php $this->template( 'components/icons/dot', [ 'classes' => [ 'tribe-common-c-loader__dot tribe-common-c-loader__dot--second' ] ] ); ?>
+	 *    <?php $this->template( 'components/icons/dot', [ 'classes' => [ 'tribe-common-c-loader__dot tribe-common-c-loader__dot--third' ] ] ); ?>
 	 * </div>
 	 *
 	 * ----------------------------------------------------------------------------- */
 
-	.tribe-common-c-loader__dot {
+	.tribe-common-c-loader__dot circle {
 		animation-name: tribe-common-c-loader-bounce;
 		animation-duration: 2.24s;
 		animation-iteration-count: infinite;
 		animation-direction: normal;
+		fill: currentColor;
+		opacity: var(--opacity-background);
 	}
 
-	.tribe-common-c-loader__dot--first {
+	.tribe-common-c-loader__dot--first circle {
 		animation-delay: 0.45s;
 	}
 
-	.tribe-common-c-loader__dot--second {
+	.tribe-common-c-loader__dot--second circle {
 		animation-delay: 1.05s;
 	}
 
-	.tribe-common-c-loader__dot--third {
+	.tribe-common-c-loader__dot--third circle {
 		animation-delay: 1.35s;
 	}
 
 	@keyframes tribe-common-c-loader-bounce {
 		0% {}
 
-		50% { background-color: var(--color-accent-primary); }
+		50% {
+			opacity: var(--opacity-default);
+		}
 
 		100% {}
 	}

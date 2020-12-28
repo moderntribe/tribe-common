@@ -189,7 +189,7 @@ if ( ! function_exists( 'tribe_get_start_time' ) ) {
 			return;
 		}
 
-		// @todo move timezones to Common
+		// @todo [BTRIA-584]: Move timezones to Common.
 		if ( class_exists( 'Tribe__Events__Timezones' ) ) {
 			$start_date = Tribe__Events__Timezones::event_start_timestamp( $event->ID, $timezone );
 		}
@@ -240,7 +240,7 @@ if ( ! function_exists( 'tribe_get_end_time' ) ) {
 			return;
 		}
 
-		// @todo move timezones to Common
+		// @todo [BTRIA-584]: Move timezones to Common.
 		if ( class_exists( 'Tribe__Events__Timezones' ) ) {
 			$end_date = Tribe__Events__Timezones::event_end_timestamp( $event->ID, $timezone );
 		}
@@ -300,7 +300,7 @@ if ( ! function_exists( 'tribe_get_start_date' ) ) {
 				$display_time = false;
 			}
 
-			// @todo move timezones to Common
+			// @todo [BTRIA-584]: Move timezones to Common.
 			if ( class_exists( 'Tribe__Events__Timezones' ) ) {
 				$start_date = Tribe__Events__Timezones::event_start_timestamp( $event->ID, $timezone );
 			} else {
@@ -362,7 +362,7 @@ if ( ! function_exists( 'tribe_get_end_date' ) ) {
 				$display_time = false;
 			}
 
-			// @todo move timezones to Common
+			// @todo [BTRIA-584]: Move timezones to Common.
 			if ( class_exists( 'Tribe__Events__Timezones' ) ) {
 				$end_date = Tribe__Events__Timezones::event_end_timestamp( $event->ID );
 			} else {
@@ -393,7 +393,7 @@ if ( ! function_exists( 'tribe_normalize_manual_utc_offset' ) ) {
 	 *                e.g. 'UTC+3', 'UTC-4.5', 'UTC+2.75'
 	 */
 	function tribe_normalize_manual_utc_offset( $utc_offset ) {
-		$matches = array();
+		$matches = [];
 		if ( preg_match( '/^UTC\\s*((\\+|-)(\\d{1,2}))((:|.|,)(\\d{1,2})+)*/ui', $utc_offset, $matches ) ) {
 			if ( ! empty( $matches[6] ) ) {
 				$minutes = $matches[6] > 10 && $matches[6] <= 60 ? $minutes = $matches[6] / 60 : $matches[6];

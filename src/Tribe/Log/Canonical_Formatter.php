@@ -16,28 +16,28 @@ use Monolog\Formatter\LineFormatter;
 
 class Canonical_Formatter implements FormatterInterface {
 	/**
-	 * @since TBD
+	 * @since 4.12.13
 	 *
 	 * @var string Our standard format for the Monolog LineFormatter.
 	 */
 	protected $standard_format = 'tribe.%channel%.%level_name%: %message%';
 
 	/**
-	 * @since TBD
+	 * @since 4.12.13
 	 *
 	 * @var string Our standard format Monolog LineFormatter.
 	 */
 	protected $standard_formatter;
 
 	/**
-	 * @since TBD
+	 * @since 4.12.13
 	 *
 	 * @var string Our context-aware format for the Monolog LineFormatter.
 	 */
 	protected $context_format  = 'tribe-canonical-line channel=%channel% %message%';
 
 	/**
-	 * @since TBD
+	 * @since 4.12.13
 	 *
 	 * @var string Our context-aware Monolog LineFormatter.
 	 */
@@ -69,7 +69,7 @@ class Canonical_Formatter implements FormatterInterface {
 	/**
 	 * Gets a LineFormatter whose format is context aware.
 	 *
-	 * @since TBD
+	 * @since 4.12.13
 	 *
 	 * @return LineFormatter
 	 */
@@ -84,7 +84,7 @@ class Canonical_Formatter implements FormatterInterface {
 	/**
 	 * Gets a LineFormatter whose format is our standard logging format.
 	 *
-	 * @since TBD
+	 * @since 4.12.13
 	 *
 	 * @return LineFormatter
 	 */
@@ -101,7 +101,7 @@ class Canonical_Formatter implements FormatterInterface {
 	 *
 	 * This simply hands off the work of formatting Batches to the LineFormatter.
 	 *
-	 * @since TBD
+	 * @since 4.12.13
 	 *
 	 * @param  array $records A set of records to format
 	 * @return mixed The formatted set of records

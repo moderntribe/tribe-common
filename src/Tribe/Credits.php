@@ -13,8 +13,8 @@ class Tribe__Credits {
 	 * Hook the functionality of this class into the world
 	 */
 	public function hook() {
-		add_filter( 'tribe_events_after_html', array( $this, 'html_comment_credit' ) );
-		add_filter( 'admin_footer_text', array( $this, 'rating_nudge' ), 1, 2 );
+		add_filter( 'tribe_events_after_html', [ $this, 'html_comment_credit' ] );
+		add_filter( 'admin_footer_text', [ $this, 'rating_nudge' ], 1, 2 );
 	}
 
 	/**
@@ -43,7 +43,7 @@ class Tribe__Credits {
 	public function rating_nudge( $footer_text ) {
 		$admin_helpers = Tribe__Admin__Helpers::instance();
 
-		add_filter( 'tribe_tickets_post_types', array( $this, 'tmp_return_tribe_events' ), 99 );
+		add_filter( 'tribe_tickets_post_types', [ $this, 'tmp_return_tribe_events' ], 99 );
 
 		// only display custom text on Tribe Admin Pages
 		if ( $admin_helpers->is_screen() || $admin_helpers->is_post_type_screen() ) {
@@ -69,7 +69,7 @@ class Tribe__Credits {
 			}
 		}
 
-		remove_filter( 'tribe_tickets_post_types', array( $this, 'tmp_return_tribe_events' ), 99 );
+		remove_filter( 'tribe_tickets_post_types', [ $this, 'tmp_return_tribe_events' ], 99 );
 
 		return $footer_text;
 	}
@@ -80,7 +80,7 @@ class Tribe__Credits {
 	 * This will limit the request for ratings to only those post type pages
 	 */
 	public function tmp_return_tribe_events( $unused_post_types ) {
-		return array( 'tribe_events' );
+		return [ 'tribe_events' ];
 	}
 
 	/**

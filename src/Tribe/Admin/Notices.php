@@ -65,7 +65,7 @@ class Tribe__Admin__Notices {
 	 *
 	 * @var array
 	 */
-	protected $notices = array();
+	protected $notices = [];
 
 	/**
 	 * Register the Methods in the correct places
@@ -80,7 +80,7 @@ class Tribe__Admin__Notices {
 		}
 
 		// Before we bail on the
-		add_action( 'wp_ajax_tribe_notice_dismiss', array( $this, 'maybe_dismiss' ) );
+		add_action( 'wp_ajax_tribe_notice_dismiss', [ $this, 'maybe_dismiss' ] );
 
 		// Doing AJAX? bail.
 		if ( tribe( 'context' )->doing_ajax() ) {
@@ -88,14 +88,14 @@ class Tribe__Admin__Notices {
 		}
 
 		// Hook the actual rendering of notices
-		add_action( 'current_screen', array( $this, 'hook' ), 20 );
+		add_action( 'current_screen', [ $this, 'hook' ], 20 );
 
 		// Add our notice dismissal script
 		tribe_asset(
 			Tribe__Main::instance(),
 			'tribe-notice-dismiss',
 			'notice-dismiss.js',
-			array( 'jquery' ),
+			[ 'jquery' ],
 			'admin_enqueue_scripts'
 		);
 	}
@@ -180,7 +180,7 @@ class Tribe__Admin__Notices {
 			$wrap = isset( $notice->wrap ) ? $notice->wrap : false;
 
 			if ( is_callable( $content ) ) {
-				$content = call_user_func_array( $content, array( $notice ) );
+				$content = call_user_func_array( $content, [ $notice ] );
 			}
 
 			// Return the rendered HTML
@@ -219,7 +219,7 @@ class Tribe__Admin__Notices {
 		$notice = $this->get( $slug );
 		$this->notices[ $slug ]->is_rendered = true;
 
-		$classes = array( 'tribe-dismiss-notice', 'notice' );
+		$classes   = [ 'tribe-dismiss-notice', 'notice' ];
 		$classes[] = sanitize_html_class( 'notice-' . $notice->type );
 		$classes[] = sanitize_html_class( 'tribe-notice-' . $notice->slug );
 
@@ -382,10 +382,10 @@ class Tribe__Admin__Notices {
 	 * @return int
 	 */
 	public function undismiss_for_all( $slug ) {
-		$user_query = new WP_User_Query( array(
+		$user_query = new WP_User_Query( [
 			'meta_key'   => self::$meta_key,
 			'meta_value' => $slug,
-		) );
+		] );
 
 		$affected = 0;
 
@@ -411,23 +411,23 @@ class Tribe__Admin__Notices {
 	 *
 	 * @return stdClass
 	 */
-	public function register( $slug, $callback, $arguments = array(), $active_callback = null ) {
+	public function register( $slug, $callback, $arguments = [], $active_callback = null ) {
 		// Prevent weird stuff here
 		$slug = sanitize_title_with_dashes( $slug );
 
-		$defaults = array(
-			'callback'        => null,
-			'content'         => null,
-			'action'          => 'admin_notices',
-			'priority'        => 10,
-			'expire'          => false,
-			'dismiss'         => false,
-			'type'            => 'error',
-			'is_rendered'     => false,
-			'wrap'            => false,
-		);
+		$defaults = [
+			'callback'    => null,
+			'content'     => null,
+			'action'      => 'admin_notices',
+			'priority'    => 10,
+			'expire'      => false,
+			'dismiss'     => false,
+			'type'        => 'error',
+			'is_rendered' => false,
+			'wrap'        => false,
+		];
 
-		$defaults['callback'] = array( $this, 'render_' . $slug );
+		$defaults['callback'] = [ $this, 'render_' . $slug ];
 		$defaults['content'] = $callback;
 
 		if ( is_callable( $active_callback ) ) {
@@ -467,9 +467,9 @@ class Tribe__Admin__Notices {
 	 *
 	 * @return stdClass Which notice was registered
 	 */
-	public function register_transient( $slug, $html, $arguments = array(), $expire = null ) {
+	public function register_transient( $slug, $html, $arguments = [], $expire = null ) {
 		$notices          = $this->get_transients();
-		$notices[ $slug ] = array( $html, $arguments, time() + $expire );
+		$notices[ $slug ] = [ $html, $arguments, time() + $expire ];
 		$this->set_transients( $notices );
 	}
 
@@ -557,7 +557,7 @@ class Tribe__Admin__Notices {
 
 		$transient = self::$transient_notices_name;
 		$notices   = get_transient( $transient );
-		$notices   = is_array( $notices ) ? $notices : array();
+		$notices   = is_array( $notices ) ? $notices : [];
 
 		if ( $this->did_prune_transients ) {
 			$this->did_prune_transients = true;

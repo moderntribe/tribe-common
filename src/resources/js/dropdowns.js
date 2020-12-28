@@ -153,7 +153,7 @@ var tribe_dropdowns = window.tribe_dropdowns || {};
 	 * @return {Object|boolean}
 	 */
 	function find_item( description, haystack ) {
-		if ( ! $.isArray( haystack ) ) {
+		if ( ! _.isArray( haystack ) ) {
 			return false;
 		}
 
@@ -168,7 +168,7 @@ var tribe_dropdowns = window.tribe_dropdowns || {};
 				return possible_match;
 			}
 
-			if ( possible_match.hasOwnProperty( 'children' ) && $.isArray( possible_match.children ) ) {
+			if ( possible_match.hasOwnProperty( 'children' ) && _.isArray( possible_match.children ) ) {
 				var subsearch = find_item( description, possible_match.children );
 
 				if ( subsearch ) {

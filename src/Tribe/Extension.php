@@ -42,7 +42,7 @@ abstract class Tribe__Extension {
 	 *                               resulting data is stored in this.
 	 * }
 	 */
-	protected $args = array();
+	protected $args = [];
 
 	/**
 	 * The various extension instances
@@ -53,7 +53,7 @@ abstract class Tribe__Extension {
 	 *      @type object $child_class_name instance
 	 * }
 	 */
-	private static $instances = array();
+	private static $instances = [];
 
 	/**
 	 * Get singleton instance of child class
@@ -101,7 +101,7 @@ abstract class Tribe__Extension {
 		if ( did_action( $init_hook ) > 0 ) {
 			$this->register();
 		} else {
-			add_action( $init_hook, array( $this, 'register' ) );
+			add_action( $init_hook, [ $this, 'register' ] );
 		}
 	}
 
@@ -127,7 +127,7 @@ abstract class Tribe__Extension {
 	 * @param string|null $minimum_version Minimum acceptable version of plugin.
 	 */
 	final protected function add_required_plugin( $main_class, $minimum_version = null ) {
-		$this->set( array( 'requires', $main_class ), $minimum_version );
+		$this->set( [ 'requires', $main_class ], $minimum_version );
 	}
 
 	/**
@@ -143,7 +143,7 @@ abstract class Tribe__Extension {
 			$this->get_plugin_file(),
 			__( 'Tutorial', 'tribe-common' ),
 			$url,
-			array( 'class' => 'tribe-meta-link-extension' )
+			[ 'class' => 'tribe-meta-link-extension' ]
 		);
 	}
 
@@ -391,7 +391,7 @@ abstract class Tribe__Extension {
 
 		// Class name was not set by debug_backtrace() hackery.
 		if ( null === $class_name ) {
-			tribe_notice( 'tribe_debug_backtrace_disabled', array( __CLASS__, 'notice_debug_backtrace' ) );
+			tribe_notice( 'tribe_debug_backtrace_disabled', [ __CLASS__, 'notice_debug_backtrace' ] );
 		}
 
 		return $class_name;

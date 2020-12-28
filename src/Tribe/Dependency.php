@@ -11,23 +11,23 @@ if ( ! class_exists( 'Tribe__Dependency' ) ) {
 		/**
 		 * A multidimensional array of active tribe plugins in the following format
 		 *
-		 * array(
+		 * [
 		 *  'class'   => 'main class name',
 		 *  'version' => 'version num', (optional)
 		 *  'path'    => 'Path to the main plugin/bootstrap file' (optional)
-		 * )
+		 * ]
 		 */
 		protected $active_plugins = [];
 
 		/**
 		 * A multidimensional array of active tribe plugins in the following format
 		 *
-		 * array(
+		 * [
 		 *  'class'             => 'main class name',
 		 *  'path'              => 'Path to the main plugin/bootstrap file'
 		 *  'version'           => 'version num', (optional)
 		 *  'dependencies'      => 'A multidimensional of dependencies' (optional)
-		 * )
+		 * ]
 		 */
 		protected $registered_plugins = [];
 
@@ -49,13 +49,13 @@ if ( ! class_exists( 'Tribe__Dependency' ) ) {
 		 * @param null|string $path         Path to the main plugin/bootstrap file
 		 * @param array       $dependencies An array of dependencies for a plugin
 		 */
-		public function add_registered_plugin( $main_class, $version = null, $path = null, $dependencies = array() ) {
-			$plugin = array(
+		public function add_registered_plugin( $main_class, $version = null, $path = null, $dependencies = [] ) {
+			$plugin = [
 				'class'        => $main_class,
 				'version'      => $version,
 				'path'         => $path,
 				'dependencies' => $dependencies,
-			);
+			];
 
 			$this->registered_plugins[ $main_class ] = $plugin;
 
@@ -83,11 +83,11 @@ if ( ! class_exists( 'Tribe__Dependency' ) ) {
 		 * @param string $path       Path to the main plugin/bootstrap file
 		 */
 		public function add_active_plugin( $main_class, $version = null, $path = null ) {
-			$plugin = array(
-				'class'        => $main_class,
-				'version'      => $version,
-				'path'         => $path,
-			);
+			$plugin = [
+				'class'   => $main_class,
+				'version' => $version,
+				'path'    => $path,
+			];
 
 			$this->active_plugins[ $main_class ] = $plugin;
 		}
@@ -267,7 +267,7 @@ if ( ! class_exists( 'Tribe__Dependency' ) ) {
 		 *
 		 * @return bool
 		 */
-		public function has_requisite_plugins( $plugins_required = array() ) {
+		public function has_requisite_plugins( $plugins_required = [] ) {
 			foreach ( $plugins_required as $class => $version ) {
 				// Return false if the plugin is not set or is a lesser version
 				if ( ! $this->is_plugin_active( $class ) ) {
@@ -307,7 +307,7 @@ if ( ! class_exists( 'Tribe__Dependency' ) ) {
 		 *
 		 * @return true|int  The number of failed dependency checks; `true` or `0` to indicate no checks failed.
 		 */
-		public function has_valid_dependencies( $plugin, $dependencies = array(), $addon = false ) {
+		public function has_valid_dependencies( $plugin, $dependencies = [], $addon = false ) {
 			if ( empty( $dependencies ) ) {
 				return true;
 			}
@@ -415,7 +415,7 @@ if ( ! class_exists( 'Tribe__Dependency' ) ) {
 		 * @param array  $classes_req  Any Main class files/tribe plugins required for this to run.
 		 * @param array  $dependencies an array of dependencies to check.
 		 */
-		public function register_plugin( $file_path, $main_class, $version, $classes_req = array(), $dependencies = array() ) {
+		public function register_plugin( $file_path, $main_class, $version, $classes_req = [], $dependencies = [] ) {
 			/**
 			 * Filters the version string for a plugin.
 			 *

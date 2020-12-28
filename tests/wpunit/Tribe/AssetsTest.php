@@ -8,7 +8,7 @@ class AssetsTest extends \Codeception\TestCase\WPTestCase {
 	/**
 	 * @test
 	 *
-	 * @since TBD
+	 * @since 4.12.13
 	 */
 	public function it_should_have_translations() {
 		$locale = 'en';

@@ -14,7 +14,7 @@ class Tribe__Service_Providers__Promoter extends tad_DI52_ServiceProvider {
 	 */
 	public function register() {
 		tribe_singleton( 'promoter.auth', 'Tribe__Promoter__Auth' );
-		tribe_singleton( 'promoter.pue', 'Tribe__Promoter__PUE', array( 'load' ) );
+		tribe_singleton( 'promoter.pue', 'Tribe__Promoter__PUE', [ 'load' ] );
 		tribe_singleton( 'promoter.view', 'Tribe__Promoter__View' );
 
 		$this->hook();
@@ -39,8 +39,8 @@ class Tribe__Service_Providers__Promoter extends tad_DI52_ServiceProvider {
 		}
 
 		// The usage of a high priority so we can push the icon to the end
-		add_action( 'admin_bar_menu', array( $this, 'add_promoter_logo_on_admin_bar' ), 1000 );
-		add_action( 'tribe_common_loaded', array( $this, 'add_promoter_assets' ) );
+		add_action( 'admin_bar_menu', [ $this, 'add_promoter_logo_on_admin_bar' ], 1000 );
+		add_action( 'tribe_common_loaded', [ $this, 'add_promoter_assets' ] );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Tribe__Service_Providers__Promoter extends tad_DI52_ServiceProvider {
 		 * It uses and inline SVG as will provider more flexibility for styling so we can change
 		 * the fill of the path property of the SVG so we can match the WP installations.
 		 */
-		$args = array(
+		$args = [
 			'id'    => 'promoter-admin-bar',
 			'title' => sprintf(
 				"<span class='promoter-admin-bar__icon'>%s</span><span class='promoter-admin-bar__text'>%s</span>",
@@ -68,11 +68,11 @@ class Tribe__Service_Providers__Promoter extends tad_DI52_ServiceProvider {
 				'Promoter'
 			),
 			'href'  => 'https://promoter.theeventscalendar.com/',
-			'meta'  => array(
+			'meta'  => [
 				'target' => '_blank',
 				'class'  => 'promoter-admin-bar-link',
-			),
-		);
+			],
+		];
 		$wp_admin_bar->add_node( $args );
 	}
 
@@ -86,11 +86,11 @@ class Tribe__Service_Providers__Promoter extends tad_DI52_ServiceProvider {
 			Tribe__Main::instance(),
 			'promoter',
 			'promoter.css',
-			array(),
-			array( 'wp_enqueue_scripts', 'admin_enqueue_scripts' ),
-			array(
-				'conditionals' => array( $this, 'should_load_promoter_styles' ),
-			)
+			[],
+			[ 'wp_enqueue_scripts', 'admin_enqueue_scripts' ],
+			[
+				'conditionals' => [ $this, 'should_load_promoter_styles' ],
+			]
 		);
 	}
 

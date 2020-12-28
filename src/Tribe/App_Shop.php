@@ -33,8 +33,8 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 		 * Class constructor
 		 */
 		public function __construct() {
-			add_action( 'admin_menu', array( $this, 'add_menu_page' ), 100 );
-			add_action( 'wp_before_admin_bar_render', array( $this, 'add_toolbar_item' ), 20 );
+			add_action( 'admin_menu', [ $this, 'add_menu_page' ], 100 );
+			add_action( 'wp_before_admin_bar_render', [ $this, 'add_toolbar_item' ], 20 );
 
 			$this->register_assets();
 		}
@@ -53,7 +53,17 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 
 			$where = Tribe__Settings::instance()->get_parent_slug();
 
-			$this->admin_page = add_submenu_page( $where, $page_title, $menu_title, $capability, self::MENU_SLUG, array( $this, 'do_menu_page' ) );
+			$this->admin_page = add_submenu_page(
+				$where,
+				$page_title,
+				$menu_title,
+				$capability,
+				self::MENU_SLUG,
+				[
+					$this,
+					'do_menu_page',
+				]
+			);
 		}
 
 		/**
@@ -67,12 +77,12 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 			if ( current_user_can( $capability ) ) {
 				global $wp_admin_bar;
 
-				$wp_admin_bar->add_menu( array(
+				$wp_admin_bar->add_menu( [
 					'id'     => 'tribe-events-app-shop',
 					'title'  => esc_html__( 'Event Add-Ons', 'tribe-common' ),
-					'href'   => Tribe__Settings::instance()->get_url( array( 'page' => self::MENU_SLUG ) ),
+					'href'   => Tribe__Settings::instance()->get_url( [ 'page' => self::MENU_SLUG ] ),
 					'parent' => 'tribe-events-settings-group',
-				) );
+				] );
 			}
 		}
 
@@ -82,14 +92,14 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 		protected function register_assets() {
 			tribe_assets(
 				Tribe__Main::instance(),
-				array(
-					array( 'tribe-app-shop-css', 'app-shop.css' ),
-					array( 'tribe-app-shop-js', 'app-shop.js', array( 'jquery' ) ),
-				),
+				[
+					[ 'tribe-app-shop-css', 'app-shop.css' ],
+					[ 'tribe-app-shop-js', 'app-shop.js', [ 'jquery' ] ],
+				],
 				'admin_enqueue_scripts',
-				array(
-					'conditionals' => array( $this, 'is_current_page' ),
-				)
+				[
+					'conditionals' => [ $this, 'is_current_page' ],
+				]
 			);
 		}
 

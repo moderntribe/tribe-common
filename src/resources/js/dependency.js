@@ -9,7 +9,7 @@
  * active     = the class we use to denote an "active" (not hidden & enabled) element
  * selector   = the css selector for the dependency, must be an ID, includes the hash "#"
  * linked     = data attribute for linked dependents mainly for radio buttons to
- *                  ensure they all get triggered togther
+ *                  ensure they all get triggered together
  */
 ( function( $, _, obj ) {
 	'use strict';

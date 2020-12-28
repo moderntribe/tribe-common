@@ -22,6 +22,8 @@ class Service_Provider extends \tad_DI52_ServiceProvider {
 	 * @since 4.9.16
 	 */
 	public function register() {
+		$this->container->singleton( 'log', $this );
+		$this->container->singleton( static::class, $this );
 		$this->container->singleton( Logger::class, [ $this, 'build_logger' ] );
 		$this->container->singleton( 'monolog',
 			function () {
@@ -144,5 +146,31 @@ class Service_Provider extends \tad_DI52_ServiceProvider {
 		$logging_engines[ Action_Logger::class ] = new Action_Logger();
 
 		return $logging_engines;
+	}
+
+	/**
+	 * Enables logging in the service provider, if not already enabled.
+	 *
+	 * @since TBD
+	 */
+	public function enable() {
+		if ( has_action( 'tribe_log', [ $this, 'dispatch_log' ] ) ) {
+			return;
+		}
+
+		add_action( 'tribe_log', [ $this, 'dispatch_log' ] );
+	}
+
+	/**
+	 * Disables the logging functions.
+	 *
+	 * @since TBD
+	 */
+	public function disable() {
+		if ( ! has_action( 'tribe_log', [ $this, 'dispatch_log' ] ) ) {
+			return;
+		}
+
+		remove_action( 'tribe_log', [ $this, 'dispatch_log' ] );
 	}
 }

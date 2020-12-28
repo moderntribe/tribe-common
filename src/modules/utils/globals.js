@@ -41,6 +41,10 @@ export const editorDefaults = () => pro().defaults || {};
 // Tickets
 export const tickets = () => config().tickets || {};
 
+// Tickets Plus
+export const ticketsPlus = () => config().ticketsPlus || {};
+export const iacVars = () => ticketsPlus().iacVars || {};
+
 // Post Objects
 export const postObjects = () => config().post_objects || {};
 

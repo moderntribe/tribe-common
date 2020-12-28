@@ -237,7 +237,7 @@ class DependencyTest extends \Codeception\TestCase\WPTestCase {
 			],
 		];
 
-		// @todo fix the handling of co-dependencies!
+		// @todo [BTRIA-585]: Fix the handling of co-dependencies!
 //		yield 'Two version too low and Five depends on Two.' => [
 //			[
 //				'one'   => array_merge( $one, [

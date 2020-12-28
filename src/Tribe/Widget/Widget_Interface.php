@@ -130,7 +130,7 @@ interface Widget_Interface {
 	/**
 	 * Returns an array of admin fields for the widget.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @return array<string,mixed> The array of widget admin fields.
 	 */
@@ -139,7 +139,7 @@ interface Widget_Interface {
 	/**
 	 * Filter a widget's admin fields.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @param array<string,mixed> $admin_fields The array of widget admin fields.
 	 *
@@ -150,7 +150,7 @@ interface Widget_Interface {
 	/**
 	 * Filters a widget's updated instance.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @param array<string,mixed> $updated_instance The updated instance of the widget.
 	 * @param array<string,mixed> $new_instance The new values for the widget instance.

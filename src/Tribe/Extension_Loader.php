@@ -15,7 +15,7 @@ class Tribe__Extension_Loader {
 	 *      @param array $plugin_basename Plugin header key/value pairs.
 	 * }
 	 */
-	private $plugin_data = array();
+	private $plugin_data = [];
 
 	/**
 	 * Class instance.
@@ -51,7 +51,7 @@ class Tribe__Extension_Loader {
 	 * @return array Prefixes
 	 */
 	public static function get_extension_file_prefixes() {
-		$prefixes = array( 'tribe-ext-' );
+		$prefixes = [ 'tribe-ext-' ];
 
 		/**
 		 * Filter which plugin folder prefixes are considered tribe extensions.
@@ -97,13 +97,17 @@ class Tribe__Extension_Loader {
 
 		// Class instantiation.
 		if ( class_exists( $p_data['ExtensionClass'] ) ) {
-			$extension_args = array(
+			$extension_args = [
 				'file' => $plugin_file,
 				'plugin_data' => $p_data,
-			);
+			];
 
 			// Instantiates extension instance.
-			$extension = call_user_func( array( $p_data['ExtensionClass'], 'instance' ), $p_data['ExtensionClass'], $extension_args );
+			$extension = call_user_func(
+				[ $p_data['ExtensionClass'], 'instance' ],
+				$p_data['ExtensionClass'],
+				$extension_args
+			);
 
 			if ( null !== $extension ) {
 				$success = true;

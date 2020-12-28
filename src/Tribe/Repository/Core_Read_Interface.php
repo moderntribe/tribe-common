@@ -362,7 +362,7 @@ interface Core_Read_Interface {
 	 *
 	 * @see   \wp_list_filter()
 	 */
-	public function filter( $args = array(), $operator = 'AND' );
+	public function filter( $args = [], $operator = 'AND' );
 
 	/**
 	 * Sorts the results according to the specified criteria.
@@ -382,7 +382,7 @@ interface Core_Read_Interface {
 	 *
 	 * @see   \wp_list_sort()
 	 */
-	public function sort( $orderby = array(), $order = 'ASC', $preserve_keys = false );
+	public function sort( $orderby = [], $order = 'ASC', $preserve_keys = false );
 
 	/**
 	 * Builds a collection on the result of the `all()` method call.

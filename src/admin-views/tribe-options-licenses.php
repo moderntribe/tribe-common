@@ -47,21 +47,21 @@ if ( is_multisite() ) {
 $html .= '</ul>';
 
 
-$licenses_tab = array(
-	'info-start' => array(
+$licenses_tab = [
+	'info-start'           => [
 		'type' => 'html',
 		'html' => '<div id="modern-tribe-info">',
-	),
-	'info-box-title' => array(
+	],
+	'info-box-title'       => [
 		'type' => 'html',
 		'html' => '<h2>' . esc_html__( 'Licenses', 'tribe-common' ) . '</h2>',
-	),
-	'info-box-description' => array(
+	],
+	'info-box-description' => [
 		'type' => 'html',
 		'html' => $html,
-	),
-	'info-end' => array(
+	],
+	'info-end'             => [
 		'type' => 'html',
 		'html' => '</div>',
-	),
-);
+	],
+];

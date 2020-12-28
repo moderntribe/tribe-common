@@ -25,7 +25,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 	/**
 	 * An instance of template.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @var \Tribe__Template
 	 */
@@ -34,7 +34,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 	/**
 	 * The slug of the admin widget view.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @var string
 	 */
@@ -117,7 +117,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 	/**
 	 * Setup the widget.
 	 *
-	 * @since  TBD
+	 * @since  4.12.14
 	 *
 	 * @param array<string,mixed> $arguments The widget arguments, as set by the user in the widget string.
 	 */
@@ -233,7 +233,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 	/**
 	 * Sets up the widgets default admin fields.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @return array<string,mixed> The array of widget admin fields.
 	 */
@@ -253,7 +253,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 		/**
 		 * Applies a filter to a widget's admin fields.
 		 *
-		 * @since TBD
+		 * @since 4.12.14
 		 *
 		 * @param array<string,mixed> $admin_fields The array of widget admin fields.
 		 * @param static              $instance     The widget instance we are dealing with.
@@ -282,7 +282,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 		/**
 		 * Applies a filter to updated instance of a widget.
 		 *
-		 * @since TBD
+		 * @since 4.12.14
 		 *
 		 * @param array<string,mixed> $updated_instance The updated instance of the widget.
 		 * @param array<string,mixed> $new_instance The new values for the widget instance.
@@ -295,7 +295,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 		/**
 		 * Applies a filter to updated instance of a widget arguments based on the registration slug of the widget.
 		 *
-		 * @since TBD
+		 * @since 4.12.14
 		 *
 		 * @param array<string,mixed> $updated_instance The updated instance of the widget.
 		 * @param array<string,mixed> $new_instance The new values for the widget instance.
@@ -309,7 +309,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 	/**
 	 * Sets up the widgets arguments, using saved values.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @param array<string,mixed> $instance Saved values for the widget instance.
 	 *
@@ -414,7 +414,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 	/**
 	 * Sets up the widgets default arguments.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @return array<string,mixed> The default widget arguments.
 	 */
@@ -461,15 +461,13 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 		 * @param array<string,mixed>  $default_arguments Current set of default arguments.
 		 * @param static               $instance          The widget instance we are dealing with.
 		 */
-		$default_arguments = apply_filters( "tribe_widget_{$registration_slug}_default_arguments", $default_arguments, $this );
-
-		return $default_arguments;
+		return apply_filters( "tribe_widget_{$registration_slug}_default_arguments", $default_arguments, $this );
 	}
 
 	/**
 	 * Sets the admin template.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @param \Tribe__Template $template The admin template to use.
 	 */
@@ -480,7 +478,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 	/**
 	 * Returns the current admin template.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @return \Tribe__Template The current admin template.
 	 */
@@ -491,7 +489,7 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 	/**
 	 * Get the admin html for the widget form.
 	 *
-	 * @since TBD
+	 * @since 4.12.14
 	 *
 	 * @param array<string,mixed> $arguments Current set of arguments.
 	 */

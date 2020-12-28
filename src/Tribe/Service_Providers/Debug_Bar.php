@@ -12,7 +12,7 @@ class Tribe__Service_Providers__Debug_Bar extends tad_DI52_ServiceProvider {
 	 * Binds and sets up implementations.
 	 */
 	public function register() {
-		add_filter( 'debug_bar_panels', array( $this, 'add_panels' ) );
+		add_filter( 'debug_bar_panels', [ $this, 'add_panels' ] );
 	}
 
 	/**
@@ -33,10 +33,10 @@ class Tribe__Service_Providers__Debug_Bar extends tad_DI52_ServiceProvider {
 		 *
 		 * @param Debug_Bar_Panel[] The default list of Modern Tribe panels added to the Debug Bar.
 		 */
-		$tribe_panels = apply_filters( 'tribe_debug_bar_panels', array(
+		$tribe_panels = apply_filters( 'tribe_debug_bar_panels', [
 			new Tribe__Debug_Bar__Panels__Context(),
 			new Tribe__Debug_Bar__Panels__Json_Ld(),
-		) );
+		] );
 
 		if ( count( $tribe_panels ) > 0 ) {
 			$panels = array_merge( $panels, $tribe_panels );
