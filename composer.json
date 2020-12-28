@@ -14,6 +14,7 @@
     "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
     "lucatume/function-mocker-le": "^1.0",
     "lucatume/wp-browser": "^2.2.4",
+    "lucatume/codeception-snapshot-assertions": "0.*",
     "moderntribe/tribalscents": "dev-master",
     "moderntribe/tribe-testing-facilities": "dev-master",
     "phpunit/phpunit": "~6.0",
