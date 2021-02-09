@@ -235,7 +235,7 @@ if ( ! class_exists( 'Tribe__PUE__Checker' ) ) {
 		 * @return string
 		 */
 		public function get_pue_update_url() {
-			$pue_update_url = 'https://pue.tri.be';
+			$pue_update_url = 'https://pue.theeventscalendar.com';
 
 			if ( defined( 'PUE_UPDATE_URL' ) ) {
 				$pue_update_url = PUE_UPDATE_URL;
@@ -498,7 +498,7 @@ if ( ! class_exists( 'Tribe__PUE__Checker' ) ) {
 			if ( 'event-aggregator' === $this->get_slug() ) {
 				$no_license_tooltip = sprintf(
 					esc_html__( '%1$sBuy a license%2$s for the Event Aggregator service to access additional import features.', 'tribe-common' ),
-					'<a href="https://m.tri.be/196y" target="_blank">',
+					'<a href="https://evnt.is/196y" target="_blank">',
 					'</a>'
 				);
 			}
@@ -904,7 +904,7 @@ if ( ! class_exists( 'Tribe__PUE__Checker' ) ) {
 			$response['status'] = 0;
 
 			if ( ! $key ) {
-				$response['message'] = sprintf( esc_html__( 'Hmmm... something\'s wrong with this validator. Please contact %ssupport%s.', 'tribe-common' ), '<a href="https://m.tri.be/1u">', '</a>' );
+				$response['message'] = sprintf( esc_html__( 'Hmmm... something\'s wrong with this validator. Please contact %ssupport%s.', 'tribe-common' ), '<a href="https://evnt.is/1u">', '</a>' );
 				return $response;
 			}
 
@@ -974,7 +974,7 @@ if ( ! class_exists( 'Tribe__PUE__Checker' ) ) {
 		}
 
 		public function get_license_expired_message() {
-			return '<a href="https://m.tri.be/195y" target="_blank" class="button button-primary">' .
+			return '<a href="https://evnt.is/195y" target="_blank" class="button button-primary">' .
 				__( 'Renew Your License Now', 'tribe-common' ) .
 				'<span class="screen-reader-text">' .
 				__( ' (opens in a new window)', 'tribe-common' ) .

@@ -1,0 +1,64 @@
+name: 'Submodule synchronization'
+on:
+  push:
+    branches-ignore:
+      - 'main'
+      - 'master'
+  pull_request:
+    branches-ignore:
+      - 'main'
+      - 'master'
+jobs:
+  submodule-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract branch name from GITHUB_REF
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer:v1
+        env:
+          fail-fast: true
+
+      - name: Fetch tut
+        uses: actions/checkout@v2
+        with:
+          repository: 'the-events-calendar/tut'
+          ref: 'main'
+          path: 'tut'
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache Composer Downloads
+        uses: actions/cache@v2
+        with:
+          path: vendor/
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+
+      - name: Install tut dependencies
+        shell: bash
+        run: |
+          cd tut && composer install --no-dev --ignore-platform-reqs
+
+      - name: Create .env
+        shell: bash
+        run: |
+          cd tut && echo "GITHUB_USER=$GITHUB_USER" >> .env && echo "GITHUB_OAUTH_TOKEN=$GITHUB_OAUTH_TOKEN" >> .env
+        env:
+          GITHUB_USER: ${{ secrets.GH_BOT_USER }}
+          GITHUB_OAUTH_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+
+      - name: Synchronize submodules
+        shell: bash
+        run: |
+          cd tut && ./tut submodule-sync --branch=${{ steps.extract_branch.outputs.branch }}

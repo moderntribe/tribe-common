@@ -45,10 +45,12 @@ class View extends \Tribe__Template {
 	 *
 	 *     @type string  $button_id               The ID for the trigger button (optional).
 	 *     @type array   $button_classes          Any desired classes for the trigger button (optional).
+	 *     @type array   $button_attributes       Any desired attributes for the trigger button (optional).
 	 *     @type boolean $button_disabled         Should the button be disabled (optional).
 	 *     @type string  $button_text             The text for the dialog trigger button ("Open the dialog window").
 	 *     @type string  $button_type             The type for the trigger button (optional).
 	 *     @type string  $button_value            The value for the trigger button (optional).
+	 *     @type boolean $button_display          If the dialog button should be displayed or not (optional).
 	 *     @type string  $close_event             The dialog close event hook name (`tribe_dialog_close_dialog`).
 	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content").
 	 *     @type array   $context                 Any additional context data you need to expose to this file (optional).
@@ -113,10 +115,12 @@ class View extends \Tribe__Template {
 	 *
 	 *     @type string  $button_id               The ID for the trigger button (optional).
 	 *     @type array   $button_classes          Any desired classes for the trigger button (optional).
+	 *     @type array   $button_attributes       Any desired attributes for the trigger button (optional).
 	 *     @type boolean $button_disabled         Should the button be disabled (optional).
 	 *     @type string  $button_text             The text for the dialog trigger button ("Open the modal window").
 	 *     @type string  $button_type             The type for the trigger button (optional).
 	 *     @type string  $button_value            The value for the trigger button (optional).
+	 *     @type boolean $button_display          If the dialog button should be displayed or not (optional).
 	 *     @type string  $close_event             The dialog close event hook name (`tribe_dialog_close_modal`).
 	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content tribe-modal__content").
 	 *     @type string  $title_classes           The dialog title classes ("tribe-dialog__title tribe-modal__title").
@@ -182,10 +186,12 @@ class View extends \Tribe__Template {
 	 *
 	 *     @type string  $button_id               The ID for the trigger button (optional).
 	 *     @type array   $button_classes          Any desired classes for the trigger button (optional).
+	 *     @type array   $button_attributes       Any desired attributes for the trigger button (optional).
 	 *     @type boolean $button_disabled         Should the button be disabled (optional).
 	 *     @type string  $button_text             The text for the dialog trigger button ("Open the dialog window").
 	 *     @type string  $button_type             The type for the trigger button (optional).
 	 *     @type string  $button_value            The value for the trigger button (optional).
+	 *     @type boolean $button_display          If the dialog button should be displayed or not (optional).
 	 *     @type string  $cancel_button_text      Text for the "Cancel" button ("Cancel").
 	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content tribe-confirm__content").
 	 *     @type string  $continue_button_text    Text for the "Continue" button ("Confirm").
@@ -250,10 +256,12 @@ class View extends \Tribe__Template {
 	 *     @type string  $alert_button_text       Text for the "OK" button ("OK").
 	 *     @type string  $button_id               The ID for the trigger button (optional).
 	 *     @type array   $button_classes          Any desired classes for the trigger button (optional).
+	 *     @type array   $button_attributes       Any desired attributes for the trigger button (optional).
 	 *     @type boolean $button_disabled         Should the button be disabled (optional).
 	 *     @type string  $button_text             The text for the dialog trigger button ("Open the dialog window").
 	 *     @type string  $button_type             The type for the trigger button (optional).
 	 *     @type string  $button_value            The value for the trigger button (optional).
+	 *     @type boolean $button_display          If the dialog button should be displayed or not (optional).
 	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content tribe-alert__content").
 	 *     @type string  $title_classes           The dialog title classes ("tribe-dialog__title tribe-alert__title").
 	 *     @type array   $context                 Any additional context data you need to expose to this file (optional).
@@ -315,10 +323,12 @@ class View extends \Tribe__Template {
 	 *
 	 *     @type string  $button_id               The ID for the trigger button (optional).
 	 *     @type array   $button_classes          Any desired classes for the trigger button (optional).
+	 *     @type array   $button_attributes       Any desired attributes for the trigger button (optional).
 	 *     @type boolean $button_disabled         Should the button be disabled (optional).
 	 *     @type string  $button_text             The text for the dialog trigger button ("Open the dialog window").
 	 *     @type string  $button_type             The type for the trigger button (optional).
 	 *     @type string  $button_value            The value for the trigger button (optional).
+	 *     @type boolean $button_display          If the dialog button should be displayed or not (optional).
 	 *     @type string  $close_event             The dialog event hook name (`tribe_dialog_close_dialog`).
 	 *     @type string  $content_classes         The dialog content classes ("tribe-dialog__content").
 	 *     @type string  $title_classes           The dialog title classes ("tribe-dialog__title").
@@ -349,12 +359,14 @@ class View extends \Tribe__Template {
 	private function build_dialog( $content, $id, $args ) {
 		$default_args = [
 			'button_classes'          => '',
+			'button_attributes'       => [],
 			'button_disabled'         => false,
 			'button_id'               => '',
 			'button_name'             => '',
 			'button_text'             => __( 'Open the dialog window', 'tribe-common' ),
 			'button_type'             => '',
 			'button_value'            => '',
+			'button_display'          => true,
 			'close_event'             => 'tribe_dialog_close_dialog',
 			'content_classes'         => 'tribe-dialog__content',
 			'context'                 => '',

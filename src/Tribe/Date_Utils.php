@@ -35,10 +35,10 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 		 */
 		private static $default_datepicker_format_index = 1;
 
-		private static $localized_months_full  = array();
-		private static $localized_months_short = array();
-		private static $localized_weekdays     = array();
-		private static $localized_months       = array();
+		private static $localized_months_full = [];
+		private static $localized_months_short = [];
+		private static $localized_weekdays = [];
+		private static $localized_months = [];
 
 		/**
 		 * Get the datepickerFormat index.
@@ -95,7 +95,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 		public static function datepicker_formats( $translate = null ) {
 
 			// The datepicker has issues when a period separator and no leading zero is used. Those formats are purposefully omitted.
-			$formats = array(
+			$formats = [
 				0     => 'Y-m-d',
 				1     => 'n/j/Y',
 				2     => 'm/d/Y',
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 				'm9'  => 'Y.m',
 				'm10' => 'm.Y',
 				'm11' => 'm.Y',
-			);
+			];
 
 			if ( is_null( $translate ) ) {
 				return $formats;
@@ -140,55 +140,55 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 		 */
 		public static function datetime_from_format( $format, $date ) {
 			// Reverse engineer the relevant date formats
-			$keys = array(
+			$keys = [
 				// Year with 4 Digits
-				'Y' => array( 'year', '\d{4}' ),
+				'Y' => [ 'year', '\d{4}' ],
 
 				// Year with 2 Digits
-				'y' => array( 'year', '\d{2}' ),
+				'y' => [ 'year', '\d{2}' ],
 
 				// Month with leading 0
-				'm' => array( 'month', '\d{2}' ),
+				'm' => [ 'month', '\d{2}' ],
 
 				// Month without the leading 0
-				'n' => array( 'month', '\d{1,2}' ),
+				'n' => [ 'month', '\d{1,2}' ],
 
 				// Month ABBR 3 letters
-				'M' => array( 'month', '[A-Z][a-z]{2}' ),
+				'M' => [ 'month', '[A-Z][a-z]{2}' ],
 
 				// Month Name
-				'F' => array( 'month', '[A-Z][a-z]{2,8}' ),
+				'F' => [ 'month', '[A-Z][a-z]{2,8}' ],
 
 				// Day with leading 0
-				'd' => array( 'day', '\d{2}' ),
+				'd' => [ 'day', '\d{2}' ],
 
 				// Day without leading 0
-				'j' => array( 'day', '\d{1,2}' ),
+				'j' => [ 'day', '\d{1,2}' ],
 
 				// Day ABBR 3 Letters
-				'D' => array( 'day', '[A-Z][a-z]{2}' ),
+				'D' => [ 'day', '[A-Z][a-z]{2}' ],
 
 				// Day Name
-				'l' => array( 'day', '[A-Z][a-z]{5,8}' ),
+				'l' => [ 'day', '[A-Z][a-z]{5,8}' ],
 
 				// Hour 12h formatted, with leading 0
-				'h' => array( 'hour', '\d{2}' ),
+				'h' => [ 'hour', '\d{2}' ],
 
 				// Hour 24h formatted, with leading 0
-				'H' => array( 'hour', '\d{2}' ),
+				'H' => [ 'hour', '\d{2}' ],
 
 				// Hour 12h formatted, without leading 0
-				'g' => array( 'hour', '\d{1,2}' ),
+				'g' => [ 'hour', '\d{1,2}' ],
 
 				// Hour 24h formatted, without leading 0
-				'G' => array( 'hour', '\d{1,2}' ),
+				'G' => [ 'hour', '\d{1,2}' ],
 
 				// Minutes with leading 0
-				'i' => array( 'minute', '\d{2}' ),
+				'i' => [ 'minute', '\d{2}' ],
 
 				// Seconds with leading 0
-				's' => array( 'second', '\d{2}' ),
-			);
+				's' => [ 'second', '\d{2}' ],
+			];
 
 			$date_regex = "/{$keys['Y'][1]}-{$keys['m'][1]}-{$keys['d'][1]}( {$keys['H'][1]}:{$keys['i'][1]}:{$keys['s'][1]})?$/";
 
@@ -213,7 +213,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 				}
 			}
 
-			$dt = array();
+			$dt = [];
 
 			// Now try to match it
 			if ( preg_match( '#^' . $regex . '$#', $date, $dt ) ) {
@@ -377,7 +377,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 		 * @return bool If the timestamp is a weekday.
 		 */
 		public static function is_weekday( $curdate ) {
-			return in_array( date( 'N', $curdate ), array( 1, 2, 3, 4, 5 ) );
+			return in_array( date( 'N', $curdate ), [ 1, 2, 3, 4, 5 ] );
 		}
 
 		/**
@@ -388,7 +388,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 		 * @return bool If the timestamp is a weekend.
 		 */
 		public static function is_weekend( $curdate ) {
-			return in_array( date( 'N', $curdate ), array( 6, 7 ) );
+			return in_array( date( 'N', $curdate ), [ 6, 7 ] );
 		}
 
 		/**
@@ -664,7 +664,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 			}
 
 			if ( empty( self::$localized_months_full ) ) {
-				self::$localized_months_full = array(
+				self::$localized_months_full = [
 					'January'   => self::$localized_months['full']['01'],
 					'February'  => self::$localized_months['full']['02'],
 					'March'     => self::$localized_months['full']['03'],
@@ -677,7 +677,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 					'October'   => self::$localized_months['full']['10'],
 					'November'  => self::$localized_months['full']['11'],
 					'December'  => self::$localized_months['full']['12'],
-				);
+				];
 			}
 
 			return self::$localized_months_full;
@@ -696,7 +696,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 			}
 
 			if ( empty( self::$localized_months_short ) ) {
-				self::$localized_months_short = array(
+				self::$localized_months_short = [
 					'Jan' => self::$localized_months['short']['01'],
 					'Feb' => self::$localized_months['short']['02'],
 					'Mar' => self::$localized_months['short']['03'],
@@ -709,7 +709,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 					'Oct' => self::$localized_months['short']['10'],
 					'Nov' => self::$localized_months['short']['11'],
 					'Dec' => self::$localized_months['short']['12'],
-				);
+				];
 			}
 
 			return self::$localized_months_short;
@@ -797,7 +797,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 		public static function wp_locale_weekday( $weekday, $format = 'weekday' ) {
 			$weekday = trim( $weekday );
 
-			$valid_formats = array(
+			$valid_formats = [
 				'full',
 				'weekday',
 				'initial',
@@ -805,7 +805,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 				'abbrev',
 				'abbr',
 				'short',
-			);
+			];
 
 			// if there isn't a valid format, bail without providing a localized string
 			if ( ! in_array( $format, $valid_formats ) ) {
@@ -819,7 +819,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 			// if the weekday isn't numeric, we need to convert to numeric in order to
 			// leverage self::localized_weekdays
 			if ( ! is_numeric( $weekday ) ) {
-				$days_of_week = array(
+				$days_of_week = [
 					'Sun',
 					'Mon',
 					'Tue',
@@ -827,7 +827,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 					'Thu',
 					'Fri',
 					'Sat',
-				);
+				];
 
 				$day_index = array_search( ucwords( substr( $weekday, 0, 3 ) ), $days_of_week );
 
@@ -871,14 +871,14 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 		public static function wp_locale_month( $month, $format = 'month' ) {
 			$month = trim( $month );
 
-			$valid_formats = array(
+			$valid_formats = [
 				'full',
 				'month',
 				'abbreviation',
 				'abbrev',
 				'abbr',
 				'short',
-			);
+			];
 
 			// if there isn't a valid format, bail without providing a localized string
 			if ( ! in_array( $format, $valid_formats ) ) {
@@ -898,7 +898,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 					return $month;
 				}
 			} else {
-				$months = array(
+				$months = [
 					'Jan',
 					'Feb',
 					'Mar',
@@ -911,7 +911,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 					'Oct',
 					'Nov',
 					'Dec',
-				);
+				];
 
 				// convert the provided month to a 3-character month and find it in the months array so we
 				// can build an appropriate month number
@@ -1184,7 +1184,7 @@ if ( ! class_exists( 'Tribe__Date_Utils' ) ) {
 					&& is_numeric( $month )
 					&& is_numeric( $year )
 					&& is_numeric( $week_direction )
-					&& in_array( $week_direction, array( - 1, 1 ) )
+					&& in_array( $week_direction, [ -1, 1 ] )
 				)
 			) {
 				return false;

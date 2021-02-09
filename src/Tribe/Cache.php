@@ -87,6 +87,10 @@ class Tribe__Cache implements ArrayAccess {
 	 * @return bool
 	 */
 	public function set_transient( $id, $value, $expiration = 0, $expiration_trigger = '' ) {
+		if ( $this->data_size_over_packet_size( $value ) ) {
+			return false;
+		}
+
 		return set_transient( $this->get_id( $id, $expiration_trigger ), $value, $expiration );
 	}
 
@@ -146,7 +150,17 @@ class Tribe__Cache implements ArrayAccess {
 	 * @return bool
 	 */
 	public function delete( $id, $expiration_trigger = '' ) {
-		return wp_cache_delete( $this->get_id( $id, $expiration_trigger ), 'tribe-events' );
+		$flipped = array_flip( $this->non_persistent_keys );
+		$group   = isset( $flipped[ $id ] ) ? 'tribe-events-non-persistent' : 'tribe-events';
+
+		// Delete from non-persistent keys list.
+		if ( 'tribe-events-non-persistent' === $group ) {
+			$index = $flipped[ $id ];
+
+			unset( $this->non_persistent_keys[ $index ] );
+		}
+
+		return wp_cache_delete( $this->get_id( $id, $expiration_trigger ), $group );
 	}
 
 	/**
@@ -495,5 +509,37 @@ class Tribe__Cache implements ArrayAccess {
 				}
 			}
 		} while ( ! empty( $post_objects ) && is_array( $post_objects ) && count( $post_objects ) < count( $post_ids ) );
+	}
+
+	/**
+	 * If NOT using an external object caching system, then check if the size, in bytes, of the data
+	 * to write to the database would fit into the `max_allowed_packet` setting or not.
+	 *
+	 * @since 4.12.14
+	 *
+	 * @param string|array|object $value The value to check.
+	 *
+	 * @return bool Whether the data, in its serialized form, would fit into the current database `max_allowed_packet`
+	 *              setting or not.
+	 */
+	public function data_size_over_packet_size( $value ) {
+		if ( wp_using_ext_object_cache() ) {
+			// We cannot know and that is a concern of the external caching system.
+			return false;
+		}
+
+		try {
+			$serialized_value = maybe_serialize( $value );
+			$size             = strlen( $serialized_value );
+		} catch ( Exception $e ) {
+			// The underlying function would run into the same issue, bail and do not set the transient.
+			return true;
+		}
+
+		/** @var Tribe__Feature_Detection $feature_detection */
+		$feature_detection = tribe( 'feature-detection' );
+
+		// If the size of the string is above 90% of the database `max_allowed_packet` setting, then it should not be written to the db.
+		return $size > ( $feature_detection->get_mysql_max_packet_size() * .9 );
 	}
 }

@@ -1176,4 +1176,26 @@ class ReadTest extends ReadTestBase {
 
 		return $reviews;
 	}
+
+	public function test_multiple_by_meta_not_exists_call(  ) {
+		$book_w_popularity = static::factory()->post->create( [ 'post_type' => 'book' ] );
+		update_post_meta( $book_w_popularity, '_popularity', 23 );
+		$book_wo_popularity = static::factory()->post->create( [ 'post_type' => 'book' ] );
+		delete_post_meta( $book_wo_popularity, '_popularity' );
+		$book_w_zero_popularity = static::factory()->post->create( [ 'post_type' => 'book' ] );
+		update_post_meta( $book_w_zero_popularity, '_popularity', 0 );
+
+		// Sanity checks.
+		$this->assertEqualSets( [ $book_wo_popularity ], $this->repository()->by( 'meta_not_exists', '_popularity' )->get_ids() );
+		$this->assertEqualSets( [ $book_w_popularity, $book_w_zero_popularity ], $this->repository()->by( 'meta_exists', '_popularity' )->get_ids() );
+
+		$repository = $this->repository();
+		$repository->by( 'meta_not_exists', '_popularity' );
+		$repository->by( 'meta_not_exists', '_popularity' );
+		$this->assertEquals(
+			[ $book_wo_popularity ],
+			$repository->by( 'meta_not_exists', '_popularity' )->get_ids(),
+			'Adding the same meta_not_exists clause multiple times should work as if adding it once'
+		);
+	}
 }

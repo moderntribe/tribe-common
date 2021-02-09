@@ -94,7 +94,7 @@ class Tribe__Validator__Base implements Tribe__Validator__Interface {
 		$sep  = is_string( $sep ) ? $sep : ',';
 		$list = Tribe__Utils__Array::list_to_array( $list, $sep );
 
-		$valid = array_filter( $list, array( $this, 'is_positive_int' ) );
+		$valid = array_filter( $list, [ $this, 'is_positive_int' ] );
 
 		return ! empty( $valid ) && count( $valid ) === count( $list );
 	}

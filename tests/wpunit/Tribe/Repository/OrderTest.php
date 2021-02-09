@@ -43,7 +43,7 @@ class OrderTest extends ReadTestBase {
 	}
 
 	/**
-	 * It should override the order direction specified w/ order w/ the orderby one
+	 * It should override the order direction specified w/ order w/ the orderby one.
 	 *
 	 * @test
 	 */
@@ -56,6 +56,24 @@ class OrderTest extends ReadTestBase {
 		$results    = $repository
 			->order_by( [ 'menu_order' => 'DESC' ] )
 			->order( 'ASC' )
+			->get_ids();
+
+		$this->assertEquals( [ $book_3, $book_1, $book_2 ], $results );
+	}
+
+	/**
+	 * It shouldn't overwrite the array order when using order_by 2nd param.
+	 *
+	 * @test
+	 */
+	public function shouldnt_overwrite_when_passing_array_and_order_param_to_order_by() {
+		$book_1 = static::factory()->post->create( [ 'post_type' => 'book', 'menu_order' => 2 ] );
+		$book_2 = static::factory()->post->create( [ 'post_type' => 'book', 'menu_order' => 1 ] );
+		$book_3 = static::factory()->post->create( [ 'post_type' => 'book', 'menu_order' => 3 ] );
+
+		$repository = $this->repository();
+		$results    = $repository
+			->order_by( [ 'menu_order' => 'DESC' ], 'ASC' )
 			->get_ids();
 
 		$this->assertEquals( [ $book_3, $book_1, $book_2 ], $results );

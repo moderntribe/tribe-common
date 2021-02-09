@@ -9,7 +9,7 @@
  * active     = the class we use to denote an "active" (not hidden & enabled) element
  * selector   = the css selector for the dependency, must be an ID, includes the hash "#"
  * linked     = data attribute for linked dependents mainly for radio buttons to
- *                  ensure they all get triggered togther
+ *                  ensure they all get triggered together
  */
 ( function( $, _, obj ) {
 	'use strict';
@@ -70,7 +70,7 @@
 	};
 
 	/**
-	 * Actualy verify the dependencies of a field
+	 * Actually verify the dependencies of a field
 	 *
 	 * @since 4.7.15
 	 *
@@ -108,11 +108,10 @@
 		}
 
 		$dependents.each( function( k, dependent ) {
-			var $dependent         = $( dependent );
-			var hasDependentParent = $dependent.is( '[data-dependent-parent]' );
+			var $dependent = $( dependent );
 
-			if ( hasDependentParent ) {
-				var dependentParent  = $dependent.data( 'dependentParent' );
+			if ( $dependent.is( '[data-dependent-parent]' ) ) {
+				var dependentParent  = $dependent.data( 'dependent-parent' );
 				var $dependentParent = $dependent.closest( dependentParent );
 
 				if ( 0 === $dependentParent.length ) {
@@ -223,10 +222,10 @@
 				}
 			}
 
-			var $dependentChilds = $dependent.find( obj.selectors.dependency );
-			if ( $dependentChilds.length > 0 ) {
+			var $dependentChildren = $dependent.find( obj.selectors.dependency );
+			if ( $dependentChildren.length > 0 ) {
 				// Checks if any child elements have dependencies
-				$dependentChilds.trigger( 'change' );
+				$dependentChildren.trigger( 'change' );
 			}
 		} );
 
@@ -234,7 +233,7 @@
 	};
 
 	/**
-	 * Setup dependency, it might be run on a bunch of diferent places to allow
+	 * Setup dependency, it might be run on a bunch of different places to allow
 	 * AJAX fields to be used.
 	 *
 	 * @since 4.7.15
@@ -286,7 +285,7 @@
 
 
 	/**
-	 * Listen on async recurent elements.
+	 * Listen on async recurrent elements.
 	 *
 	 * @since 4.7.15
 	 */
@@ -306,7 +305,7 @@
 	}, obj.selectors.dependency );
 
 	// Configure on Document ready for the default trigger
-	$document.ready( obj.setup );
+	$( obj.setup );
 
 	// Configure on Window Load again
 	$window.on( 'load', obj.setup );

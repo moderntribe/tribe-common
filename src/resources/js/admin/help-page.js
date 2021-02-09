@@ -27,9 +27,12 @@ tribe.helpPage = tribe.helpPage || {};
 		var button_text = tribe_system_info.clipboard_btn_text;
 
 		//Prevent Button From Doing Anything Else
-		$( '.system-info-copy-btn' ).click( function ( e ) {
-			e.preventDefault();
-		} );
+		$( '.system-info-copy-btn' ).on(
+			'click',
+			function ( e ) {
+				e.preventDefault();
+			}
+		);
 
 		clipboard.on( 'success', function ( event ) {
 			event.clearSelection();

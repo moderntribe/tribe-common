@@ -83,7 +83,7 @@ foreach ( $products as $product ) {
 							</ul>
 
 							<?php if ( 'installed' == $status ) : ?>
-								<a class="button" href="https://m.tri.be/1aiz"><?php esc_html_e( 'Manage', 'tribe-common' ); ?></a>
+								<a class="button" href="https://evnt.is/1aiz"><?php esc_html_e( 'Manage', 'tribe-common' ); ?></a>
 							<?php else : ?>
 								<a class="button" href="<?php echo esc_url( $product->link ); ?>"><?php esc_html_e( 'Learn More', 'tribe-common' ); ?></a>
 							<?php endif; ?>
@@ -180,7 +180,7 @@ foreach ( $products as $product ) {
 					</div>
 				<?php endforeach; ?>
 
-				<a class="button secondary" href="https://m.tri.be/1ajd"><?php esc_html_e( 'Browse Extensions', 'tribe-common' ); ?></a>
+				<a class="button secondary" href="https://evnt.is/1ajd"><?php esc_html_e( 'Browse Extensions', 'tribe-common' ); ?></a>
 
 			</div>
 

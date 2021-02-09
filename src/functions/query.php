@@ -28,7 +28,7 @@ if ( ! function_exists( 'tribe_filter_meta_query' ) ) {
 	 * @return array The filtered meta query array.
 	 */
 	function tribe_filter_meta_query( array $meta_query, array $where ) {
-		$filtered = array();
+		$filtered = [];
 
 		foreach ( $meta_query as $key => $entry ) {
 			if ( ! is_array( $entry ) ) {

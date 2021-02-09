@@ -149,9 +149,9 @@ interface Core_Read_Interface {
 	 *
 	 * @since 4.7.19
 	 *
-	 * @param string $order_by The post field, custom field or alias key to order posts by.
-	 * @param string $order    The order direction; optional; shortcut for the `order` method; defaults
-	 *                         to `DESC`.
+	 * @param string|array<string,string> $order_by The post field, custom field or alias key to order posts by.
+	 * @param string                      $order    The order direction; optional; shortcut for the `order` method; defaults
+	 *                                              to `DESC`.
 	 *
 	 * @return Tribe__Repository__Read_Interface
 	 */
@@ -362,7 +362,7 @@ interface Core_Read_Interface {
 	 *
 	 * @see   \wp_list_filter()
 	 */
-	public function filter( $args = array(), $operator = 'AND' );
+	public function filter( $args = [], $operator = 'AND' );
 
 	/**
 	 * Sorts the results according to the specified criteria.
@@ -382,7 +382,7 @@ interface Core_Read_Interface {
 	 *
 	 * @see   \wp_list_sort()
 	 */
-	public function sort( $orderby = array(), $order = 'ASC', $preserve_keys = false );
+	public function sort( $orderby = [], $order = 'ASC', $preserve_keys = false );
 
 	/**
 	 * Builds a collection on the result of the `all()` method call.

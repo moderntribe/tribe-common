@@ -11,12 +11,12 @@ $generalTabFields = [
 	],
 	'event-tickets-info' => [
 		'type'        => 'html',
-		'html'        => '<p>' . sprintf( esc_html__( 'Thank you for using Event Tickets! All of us at Modern Tribe sincerely appreciate your support and we\'re excited to see you using our plugins. Check out our handy %1$sNew User Primer%2$s to get started.', 'tribe-common' ), '<a href="http://m.tri.be/18nd">', '</a>' ) . '</p>',
+		'html'        => '<p>' . sprintf( esc_html__( 'Thank you for using Event Tickets! All of us at Modern Tribe sincerely appreciate your support and we\'re excited to see you using our plugins. Check out our handy %1$sNew User Primer%2$s to get started.', 'tribe-common' ), '<a href="http://evnt.is/18nd">', '</a>' ) . '</p>',
 		'conditional' => ! class_exists( 'Tribe__Events__Main' ),
 	],
 	'event-tickets-upsell-info' => [
 		'type'        => 'html',
-		'html'        => '<p>' . sprintf( esc_html__( 'Optimize your site\'s event listings with %1$sThe Events Calendar%2$s, our free calendar plugin. Looking for additional functionality including recurring events, user-submission, advanced ticket sales and more? Check out our %3$spremium add-ons%4$s.', 'tribe-common' ), '<a href="http://m.tri.be/18x6">', '</a>', '<a href="http://m.tri.be/18x5">', '</a>' ) . '</p>',
+		'html'        => '<p>' . sprintf( esc_html__( 'Optimize your site\'s event listings with %1$sThe Events Calendar%2$s, our free calendar plugin. Looking for additional functionality including recurring events, user-submission, advanced ticket sales and more? Check out our %3$spremium add-ons%4$s.', 'tribe-common' ), '<a href="http://evnt.is/18x6">', '</a>', '<a href="http://evnt.is/18x5">', '</a>' ) . '</p>',
 		'conditional' => ! class_exists( 'Tribe__Events__Main' ),
 	],
 	'upsell-info'                   => [

@@ -247,7 +247,11 @@ if ( ! function_exists( 'tribe_sort_by_priority' ) ) {
 			$b_priority = $b->priority;
 		}
 
-		return (int) $a_priority === (int) $b_priority ? 0 : (int) $a_priority > (int) $b_priority;
+		if ( (int) $a_priority === (int) $b_priority ) {
+			return 0;
+		}
+
+		return (int) $a_priority > (int) $b_priority ? 1 : -1;
 	}
 }
 
@@ -289,21 +293,21 @@ if ( ! function_exists( 'tribe_normalize_terms_list' ) ) {
 
 		return $normalized;
 	}
+}
 
-	if ( ! function_exists( 'tribe_upload_image' ) ) {
-		/**
-		 * @see Tribe__Image__Uploader::upload_and_get_attachment_id()
-		 *
-		 * @param string|int $image The path to an image file, an image URL or an attachment post ID.
-		 *
-		 * @return int|bool The attachment post ID if the uploading and attachment is successful or the ID refers to an attachment;
-		 *                  `false` otherwise.
-		 */
-		function tribe_upload_image( $image ) {
-			$uploader = new Tribe__Image__Uploader( $image );
+if ( ! function_exists( 'tribe_upload_image' ) ) {
+	/**
+	 * @see Tribe__Image__Uploader::upload_and_get_attachment_id()
+	 *
+	 * @param string|int $image The path to an image file, an image URL or an attachment post ID.
+	 *
+	 * @return int|bool The attachment post ID if the uploading and attachment is successful or the ID refers to an attachment;
+	 *                  `false` otherwise.
+	 */
+	function tribe_upload_image( $image ) {
+		$uploader = new Tribe__Image__Uploader( $image );
 
-			return $uploader->upload_and_get_attachment_id();
-		}
+		return $uploader->upload_and_get_attachment_id();
 	}
 }
 
@@ -716,29 +720,33 @@ if ( ! function_exists( 'tribe_get_least_version_ever_installed' ) ) {
 	 * @return string|boolean The SemVer version string or false if no info found.
 	 */
 	function tribe_get_least_version_ever_installed( $class ) {
-		$instance = tribe_get_class_instance( $class );
+		if ( ! is_string( $class ) ) {
+			$class = get_class( $class );
 
-		if ( $instance ) {
-			// Try for the version history first.
-			if ( ! empty( $instance->version_history_slug ) ) {
-				$history = (array) Tribe__Settings_Manager::get_option( $instance->version_history_slug );
-
-				// '0' may be logged as a version number, which isn't useful, so we remove it
-				$history = array_filter( $history );
-				$history = array_unique( $history );
-
-				if ( ! empty( $history ) ) {
-					// Sort the array so smallest version number is first (likely how the array is stored anyway)
-					usort( $history, 'version_compare' );
-
-					return array_shift( $history );
-				}
+			if ( false === $class ) {
+				return false;
 			}
+		}
 
-			// Fall back to the current plugin version.
-			if ( defined( get_class( $instance ) . '::VERSION' ) ) {
-				return $instance::VERSION;
+		$history = tribe_plugin_version_history( $class );
+
+		// Try for the version history first.
+		if ( false !== $history ) {
+			// '0' may be logged as a version number, which isn't useful, so we remove it
+			$history = array_filter( $history );
+			$history = array_unique( $history );
+
+			if ( ! empty( $history ) ) {
+				// Sort the array so smallest version number is first (likely how the array is stored anyway)
+				usort( $history, 'version_compare' );
+
+				return array_shift( $history );
 			}
+		}
+
+		// Fall back to the current plugin version.
+		if ( defined( $class . '::VERSION' ) ) {
+			return $class::VERSION;
 		}
 
 		// No version set.
@@ -765,34 +773,75 @@ if ( ! function_exists( 'tribe_get_greatest_version_ever_installed' ) ) {
 	 * @return string|boolean The SemVer version string or false if no info found.
 	 */
 	function tribe_get_greatest_version_ever_installed( $class ) {
-		$instance = tribe_get_class_instance( $class );
+		if ( ! is_string( $class ) ) {
+			$class = get_class( $class );
 
-		if ( $instance ) {
-			// Try for the version history first.
-			if ( ! empty( $instance->version_history_slug ) ) {
-				$history = (array) Tribe__Settings_Manager::get_option( $instance->version_history_slug );
-
-				// '0' may be logged as a version number, which isn't useful, so we remove it
-				$history = array_filter( $history );
-				$history = array_unique( $history );
-
-				if ( ! empty( $history ) ) {
-					// Sort the array so smallest version number is first (likely how the array is stored anyway)
-					usort( $history, 'version_compare' );
-
-					return array_pop( $history );
-				}
+			if ( false === $class ) {
+				return false;
 			}
+		}
 
-			// Fall back to the current plugin version.
-			if ( defined( get_class( $instance ) . '::VERSION' ) ) {
-				return $instance::VERSION;
+		$history = tribe_plugin_version_history( $class );
+
+		// Try for the version history first.
+		if ( false !== $history ) {
+			// '0' may be logged as a version number, which isn't useful, so we remove it
+			$history = array_filter( $history );
+			$history = array_unique( $history );
+
+			if ( ! empty( $history ) ) {
+				// Sort the array so smallest version number is first (likely how the array is stored anyway)
+				usort( $history, 'version_compare' );
+
+				return array_pop( $history );
 			}
+		}
+
+		// Fall back to the current plugin version.
+		if ( defined( $class . '::VERSION' ) ) {
+			return $class::VERSION;
 		}
 
 		// No version set.
 		return false;
 	}
+}
+
+/**
+ * Gets the plugin version history for a given main class.
+ *
+ * Important to note we cannot setup instances to get these values, we need to
+ * use static mapping here, since generating a full instance will effectively
+ * activate parts of the plugin behind the scenes.
+ *
+ * @since 4.12.14
+ *
+ * @param string $class Which plugin main class we are looking for.
+ *
+ * @return array|false
+ */
+function tribe_plugin_version_history( $class ) {
+	if ( ! is_string( $class ) ) {
+		$class = get_class( $class );
+
+		if ( false === $class ) {
+			return false;
+		}
+	}
+
+	$map = [
+		'Tribe__Events__Main'       => 'previous_ecp_versions',
+		'Tribe__Tickets__Main'      => 'previous_event_tickets_versions',
+		'tickets.main'              => 'previous_event_tickets_versions',
+		'Tribe__Tickets_Plus__Main' => 'previous_event_tickets_plus_versions',
+		'tickets-plus.main'         => 'previous_event_tickets_plus_versions',
+	];
+
+	if ( ! isset( $map[ $class ] ) ) {
+		return false;
+	}
+
+	return (array) Tribe__Settings_Manager::get_option( $map[ $class ] );
 }
 
 if ( ! function_exists( 'tribe_get_first_ever_installed_version' ) ) {
@@ -812,31 +861,35 @@ if ( ! function_exists( 'tribe_get_first_ever_installed_version' ) ) {
 	 * @return string|boolean The SemVer version string or false if no info found.
 	 */
 	function tribe_get_first_ever_installed_version( $class ) {
-		$instance = tribe_get_class_instance( $class );
+		if ( ! is_string( $class ) ) {
+			$class = get_class( $class );
 
-		if ( $instance ) {
-			// Try for the version history first.
-			if ( ! empty( $instance->version_history_slug ) ) {
-				$history = (array) Tribe__Settings_Manager::get_option( $instance->version_history_slug );
+			if ( false === $class ) {
+				return false;
+			}
+		}
 
-				// '0' may be logged as a version number, which isn't useful, so we remove it
-				while (
-					! empty( $history )
-					&& empty( $history[0] )
-				) {
-					array_shift( $history );
-				}
+		$history = tribe_plugin_version_history( $class );
 
-				// Found it so return it
-				if ( ! empty( $history[0] ) ) {
-					return $history[0];
-				}
+		// Try for the version history first.
+		if ( false !== $history ) {
+			// '0' may be logged as a version number, which isn't useful, so we remove it
+			while (
+				! empty( $history )
+				&& empty( $history[0] )
+			) {
+				array_shift( $history );
 			}
 
-			// Fall back to the current plugin version.
-			if ( defined( get_class( $instance ) . '::VERSION' ) ) {
-				return $instance::VERSION;
+			// Found it so return it
+			if ( ! empty( $history[0] ) ) {
+				return $history[0];
 			}
+		}
+
+		// Fall back to the current plugin version.
+		if ( defined( $class . '::VERSION' ) ) {
+			return $class::VERSION;
 		}
 
 		// No version set.
@@ -863,11 +916,9 @@ if ( ! function_exists( 'tribe_get_currently_installed_version' ) ) {
 	function tribe_get_currently_installed_version( $class ) {
 		$instance = tribe_get_class_instance( $class );
 
-		if ( $instance ) {
-			// First try for class constant (different logic from the other similar functions).
-			if ( defined( get_class( $instance ) . '::VERSION' ) ) {
-				return $instance::VERSION;
-			}
+		// First try for class constant (different logic from the other similar functions).
+		if ( defined( $class . '::VERSION' ) ) {
+			return $class::VERSION;
 		}
 
 		// No version set.
@@ -1103,6 +1154,37 @@ if ( ! function_exists( 'tribe_without_filters' ) ) {
 
 		foreach ( $filter_backups as $tag => $filter_backup ) {
 			$GLOBALS['wp_filter'][ $tag ] = $filter_backup;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Runs a callbacks while suspending, removing and re-adding, a filter or action.
+	 *
+	 * The function will infer the priority of the filter, required for its correct detachment and re-attachment, on
+	 * its own.
+	 *
+	 * @since 5.12.12
+	 *
+	 * @param string   $filter_tag      The filter tag to suspend.
+	 * @param callable $filter_callback The filter_callback currently attached to the filter.
+	 * @param callable $do              The filter_callback that will be run detaching the `$filter_callback`.
+	 * @param int      $args            The number of arguments that should be used to re-attach the filtering callback to the filter.
+	 *
+	 * @return mixed The return value of the `$do` callback.
+	 */
+	function tribe_suspending_filter( $filter_tag, callable $filter_callback, callable $do, $args = 1 ) {
+		$priority = has_filter( $filter_tag, $filter_callback );
+
+		if ( false !== $priority ) {
+			remove_filter( $filter_tag, $filter_callback, $priority );
+		}
+
+		$result = $do();
+
+		if ( false !== $priority ) {
+			add_filter( $filter_tag, $filter_callback, $priority, $args );
 		}
 
 		return $result;

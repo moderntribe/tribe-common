@@ -15,7 +15,7 @@ class Tribe__Timezones {
 	 *
 	 * @var array
 	 */
-	protected static $timezones = array();
+	protected static $timezones = [];
 
 	public static function init() {
 		self::invalidate_caches();
@@ -27,8 +27,8 @@ class Tribe__Timezones {
 	 * Currently we are concerned only with the site timezone abbreviation.
 	 */
 	protected static function invalidate_caches() {
-		add_filter( 'pre_update_option_gmt_offset', array( __CLASS__, 'clear_site_timezone_abbr' ) );
-		add_filter( 'pre_update_option_timezone_string', array( __CLASS__, 'clear_site_timezone_abbr' ) );
+		add_filter( 'pre_update_option_gmt_offset', [ __CLASS__, 'clear_site_timezone_abbr' ] );
+		add_filter( 'pre_update_option_timezone_string', [ __CLASS__, 'clear_site_timezone_abbr' ] );
 	}
 
 	/**
@@ -462,11 +462,11 @@ class Tribe__Timezones {
 		}
 
 		// if the offset contains fractions like :15, :30 or :45 convert them
-		$supported_offsets = array(
+		$supported_offsets = [
 			'/:15$/' => '.25',
 			'/:30$/' => '.5',
 			'/:45$/' => '.75',
-		);
+		];
 		$offset = preg_replace( array_keys( $supported_offsets ), array_values( $supported_offsets ), $offset );
 
 		// Convert the offset to minutes for easier handling of fractional offsets

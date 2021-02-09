@@ -255,6 +255,11 @@ class Tribe__Assets {
 						$this->localized[] = $localize->name;
 					}
 				}
+
+				// If available, load the script translations.
+				if ( isset( $asset->translations['domain'], $asset->translations['path'] ) && function_exists( 'wp_set_script_translations' ) ) {
+					wp_set_script_translations( $asset->slug, $asset->translations['domain'], $asset->translations['path'] );
+				}
 			} else {
 				wp_enqueue_style( $asset->slug );
 			}
@@ -443,6 +448,8 @@ class Tribe__Assets {
 			// Bigger Variables at the end.
 			'localize'      => [],
 			'conditionals'  => [],
+			// Used to handle Translations handled in the JavaScript side of the Assets.
+			'translations'  => [],
 		];
 
 		// Merge Arguments.
@@ -529,6 +536,11 @@ class Tribe__Assets {
 			$asset->groups = (array) $asset->groups;
 			$asset->groups = array_filter( $asset->groups, 'is_string' );
 			$asset->groups = array_unique( $asset->groups );
+		}
+
+		if ( isset( $arguments['translations']['domain'], $arguments['translations']['path'] ) ) {
+			$asset->translations['domain'] = $arguments['translations']['domain'];
+			$asset->translations['path']   = $arguments['translations']['path'];
 		}
 
 		/**

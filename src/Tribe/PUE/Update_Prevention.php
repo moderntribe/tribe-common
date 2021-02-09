@@ -178,7 +178,7 @@ class Update_Prevention {
 		$plugins_classes = array_keys( $incompatible_plugins );
 		$plugins_list_html = tribe( 'pue.notices' )->get_formatted_plugin_names_from_classes( $plugins_classes );
 
-		$link_read_more = '<a href="http://m.tri.be/1aev" target="_blank">' . esc_html__( 'Read more', 'tribe-common' ) . '.</a>';
+		$link_read_more = '<a href="http://evnt.is/1aev" target="_blank">' . esc_html__( 'Read more', 'tribe-common' ) . '.</a>';
 
 		$message = sprintf(
 			esc_html__( 'Your update failed due to an incompatibility between the version (%1$s) of the %2$s you tried to update to and the version of %3$s that you are using. %4$s', 'tribe-common' ),

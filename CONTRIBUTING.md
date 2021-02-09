@@ -6,7 +6,7 @@ worth knowing.
 
 ## Standards
 
-We have a set of [coding standards](http://moderntribe.github.io/products-engineering/)
+We have a set of [coding standards](http://the-events-calendar.github.io/products-engineering/)
 that we follow and encourage others to follow as well. When you submit
 Pull Requests, you'll probably notice a friendly bot - `tr1b0t` - that
 comments on your PR and suggests changes. Be gentle with him, he's only
@@ -16,7 +16,7 @@ see in terms of code formatting, so don't ignore him.
 ## Gulp
 
 We compress/uglify our CSS and JS files using [Gulp](http://gulpjs.com/)
-via our very own [`product-taskmaster`](https://github.com/moderntribe/product-taskmaster)
+via our very own [`product-taskmaster`](https://github.com/the-events-calendar/product-taskmaster)
 repo - which is a collection of gulp tasks. Here's how you get rolling
 with that.
 
@@ -55,4 +55,4 @@ npm rebuild
 
 ### Using Gulp
 
-Our gulp tasks are documented in our [product-taskmanager README](https://github.com/moderntribe/product-taskmaster#gulp-tasks).
+Our gulp tasks are documented in our [product-taskmanager README](https://github.com/the-events-calendar/product-taskmaster#gulp-tasks).

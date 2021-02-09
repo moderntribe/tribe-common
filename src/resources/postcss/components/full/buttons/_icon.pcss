@@ -14,6 +14,37 @@
 	}
 
 	/* -----------------------------------------------------------------------------
+	 * Button: Icon Caret Left/Right
+	 * ----------------------------------------------------------------------------- */
+
+	.tribe-common-c-btn-icon--caret-left,
+	.tribe-common-c-btn-icon--caret-right {
+
+		&:active,
+		&:hover,
+		&:focus {
+
+			.tribe-common-c-btn-icon__icon-svg path {
+				fill: var(--color-icon-primary);
+			}
+		}
+
+		&:disabled {
+
+			.tribe-common-c-btn-icon__icon-svg path {
+				fill: var(--color-icon-disabled);
+			}
+		}
+
+		.tribe-common-c-btn-icon__icon-svg {
+
+			path {
+				fill: var(--color-icon-secondary);
+			}
+		}
+	}
+
+	/* -----------------------------------------------------------------------------
 	 *
 	 * Button: Icon Border
 	 *

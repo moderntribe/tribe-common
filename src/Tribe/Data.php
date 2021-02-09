@@ -49,7 +49,7 @@ class Tribe__Data implements ArrayAccess, Iterator {
 	 * @param array|object $data    An array or object of data.
 	 * @param mixed        $default The default value that should be returned if a key is not set
 	 */
-	public function __construct( $data = array(), $default = false ) {
+	public function __construct( $data = [], $default = false ) {
 		$this->data = (array) $data;
 		$this->default = $default;
 	}

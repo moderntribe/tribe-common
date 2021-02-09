@@ -1,5 +1,6 @@
 <?php
 
+use Tribe\Utils\Paths;
 use Tribe\Utils\Strings;
 
 class Tribe__Template {
@@ -10,7 +11,7 @@ class Tribe__Template {
 	 *
 	 * @var array
 	 */
-	protected $folder = array();
+	protected $folder = [];
 
 	/**
 	 * The origin class for the plugin where the template lives
@@ -37,7 +38,7 @@ class Tribe__Template {
 	 *
 	 * @var array
 	 */
-	protected $global = array();
+	protected $global = [];
 
 	/**
 	 * Used for finding templates for public templates on themes inside of a folder.
@@ -233,7 +234,7 @@ class Tribe__Template {
 	 *
 	 * @return self
 	 */
-	public function add_template_globals( $context = array() ) {
+	public function add_template_globals( $context = [] ) {
 		// Cast as Array merge and save
 		$this->global = wp_parse_args( (array) $context, $this->global );
 
@@ -283,17 +284,17 @@ class Tribe__Template {
 	}
 
 	/**
-	 * Sets a Index inside of the global or local context
-	 * Final to prevent extending the class when the `get` already exists on the child class
+	 * Sets an Index inside of the global or local context.
+	 * Final to prevent extending the class when the `get` already exists on the child class.
+	 *
+	 * @see    Tribe__Utils__Array::set()
 	 *
 	 * @since  4.6.2
 	 *
-	 * @see    Tribe__Utils__Array::set
-	 *
-	 * @param  array    $index     Specify each nested index in order.
-	 *                             Example: array( 'lvl1', 'lvl2' );
-	 * @param  mixed    $default   Default value if the search finds nothing.
-	 * @param  boolean  $is_local  Use the Local or Global context
+	 * @param array|string $index    Specify each nested index in order.
+	 *                               Example: array( 'lvl1', 'lvl2' );
+	 * @param mixed        $default  Default value if the search finds nothing.
+	 * @param boolean      $is_local Use the Local or Global context.
 	 *
 	 * @return mixed The value of the specified index or the default if not found.
 	 */
@@ -310,14 +311,15 @@ class Tribe__Template {
 		 *
 		 * @since  4.6.2
 		 *
-		 * @param  mixed    $value     The value that will be filtered
-		 * @param  array    $index     Specify each nested index in order.
-		 *                             Example: array( 'lvl1', 'lvl2' );
-		 * @param  mixed    $default   Default value if the search finds nothing.
-		 * @param  boolean  $is_local  Use the Local or Global context
-		 * @param  self     $template  Current instance of the Tribe__Template
+		 * @param mixed        $value    The value that will be filtered.
+		 * @param array|string $index    Specify each nested index in order.
+		 *                               Example: array( 'lvl1', 'lvl2' );
+		 * @param mixed        $default  Default value if the search finds nothing.
+		 * @param boolean      $is_local Use the Local or Global context.
+		 * @param self         $template Current instance of the Tribe__Template.
 		 */
 		$value = apply_filters( 'tribe_template_context_get', null, $index, $default, $is_local, $this );
+
 		if ( null !== $value ) {
 			return $value;
 		}
@@ -611,7 +613,7 @@ class Tribe__Template {
 			}
 
 			// Build the File Path
-			$file = implode( DIRECTORY_SEPARATOR, array_merge( (array) $folder['path'], $name ) );
+			$file = Paths::merge( $folder['path'], $name );
 
 			// Append the Extension to the file path
 			$file .= '.php';

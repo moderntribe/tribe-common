@@ -448,4 +448,59 @@ class utilsTest extends \Codeception\TestCase\WPTestCase {
 		$this->assertEquals( 23, $value );
 		$this->assertTrue( $action_2_called );
 	}
+
+	/**
+	 * It should allow suspending filters
+	 *
+	 * @test
+	 */
+	public function should_allow_suspending_filters() {
+		$callback_one = function ( string $input ) {
+			$arguments = func_get_args();
+			$this->assertCount( 3, $arguments );
+
+			return 'one';
+		};
+		$callback_two = function ( string $input ) {
+			$arguments = func_get_args();
+			$this->assertCount( 5, $arguments );
+
+			return 'two';
+		};
+
+		add_filter( 'test_filter', $callback_one, 23, 3 );
+		add_filter( 'test_filter', $callback_two, 13, 5 );
+
+		$this->assertEquals( 'one', apply_filters( 'test_filter', 'original', ...range( 1, 10 ) ) );
+		$this->assertEquals(
+			'two',
+			tribe_suspending_filter(
+				'test_filter',
+				$callback_one,
+				function () use ( $callback_one, $callback_two ) {
+					$this->assertFalse( has_filter( 'test_filter', $callback_one ) );
+					$this->assertEquals( 13, has_filter( 'test_filter', $callback_two ) );
+
+					return apply_filters( 'test_filter', 'original', ...range( 1, 10 ) );
+				},
+				3
+			)
+		);
+		$this->assertEquals( 23, has_filter( 'test_filter', $callback_one ) );
+		$this->assertEquals( 13, has_filter( 'test_filter', $callback_two ) );
+		$this->assertEquals(
+			'one',
+			tribe_suspending_filter(
+				'test_filter',
+				$callback_two,
+				function () use ( $callback_one, $callback_two ) {
+					$this->assertEquals( 23, has_filter( 'test_filter', $callback_one ) );
+					$this->assertFalse( has_filter( 'test_filter', $callback_two ) );
+
+					return apply_filters( 'test_filter', 'original', ...range( 1, 10 ) );
+				},
+				3
+			)
+		);
+	}
 }
