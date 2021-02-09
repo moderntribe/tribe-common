@@ -83,9 +83,6 @@
     }
 
     $apply_to_become_affiliate_text = fs_text_inline( 'Apply to become an affiliate', 'apply-to-become-an-affiliate', $slug );
-
-    $module_id                   = $fs->get_id();
-    $affiliate_program_terms_url = "https://freemius.com/plugin/{$module_id}/{$slug}/legal/affiliate-program/";
 ?>
 <div id="fs_affiliation_content_wrapper" class="wrap">
     <form method="post" action="">
@@ -107,7 +104,7 @@
                                             fs_esc_html_inline( "Your affiliate application for %s has been accepted! Log in to your affiliate area at: %s.", 'affiliate-application-accepted', $slug ),
                                             $plugin_title,
                                             sprintf(
-                                                '<a href="%s" target="_blank" rel="noopener">%s</a>',
+                                                '<a href="%s" target="_blank">%s</a>',
                                                 $members_dashboard_login_url,
                                                 $members_dashboard_login_url
                                             )
@@ -220,17 +217,11 @@
                                             <p class="description"><?php echo esc_html( sprintf( fs_text_inline( 'Please provide details on how you intend to promote %s (please be as specific as possible).', 'promotion-method-desc-field-desc', $slug ), $plugin_title ) ) ?></p>
                                         <?php endif ?>
                                     </div>
-                                    <?php if ( ! $is_affiliate ) : ?>
-                                    <div>
-                                        <input type="checkbox" id="legal_consent_checkbox">
-                                        <label for="legal_consent_checkbox">I agree to the <a href="<?php echo $affiliate_program_terms_url ?>" target="_blank" rel="noopener">Referrer Program</a>'s terms & conditions.</label>
-                                    </div>
-                                    <?php endif ?>
                                 </form>
                             </div>
                             <?php if ( ! $is_affiliate ) : ?>
                                 <a id="cancel_button" href="#" class="button button-secondary button-cancel" style="display: none"><?php fs_esc_html_echo_inline( 'Cancel', 'cancel', $slug ) ?></a>
-                                <a id="submit_button" class="button button-primary disabled" href="#" style="display: none"><?php echo esc_html( $apply_to_become_affiliate_text ) ?></a>
+                                <a id="submit_button" class="button button-primary" href="#" style="display: none"><?php echo esc_html( $apply_to_become_affiliate_text ) ?></a>
                                 <a id="apply_button" class="button button-primary" href="#"><?php fs_esc_html_echo_inline( 'Become an affiliate', 'become-an-affiliate', $slug ) ?></a>
                             <?php endif ?>
                         </div>
@@ -251,8 +242,7 @@
                     $errorMessageContainer    = $('#error_message'),
                     $domain                   = $('#domain'),
                     $addDomain                = $('#add_domain'),
-                    $extraDomainsContainer    = $('#extra_domains_container'),
-                    $legalConsentCheckbox     = $( '#legal_consent_checkbox' );
+                    $extraDomainsContainer    = $('#extra_domains_container');
 
                 $applyButton.click(function (evt) {
                     evt.preventDefault();
@@ -370,7 +360,7 @@
                         data      : {
                             action   : '<?php echo $fs->get_ajax_action( 'submit_affiliate_application' ) ?>',
                             security : '<?php echo $fs->get_ajax_security( 'submit_affiliate_application' ) ?>',
-                            module_id: '<?php echo $module_id ?>',
+                            module_id: '<?php echo $fs->get_id() ?>',
                             affiliate: affiliate
                         },
                         beforeSend: function () {
@@ -482,26 +472,13 @@
 
                     window.scrollTo(0, 0);
                 }
-
-                /**
-                 * @author Xiaheng Chen (@xhchen)
-                 *
-                 * @since 2.4.0
-                 */
-                $legalConsentCheckbox.click( function () {
-                    if ( $( this ).prop( 'checked' ) ) {
-                        $submitButton.removeClass( 'disabled' );
-                    } else {
-                        $submitButton.addClass( 'disabled' );
-                    }
-                } );
             });
         </script>
     </div>
 <?php
     $params = array(
         'page'           => 'affiliation',
-        'module_id'      => $module_id,
+        'module_id'      => $fs->get_id(),
         'module_slug'    => $slug,
         'module_version' => $fs->get_plugin_version(),
     );

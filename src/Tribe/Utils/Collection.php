@@ -17,7 +17,7 @@ class Tribe__Utils__Collection extends SplDoublyLinkedList {
 	 *
 	 * @var array
 	 */
-	protected $items = [];
+	protected $items = array();
 
 	/**
 	 * The doubly-linked list that will hold the items handled by the collection.

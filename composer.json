@@ -1,12 +1,12 @@
 {
-  "name": "the-events-calendar/tribe-common",
+  "name": "moderntribe/tribe-common",
   "description": "Common classes and functions used in our plugins",
   "type": "wordpress-plugin",
   "keywords": [
     "wordpress",
     "events"
   ],
-    "homepage": "https://theeventscalendar.com",
+  "homepage": "http://tri.be/shop/wordpress-events-calendar/",
   "license": "GPL-2.0",
   "require-dev": {
     "automattic/vipwpcs": "^2.0",
@@ -14,8 +14,8 @@
     "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
     "lucatume/function-mocker-le": "^1.0",
     "lucatume/wp-browser": "^2.2.4",
-    "the-events-calendar/tribalscents": "dev-master",
-    "the-events-calendar/tec-testing-facilities": "dev-master",
+    "moderntribe/tribalscents": "dev-master",
+    "moderntribe/tribe-testing-facilities": "dev-master",
     "phpunit/phpunit": "~6.0",
     "wp-cli/checksum-command": "1.0.5",
     "wp-coding-standards/wpcs": "^2.1",
@@ -30,22 +30,22 @@
     }
   },
   "require": {
-    "lucatume/di52": "~2.1.0",
+    "lucatume/di52": "~2.0.10",
     "firebase/php-jwt": "~5.0.0",
     "faction23/a11y-dialog": "~5.0.0",
     "monolog/monolog": "1.24.*"
   },
   "repositories": [
     {
-      "name": "the-events-calendar/tec-testing-facilities",
+      "name": "moderntribe/tribe-testing-facilities",
       "type": "github",
-      "url": "https://github.com/the-events-calendar/tec-testing-facilities",
+      "url": "https://github.com/moderntribe/tribe-testing-facilities",
       "no-api": true
     },
     {
-      "name": "the-events-calendar/TribalScents",
+      "name": "moderntribe/TribalScents",
       "type": "github",
-      "url": "https://github.com/the-events-calendar/TribalScents",
+      "url": "https://github.com/moderntribe/TribalScents",
       "no-api": true
     },
     {

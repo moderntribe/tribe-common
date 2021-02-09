@@ -2,15 +2,15 @@
 /*
 Plugin Name: Tribe Common
 Description: An event settings framework for managing shared options
-Version: 4.12.16
-Author: The Events Calendar
-Author URI: http://evnt.is/1x
+Version: 4.12.11
+Author: Modern Tribe, Inc.
+Author URI: http://m.tri.be/1x
 Text Domain: tribe-common
 License: GPLv2 or later
 */
 
 /*
-Copyright 2009-2015 by The Events Calendar and the contributors
+Copyright 2009-2015 by Modern Tribe Inc and the contributors
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

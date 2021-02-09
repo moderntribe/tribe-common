@@ -8,14 +8,14 @@
  * @since 4.6
  */
 class Tribe__Duplicate__Strategy_Factory {
-	protected $strategy_map = [];
+	protected $strategy_map = array();
 
 	public function __construct() {
-		$strategy_map = [
+		$strategy_map = array(
 			'default' => 'Tribe__Duplicate__Strategy__Same',
 			'same'    => 'Tribe__Duplicate__Strategy__Same',
 			'like'    => 'Tribe__Duplicate__Strategy__Like',
-		];
+		);
 
 		/**
 		 * Filters the strategies managed by the strategy factory.

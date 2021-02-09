@@ -22,7 +22,7 @@ class Tribe__Utils__JSON {
 			return $value;
 		}
 		if ( is_array( $value ) ) {
-			$escaped = [];
+			$escaped = array();
 			foreach ( $value as $key => $subvalue ) {
 				$escaped[ $key ] = self::escape_string( $subvalue );
 			}
@@ -30,8 +30,8 @@ class Tribe__Utils__JSON {
 			return $escaped;
 		}
 
-		$escapers     = [ "\\", "/", "\"", "\n", "\r", "\t", "\x08", "\x0c" ];
-		$replacements = [ "\\\\", "\\/", "\\\"", "\\n", "\\r", "\\t", "\\f", "\\b" ];
+		$escapers     = array( "\\", "/", "\"", "\n", "\r", "\t", "\x08", "\x0c" );
+		$replacements = array( "\\\\", "\\/", "\\\"", "\\n", "\\r", "\\t", "\\f", "\\b" );
 
 		return str_replace( $escapers, $replacements, $value );
 	}

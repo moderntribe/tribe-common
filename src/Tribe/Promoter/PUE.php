@@ -23,10 +23,10 @@ class Tribe__Promoter__PUE {
 	 * @since 4.9
 	 */
 	public function load() {
-		$this->pue_checker = new Tribe__PUE__Checker( 'http://tri.be/', $this->slug, [
+		$this->pue_checker = new Tribe__PUE__Checker( 'http://tri.be/', $this->slug, array(
 			'context'     => 'service',
 			'plugin_name' => __( 'Promoter', 'tribe-common' ),
-		] );
+		) );
 	}
 
 	/**
@@ -57,10 +57,10 @@ class Tribe__Promoter__PUE {
 			return false;
 		}
 
-		return [
+		return array(
 			'key'            => $key,
 			'is_network_key' => $is_network_key,
-		];
+		);
 	}
 
 	/**

@@ -33,8 +33,8 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 		 * Class constructor
 		 */
 		public function __construct() {
-			add_action( 'admin_menu', [ $this, 'add_menu_page' ], 100 );
-			add_action( 'wp_before_admin_bar_render', [ $this, 'add_toolbar_item' ], 20 );
+			add_action( 'admin_menu', array( $this, 'add_menu_page' ), 100 );
+			add_action( 'wp_before_admin_bar_render', array( $this, 'add_toolbar_item' ), 20 );
 
 			$this->register_assets();
 		}
@@ -53,17 +53,7 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 
 			$where = Tribe__Settings::instance()->get_parent_slug();
 
-			$this->admin_page = add_submenu_page(
-				$where,
-				$page_title,
-				$menu_title,
-				$capability,
-				self::MENU_SLUG,
-				[
-					$this,
-					'do_menu_page',
-				]
-			);
+			$this->admin_page = add_submenu_page( $where, $page_title, $menu_title, $capability, self::MENU_SLUG, array( $this, 'do_menu_page' ) );
 		}
 
 		/**
@@ -77,12 +67,12 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 			if ( current_user_can( $capability ) ) {
 				global $wp_admin_bar;
 
-				$wp_admin_bar->add_menu( [
+				$wp_admin_bar->add_menu( array(
 					'id'     => 'tribe-events-app-shop',
 					'title'  => esc_html__( 'Event Add-Ons', 'tribe-common' ),
-					'href'   => Tribe__Settings::instance()->get_url( [ 'page' => self::MENU_SLUG ] ),
+					'href'   => Tribe__Settings::instance()->get_url( array( 'page' => self::MENU_SLUG ) ),
 					'parent' => 'tribe-events-settings-group',
-				] );
+				) );
 			}
 		}
 
@@ -92,14 +82,14 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 		protected function register_assets() {
 			tribe_assets(
 				Tribe__Main::instance(),
-				[
-					[ 'tribe-app-shop-css', 'app-shop.css' ],
-					[ 'tribe-app-shop-js', 'app-shop.js', [ 'jquery' ] ],
-				],
+				array(
+					array( 'tribe-app-shop-css', 'app-shop.css' ),
+					array( 'tribe-app-shop-js', 'app-shop.js', array( 'jquery' ) ),
+				),
 				'admin_enqueue_scripts',
-				[
-					'conditionals' => [ $this, 'is_current_page' ],
-				]
+				array(
+					'conditionals' => array( $this, 'is_current_page' ),
+				)
 			);
 		}
 
@@ -174,7 +164,7 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 				(object) [
 					'title' => __( 'Events Marketing Bundle', 'tribe-common' ),
 					'logo' => 'images/logo/bundle-event-marketing.svg',
-					'link' => 'https://evnt.is/1aj3',
+					'link' => 'https://m.tri.be/1aj3',
 					'discount' => __( 'Save over 20%', 'tribe-common' ),
 					'description' => __( 'Ticket sales, attendee management, and email marketing for your events', 'tribe-common' ),
 					'includes' => [
@@ -186,7 +176,7 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 				(object) [
 					'title' => __( 'Event Importer Bundle', 'tribe-common' ),
 					'logo' => 'images/logo/bundle-event-importer.svg',
-					'link' => 'https://evnt.is/1aj2',
+					'link' => 'https://m.tri.be/1aj2',
 					'discount' => __( 'Save over 25%', 'tribe-common' ),
 					'description' => __( 'Fill your calendar with events from across the web, including Google Calendar, Meetup, and more.', 'tribe-common' ),
 					'includes' => [
@@ -198,7 +188,7 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 				(object) [
 					'title' => __( 'Virtual Events Marketing Bundle', 'tribe-common' ),
 					'logo' => 'images/logo/bundle-virtual-events.svg',
-					'link' => 'http://evnt.is/ve-bundle',
+					'link' => 'http://m.tri.be/ve-bundle',
 					'discount' => __( 'Save over 20%', 'tribe-common' ),
 					'description' => __( 'Streamline your online events and increase revenue.', 'tribe-common' ),
 					'includes' => [
@@ -217,7 +207,7 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 				(object) [
 					'title' => __( 'Community Manager Bundle', 'tribe-common' ),
 					'logo' => 'images/logo/bundle-community-manager.svg',
-					'link' => 'https://evnt.is/1aj4',
+					'link' => 'https://m.tri.be/1aj4',
 					'discount' => __( 'Save over 20%', 'tribe-common' ), /* code review: fix this */
 					'description' => __( 'Handle event submissions with ticket sales and everything you need to build a robust community.', 'tribe-common' ),
 					'includes' => [
@@ -230,7 +220,7 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 				(object) [
 					'title' => __( 'Ultimate Bundle', 'tribe-common' ),
 					'logo' => 'images/logo/bundle-ultimate.svg',
-					'link' => 'https://evnt.is/1aj5',
+					'link' => 'https://m.tri.be/1aj5',
 					'discount' => __( 'Save over 20%', 'tribe-common' ), /* code review: fix this */
 					'description' => __( 'All of our premium events management plugins at a deep discount.', 'tribe-common' ),
 					'includes' => [
@@ -260,37 +250,37 @@ if ( ! class_exists( 'Tribe__App_Shop' ) ) {
 			$extensions = [
 				(object) [
 					'title' => __( 'Website URL CTA', 'tribe-common' ),
-					'link' => 'https://evnt.is/1aj6',
+					'link' => 'https://m.tri.be/1aj6',
 					'image' => 'images/shop/extension-web-url-cta.jpg',
 					'description' => __( 'Create a strong call-to-action for attendees to "Join Webinar" instead of only sharing a website address.', 'tribe-common' ),
 				],
 				(object) [
 					'title' => __( 'Link Directly to Webinar', 'tribe-common' ),
-					'link' => 'https://evnt.is/1aj7',
+					'link' => 'https://m.tri.be/1aj7',
 					'image' => 'images/shop/extension-link-to-webinar.jpg',
 					'description' => __( 'When users click on the event title, they’ll be taken right to the source of your event, offering a direct route to join.', 'tribe-common' ),
 				],
 				(object) [
 					'title' => __( 'Events Happening Now', 'tribe-common' ),
-					'link' => 'https://evnt.is/1aj8',
+					'link' => 'https://m.tri.be/1aj8',
 					'image' => 'images/shop/extension-events-happening-now.jpg',
 					'description' => __( 'Use this shortcode to display events that are currently in progress, like webinars and livestreams.', 'tribe-common' ),
 				],
 				(object) [
 					'title' => __( 'Custom Venue Links', 'tribe-common' ),
-					'link' => 'https://evnt.is/1aj9',
+					'link' => 'https://m.tri.be/1aj9',
 					'image' => 'images/shop/extension-custom-venue-links.jpg',
 					'description' => __( 'Turn the venue name for your event into a clickable URL — a great way to link directly to a venue’s website or a virtual meeting.', 'tribe-common' ),
 				],
 				(object) [
 					'title' => __( 'Adjust Label', 'tribe-common' ),
-					'link' => 'https://evnt.is/1aja',
+					'link' => 'https://m.tri.be/1aja',
 					'image' => 'images/shop/extension-change-label.jpg',
 					'description' => __( 'Change "Events" to "Webinars," or "Venues" to "Livestream," or "Organizers" to "Hosts." Tailor your calendar for virtual events and meetings.', 'tribe-common' ),
 				],
 				(object) [
 					'title' => __( 'Reach Attendees', 'tribe-common' ),
-					'link' => 'https://evnt.is/1ajc',
+					'link' => 'https://m.tri.be/1ajc',
 					'image' => 'images/shop/extension-advanced-options.jpg',
 					'description' => __( 'From registration to attendance history, view every step of the event lifecycle with this HubSpot integration.', 'tribe-common' ),
 				],

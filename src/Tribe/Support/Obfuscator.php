@@ -6,14 +6,14 @@ class Tribe__Support__Obfuscator {
 	/**
 	 * @var array
 	 */
-	protected $prefixes = [];
+	protected $prefixes = array();
 
 	/**
 	 * Tribe__Support__Obfuscator constructor.
 	 *
 	 * @param array $prefixes
 	 */
-	public function __construct( array $prefixes = [] ) {
+	public function __construct( array $prefixes = array() ) {
 		$this->prefixes = $prefixes;
 	}
 

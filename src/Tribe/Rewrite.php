@@ -47,15 +47,14 @@ class Tribe__Rewrite {
 	 *
 	 * @var array
 	 */
-	public $rules = [];
+	public $rules = array();
 
 	/**
 	 * Base slugs for rewrite urls
 	 *
 	 * @var array
 	 */
-	public $bases = [];
-
+	public $bases = array();
 	/**
 	 * After creating the Hooks on WordPress we lock the usage of the function.
 	 *
@@ -183,17 +182,17 @@ class Tribe__Rewrite {
 	}
 
 	protected function add_hooks() {
-		add_filter( 'generate_rewrite_rules', [ $this, 'filter_generate' ] );
+		add_filter( 'generate_rewrite_rules', array( $this, 'filter_generate' ) );
 
 		// Remove percent Placeholders on all items
-		add_filter( 'rewrite_rules_array', [ $this, 'remove_percent_placeholders' ], 25 );
+		add_filter( 'rewrite_rules_array', array( $this, 'remove_percent_placeholders' ), 25 );
 
 		add_action( 'shutdown', [ $this, 'dump_cache' ] );
 	}
 
 	protected function remove_hooks() {
-		remove_filter( 'generate_rewrite_rules', [ $this, 'filter_generate' ] );
-		remove_filter( 'rewrite_rules_array', [ $this, 'remove_percent_placeholders' ], 25 );
+		remove_filter( 'generate_rewrite_rules', array( $this, 'filter_generate' ) );
+		remove_filter( 'rewrite_rules_array', array( $this, 'remove_percent_placeholders' ), 25 );
 
 		remove_action( 'shutdown', [ $this, 'dump_cache' ] );
 	}
@@ -230,10 +229,10 @@ class Tribe__Rewrite {
 	 *
 	 * @return Tribe__Events__Rewrite
 	 */
-	public function add( $regex, $args = [] ) {
+	public function add( $regex, $args = array() ) {
 		$regex = (array) $regex;
 
-		$default = [];
+		$default = array();
 		$args    = array_filter( wp_parse_args( $args, $default ) );
 
 		$url = add_query_arg( $args, 'index.php' );
@@ -246,7 +245,7 @@ class Tribe__Rewrite {
 
 		// Add the Bases to the regex
 		foreach ( $this->bases as $key => $value ) {
-			$regex = str_replace( [ '{{ ' . $key . ' }}', '{{' . $key . '}}' ], $value, $regex );
+			$regex = str_replace( array( '{{ ' . $key . ' }}', '{{' . $key . '}}' ), $value, $regex );
 		}
 
 		// Apply the Preg Indexes to the URL
@@ -554,8 +553,7 @@ class Tribe__Rewrite {
 				$replace
 			);
 
-			// Use case-insensitive replace to make sure to work with some decoding using uppercase escaped chars.
-			$replaced = str_ireplace( array_keys( $replace ), $replace, $link_template );
+			$replaced = str_replace( array_keys( $replace ), $replace, $link_template );
 
 			// Remove trailing chars.
 			$path     = rtrim( $replaced, '?$' );
@@ -886,7 +884,7 @@ class Tribe__Rewrite {
 		$url_components = parse_url($url);
 		$url_path = Arr::get( $url_components, 'path', '/' );
 		$site_path = parse_url( home_url(), PHP_URL_PATH );
-		if ( ! empty( $site_path ) && '/' !== $site_path ) {
+		if ( ! ( empty( $site_path ) && '/' !== $site_path ) ) {
 			// The current site is in a sub-directory: the site path should be dropped from the request path.
 			$url_path = str_replace( $site_path, '', $url_path );
 		}

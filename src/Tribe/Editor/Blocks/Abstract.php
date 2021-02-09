@@ -47,7 +47,7 @@ implements Tribe__Editor__Blocks__Interface {
 	 *
 	 * @return array
 	*/
-	public function attributes( $params = [] ) {
+	public function attributes( $params = array() ) {
 
 		// get the default attributes
 		$default_attributes = $this->default_attributes();
@@ -80,7 +80,7 @@ implements Tribe__Editor__Blocks__Interface {
 	*/
 	public function default_attributes() {
 
-		$attributes = [];
+		$attributes = array();
 
 		/**
 		 * Filters the default attributes
@@ -102,8 +102,12 @@ implements Tribe__Editor__Blocks__Interface {
 	 *
 	 * @return string
 	 */
-	public function render( $attributes = [] ) {
-		$json_string = json_encode( $attributes, JSON_PRETTY_PRINT );
+	public function render( $attributes = array() ) {
+		if ( version_compare( phpversion(), '5.4', '>=' ) ) {
+			$json_string = json_encode( $attributes, JSON_PRETTY_PRINT );
+		} else {
+			$json_string = json_encode( $attributes );
+		}
 
 		return
 		'<pre class="tribe-placeholder-text-' . $this->name() . '">' .
@@ -132,13 +136,13 @@ implements Tribe__Editor__Blocks__Interface {
 	 * @return void
 	 */
 	public function register() {
-		$block_args = [
-			'render_callback' => [ $this, 'render' ],
-		];
+		$block_args = array(
+			'render_callback' => array( $this, 'render' ),
+		);
 
 		register_block_type( $this->name(), $block_args );
 
-		add_action( 'wp_ajax_' . $this->get_ajax_action(), [ $this, 'ajax' ] );
+		add_action( 'wp_ajax_' . $this->get_ajax_action(), array( $this, 'ajax' ) );
 
 		$this->assets();
 		$this->hook();

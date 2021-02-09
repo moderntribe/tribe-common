@@ -15,7 +15,7 @@ class Tribe__Extension_Loader {
 	 *      @param array $plugin_basename Plugin header key/value pairs.
 	 * }
 	 */
-	private $plugin_data = [];
+	private $plugin_data = array();
 
 	/**
 	 * Class instance.
@@ -51,7 +51,7 @@ class Tribe__Extension_Loader {
 	 * @return array Prefixes
 	 */
 	public static function get_extension_file_prefixes() {
-		$prefixes = [ 'tribe-ext-' ];
+		$prefixes = array( 'tribe-ext-' );
 
 		/**
 		 * Filter which plugin folder prefixes are considered tribe extensions.
@@ -97,17 +97,13 @@ class Tribe__Extension_Loader {
 
 		// Class instantiation.
 		if ( class_exists( $p_data['ExtensionClass'] ) ) {
-			$extension_args = [
+			$extension_args = array(
 				'file' => $plugin_file,
 				'plugin_data' => $p_data,
-			];
+			);
 
 			// Instantiates extension instance.
-			$extension = call_user_func(
-				[ $p_data['ExtensionClass'], 'instance' ],
-				$p_data['ExtensionClass'],
-				$extension_args
-			);
+			$extension = call_user_func( array( $p_data['ExtensionClass'], 'instance' ), $p_data['ExtensionClass'], $extension_args );
 
 			if ( null !== $extension ) {
 				$success = true;
@@ -145,7 +141,7 @@ class Tribe__Extension_Loader {
 	 *
 	 * @return void
 	 */
-	public function __clone() {
+	private function __clone() {
 		_doing_it_wrong(
 			__FUNCTION__,
 			'Can not use this method on singletons.',
@@ -158,7 +154,7 @@ class Tribe__Extension_Loader {
 	 *
 	 * @return void
 	 */
-	public function __wakeup() {
+	private function __wakeup() {
 		_doing_it_wrong(
 			__FUNCTION__,
 			'Can not use this method on singletons.',

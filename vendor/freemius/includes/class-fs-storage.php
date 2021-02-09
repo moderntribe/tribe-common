@@ -371,7 +371,6 @@
                  * sites in the network.
                  */
                 'is_network_activation'        => 0,
-                'license_migration'            => 0,
 
                 // When network activated, then network level.
                 'install_timestamp'            => 1,

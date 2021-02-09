@@ -93,7 +93,8 @@ if ( ! class_exists( 'Tribe__PUE__Plugin_Info' ) ) {
 
 			// The custom update API is built so that many fields have the same name and format
 			// as those returned by the native WordPress.org API. These can be assigned directly.
-			$sameFormat = [
+
+			$sameFormat = array(
 				'name',
 				'slug',
 				'version',
@@ -108,8 +109,7 @@ if ( ! class_exists( 'Tribe__PUE__Plugin_Info' ) ) {
 				'api_expired',
 				'api_upgrade',
 				'api_invalid',
-			];
-
+			);
 			foreach ( $sameFormat as $field ) {
 				if ( isset( $this->$field ) ) {
 					$info->$field = $this->$field;
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Tribe__PUE__Plugin_Info' ) ) {
 			} elseif ( is_array( $this->sections ) ) {
 				$info->sections = $this->sections;
 			} else {
-				$info->sections = [ 'description' => '' ];
+				$info->sections = array( 'description' => '' );
 			}
 
 			return $info;

@@ -542,66 +542,23 @@
                 }
             }
 
-            // Alias.
-            $basename = $this->_fs->premium_plugin_basename();
-
             if ( is_object( $this->_update_details ) ) {
-                if ( isset( $transient_data->no_update ) ) {
-                    unset( $transient_data->no_update[ $basename ] );
-                }
-
                 if ( ! isset( $transient_data->response ) ) {
                     $transient_data->response = array();
                 }
 
                 // Add plugin to transient data.
-                $transient_data->response[ $basename ] = $this->_fs->is_plugin() ?
+                $transient_data->response[ $this->_fs->premium_plugin_basename() ] = $this->_fs->is_plugin() ?
                     $this->_update_details :
                     (array) $this->_update_details;
-            } else {
-                if ( isset( $transient_data->response ) ) {
-                    /**
-                     * Ensure that there's no update data for the plugin to prevent upgrading the premium version to the latest free version.
-                     *
-                     * @author Leo Fajardo (@leorw)
-                     * @since 2.3.0
-                     */
-                    unset( $transient_data->response[ $basename ] );
-                }
-
-                if ( ! isset( $transient_data->no_update ) ) {
-                    $transient_data->no_update = array();
-                }
-
+            } else if ( isset( $transient_data->response ) ) {
                 /**
-                 * Add product to no_update transient data to properly integrate with WP 5.5 auto-updates UI.
+                 * Ensure that there's no update data for the plugin to prevent upgrading the premium version to the latest free version.
                  *
-                 * @since 2.4.1
-                 * @link https://make.wordpress.org/core/2020/07/30/recommended-usage-of-the-updates-api-to-support-the-auto-updates-ui-for-plugins-and-themes-in-wordpress-5-5/
+                 * @author Leo Fajardo (@leorw)
+                 * @since 2.3.0
                  */
-                $transient_data->no_update[ $basename ] = $this->_fs->is_plugin() ?
-                    (object) array(
-                        'id'            => $basename,
-                        'slug'          => $this->_fs->get_slug(),
-                        'plugin'        => $basename,
-                        'new_version'   => $this->_fs->get_plugin_version(),
-                        'url'           => '',
-                        'package'       => '',
-                        'icons'         => array(),
-                        'banners'       => array(),
-                        'banners_rtl'   => array(),
-                        'tested'        => '',
-                        'requires_php'  => '',
-                        'compatibility' => new stdClass(),
-                    ) :
-                    array(
-                        'theme'        => $basename,
-                        'new_version'  => $this->_fs->get_plugin_version(),
-                        'url'          => '',
-                        'package'      => '',
-                        'requires'     => '',
-                        'requires_php' => '',
-                    );
+                unset( $transient_data->response[ $this->_fs->premium_plugin_basename() ] );
             }
 
             $slug = $this->_fs->get_slug();

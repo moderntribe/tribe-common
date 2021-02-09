@@ -16,48 +16,48 @@ class Tribe__Documentation__Swagger__Term_Definition_Provider
 	 * @return array An array description of a Swagger supported component.
 	 */
 	public function get_documentation() {
-		$documentation = [
+		$documentation = array(
 			'type'       => 'object',
-			'properties' => [
-				'id'          => [
-					'type'        => 'integer',
+			'properties' => array(
+				'id' => array(
+					'type' => 'integer',
 					'description' => __( 'The WordPress term ID', 'tribe-common' ),
-				],
-				'name'        => [
-					'type'        => 'string',
+				),
+				'name' => array(
+					'type' => 'string',
 					'description' => __( 'The term name', 'tribe-common' ),
-				],
-				'slug'        => [
-					'type'        => 'string',
+				),
+				'slug' => array(
+					'type' => 'string',
 					'description' => __( 'The term slug', 'tribe-common' ),
-				],
-				'taxonomy'    => [
-					'type'        => 'string',
+				),
+				'taxonomy' => array(
+					'type' => 'string',
 					'description' => __( 'The taxonomy the term belongs to', 'tribe-common' ),
-				],
-				'description' => [
-					'type'        => 'string',
+				),
+				'description' => array(
+					'type' => 'string',
 					'description' => __( 'The term description', 'tribe-common' ),
-				],
-				'parent'      => [
-					'type'        => 'integer',
+				),
+				'parent' => array(
+					'type' => 'integer',
 					'description' => __( 'The term parent term if any', 'tribe-common' ),
-				],
-				'count'       => [
-					'type'        => 'integer',
+				),
+				'count' => array(
+					'type' => 'integer',
 					'description' => __( 'The number of posts associated with the term', 'tribe-common' ),
-				],
-				'url'         => [
-					'type'        => 'string',
+				),
+				'url' => array(
+					'type' => 'string',
 					'description' => __( 'The URL to the term archive page', 'tribe-common' ),
-				],
-				'urls'        => [
-					'type'        => 'array',
-					'items'       => [ 'type' => 'string' ],
+				),
+				'urls' => array(
+					'type' => 'array',
+					'items' => array( 'type' => 'string' ),
 					'description' => __( 'A list of links to the term own, archive and parent REST URL', 'tribe-common' ),
-				],
-			],
-		];
+				),
+			),
+		);
 
 		/**
 		 * Filters the Swagger documentation generated for an term in the TEC REST API.

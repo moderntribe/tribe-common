@@ -19,7 +19,7 @@ class Tribe__Main {
 	const OPTIONNAME          = 'tribe_events_calendar_options';
 	const OPTIONNAMENETWORK   = 'tribe_events_calendar_network_options';
 
-	const VERSION             = '4.12.16';
+	const VERSION             = '4.12.11';
 
 	const FEED_URL            = 'https://theeventscalendar.com/feed/';
 
@@ -67,7 +67,12 @@ class Tribe__Main {
 			return;
 		}
 
-		require_once realpath( dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/autoload.php' );
+		// the 5.2 compatible autoload file
+		if ( version_compare( PHP_VERSION, '5.2.17', '<=' ) ) {
+			require_once realpath( dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/autoload_52.php' );
+		} else {
+			require_once realpath( dirname( dirname( dirname( __FILE__ ) ) ) . '/vendor/autoload.php' );
+		}
 
 		// the DI container class
 		require_once dirname( __FILE__ ) . '/Container.php';
@@ -423,14 +428,11 @@ class Tribe__Main {
 		// Are we on the Plugins page?
 		$is_plugins = $helper->is_screen( 'plugins' );
 
-		// Are we on the Widgets page?
-		$is_widgets = $helper->is_screen( 'widgets' );
-
 		// Are we viewing a generic Tribe screen?
 		// Includes: Events > Settings, Events > Help, App Shop page, and more.
 		$is_tribe_screen = $helper->is_screen();
 
-		return $is_post_type || $is_plugins || $is_widgets || $is_tribe_screen;
+		return $is_post_type || $is_plugins || $is_tribe_screen;
 	}
 
 	/**
@@ -559,7 +561,7 @@ class Tribe__Main {
 		if ( 'plugins.php' !== $page ) {
 			return;
 		}
-		$notices = apply_filters( 'tribe_plugin_notices', [] );
+		$notices = apply_filters( 'tribe_plugin_notices', array() );
 		wp_localize_script( 'tribe-pue-notices', 'tribe_plugin_notices', $notices );
 	}
 
@@ -575,8 +577,6 @@ class Tribe__Main {
 		if ( ! defined( 'TRIBE_HIDE_MARKETING_NOTICES' ) ) {
 			tribe( 'admin.notice.marketing' );
 		}
-
-		tribe( \Tribe\Admin\Notice\WP_Version::class );
 
 		/**
 		 * Runs after all plugins including Tribe ones have loaded
@@ -626,7 +626,6 @@ class Tribe__Main {
 
 		tribe_singleton( 'admin.notice.php.version', 'Tribe__Admin__Notice__Php_Version', [ 'hook' ] );
 		tribe_singleton( 'admin.notice.marketing', 'Tribe__Admin__Notice__Marketing', [ 'hook' ] );
-		tribe_singleton( \Tribe\Admin\Notice\WP_Version::class, \Tribe\Admin\Notice\WP_Version::class, [ 'hook' ] );
 
 		tribe_register_provider( Tribe__Editor__Provider::class );
 		tribe_register_provider( Tribe__Service_Providers__Debug_Bar::class );
@@ -638,7 +637,6 @@ class Tribe__Main {
 		tribe_register_provider( Tribe\Service_Providers\Body_Classes::class );
 		tribe_register_provider( Tribe\Log\Service_Provider::class );
 		tribe_register_provider( Tribe\Service_Providers\Crons::class );
-		tribe_register_provider( Tribe\Service_Providers\Widgets::class );
 	}
 
 	/**

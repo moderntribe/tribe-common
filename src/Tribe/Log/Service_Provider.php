@@ -22,8 +22,6 @@ class Service_Provider extends \tad_DI52_ServiceProvider {
 	 * @since 4.9.16
 	 */
 	public function register() {
-		$this->container->singleton( 'log', $this );
-		$this->container->singleton( static::class, $this );
 		$this->container->singleton( Logger::class, [ $this, 'build_logger' ] );
 		$this->container->singleton( 'monolog',
 			function () {
@@ -72,7 +70,7 @@ class Service_Provider extends \tad_DI52_ServiceProvider {
 		 */
 		$level_threshold = apply_filters( 'tribe_log_level', Logger::WARNING );
 
-		$error_log_handler = new ErrorLogHandler( ErrorLogHandler::OPERATING_SYSTEM, $level_threshold );
+		$error_log_handler = new ErrorLogHandler( null, $level_threshold );
 
 		/**
 		 * Filters whether to use canonical format for the logs or not.
@@ -146,31 +144,5 @@ class Service_Provider extends \tad_DI52_ServiceProvider {
 		$logging_engines[ Action_Logger::class ] = new Action_Logger();
 
 		return $logging_engines;
-	}
-
-	/**
-	 * Enables logging in the service provider, if not already enabled.
-	 *
-	 * @since 4.12.15
-	 */
-	public function enable() {
-		if ( has_action( 'tribe_log', [ $this, 'dispatch_log' ] ) ) {
-			return;
-		}
-
-		add_action( 'tribe_log', [ $this, 'dispatch_log' ] );
-	}
-
-	/**
-	 * Disables the logging functions.
-	 *
-	 * @since 4.12.15
-	 */
-	public function disable() {
-		if ( ! has_action( 'tribe_log', [ $this, 'dispatch_log' ] ) ) {
-			return;
-		}
-
-		remove_action( 'tribe_log', [ $this, 'dispatch_log' ] );
 	}
 }

@@ -155,7 +155,7 @@ class Tribe__Log__File_Logger implements Tribe__Log__Logger {
 			return;
 		}
 
-		fputcsv( $this->handle, [ date_i18n( 'Y-m-d H:i:s' ), $entry, $type, $src ] );
+		fputcsv( $this->handle, array( date_i18n( 'Y-m-d H:i:s' ), $entry, $type, $src ) );
 	}
 
 	/**
@@ -171,7 +171,7 @@ class Tribe__Log__File_Logger implements Tribe__Log__Logger {
 	 *
 	 * @return array
 	 */
-	public function retrieve( $limit = 0, array $args = [] ) {
+	public function retrieve( $limit = 0, array $args = array() ) {
 		// Ensure we're in 'read' mode before we try to retrieve
 		if ( 'r' !== $this->context ) {
 			$this->set_context( 'r' );
@@ -179,10 +179,10 @@ class Tribe__Log__File_Logger implements Tribe__Log__Logger {
 
 		// Couldn't obtain the file handle? We'll bail out without causing further disruption
 		if ( ! $this->handle ) {
-			return [];
+			return array();
 		}
 
-		$rows = [];
+		$rows = array();
 
 		while ( $current_row = fgetcsv( $this->handle ) ) {
 			if ( $limit && $limit === count( $rows ) ) {
@@ -212,7 +212,7 @@ class Tribe__Log__File_Logger implements Tribe__Log__Logger {
 	 * @return array
 	 */
 	public function list_available_logs() {
-		$logs = [];
+		$logs = array();
 
 		// This could be called when the log dir is not accessible.
 		if ( ! $this->is_available() ) {
@@ -238,7 +238,13 @@ class Tribe__Log__File_Logger implements Tribe__Log__Logger {
 				}
 
 				$name = $node->getFilename();
-				$ext = $node->getExtension();
+
+				// DirectoryIterator::getExtension() is only available on 5.3.6
+				if ( version_compare( phpversion(), '5.3.6', '>=' ) ) {
+					$ext = $node->getExtension();
+				} else {
+					$ext = pathinfo( $name, PATHINFO_EXTENSION );
+				}
 
 				// Skip unless it is a .log file with the expected prefix
 				if ( 'log' !== $ext || 0 !== strpos( $name, $basename ) ) {

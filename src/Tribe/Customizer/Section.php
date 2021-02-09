@@ -41,7 +41,7 @@ abstract class Tribe__Customizer__Section {
 	 * @access private
 	 * @var array
 	 */
-	public $defaults = [];
+	public $defaults = array();
 
 	/**
 	 * Information to setup the Section
@@ -51,12 +51,12 @@ abstract class Tribe__Customizer__Section {
 	 * @access public
 	 * @var array
 	 */
-	public $arguments = [
+	public $arguments = array(
 		'priority'    => 10,
 		'capability'  => 'edit_theme_options',
 		'title'       => null,
 		'description' => null,
-	];
+	);
 
 	/**
 	 * Overwrite this method to create the Fields/Settings for this section
@@ -85,7 +85,7 @@ abstract class Tribe__Customizer__Section {
 	 * @param  array  $settings The actual options on the database
 	 * @return array
 	 */
-	public function create_ghost_settings( $settings = [] ) {
+	public function create_ghost_settings( $settings = array() ) {
 		return $settings;
 	}
 
@@ -147,15 +147,15 @@ abstract class Tribe__Customizer__Section {
 		$this->setup();
 
 		// Hook the Register methods
-		add_action( "tribe_customizer_register_{$this->ID}_settings", [ $this, 'register_settings' ], 10, 2 );
-		add_filter( 'tribe_customizer_pre_sections', [ $this, 'register' ], 10, 2 );
+		add_action( "tribe_customizer_register_{$this->ID}_settings", array( $this, 'register_settings' ), 10, 2 );
+		add_filter( 'tribe_customizer_pre_sections', array( $this, 'register' ), 10, 2 );
 
 		// Append this section CSS template
-		add_filter( 'tribe_customizer_css_template', [ $this, 'get_css_template' ], 15 );
-		add_filter( "tribe_customizer_section_{$this->ID}_defaults", [ $this, 'get_defaults' ], 10 );
+		add_filter( 'tribe_customizer_css_template', array( $this, 'get_css_template' ), 15 );
+		add_filter( "tribe_customizer_section_{$this->ID}_defaults", array( $this, 'get_defaults' ), 10 );
 
 		// Create the Ghost Options
-		add_filter( 'tribe_customizer_pre_get_option', [ $this, 'filter_settings' ], 10, 2 );
+		add_filter( 'tribe_customizer_pre_get_option', array( $this, 'filter_settings' ), 10, 2 );
 
 		// By Default Invoking a new Section will load, unless `load` is set to false
 		if ( true === (bool) $this->load ) {
@@ -167,7 +167,7 @@ abstract class Tribe__Customizer__Section {
 	 * A way to apply filters when getting the Customizer options
 	 * @return array
 	 */
-	public function get_defaults( $settings = [] ) {
+	public function get_defaults( $settings = array() ) {
 		// Create Ghost Options
 		return $this->create_ghost_settings( wp_parse_args( $settings, $this->defaults ) );
 	}

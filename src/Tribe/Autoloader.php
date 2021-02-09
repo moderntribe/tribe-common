@@ -77,12 +77,12 @@
 			protected $dir_separator = '__';
 
 			/** @var string[] */
-			protected $fallback_dirs = [];
+			protected $fallback_dirs = array();
 
 			/**
 			 * @var array
 			 */
-			protected $class_paths = [];
+			protected $class_paths = array();
 
 			/**
 			 * Returns the singleton instance of the class.
@@ -130,7 +130,7 @@
 				}
 
 				if ( ! isset( $this->prefixes[ $prefix ] ) ) {
-					$this->prefixes[ $prefix ] = [];
+					$this->prefixes[ $prefix ] = array();
 				}
 
 				$this->prefixes[ $prefix ][] = $root_dir;
@@ -148,7 +148,7 @@
 			 * autoload register.
 			 */
 			public function register_autoloader() {
-				spl_autoload_register( [ $this, 'autoload' ] );
+				spl_autoload_register( array( $this, 'autoload' ) );
 			}
 
 			/**

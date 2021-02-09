@@ -9,8 +9,9 @@ class Tribe__Support__Template_Checker {
 	protected $plugin_views_dir = '';
 	protected $theme_views_dir = '';
 
-	protected $originals = [];
-	protected $overrides = [];
+	protected $originals = array();
+	protected $overrides = array();
+
 
 	/**
 	 * Examine the plugin views (and optionally any theme overrides) and analyse
@@ -175,7 +176,7 @@ class Tribe__Support__Template_Checker {
 	 * @return array
 	 */
 	public function get_versioned_views() {
-		$versioned_views = [];
+		$versioned_views = array();
 
 		foreach ( $this->originals as $key => $version ) {
 			if ( ! empty( $version ) ) {
@@ -195,7 +196,7 @@ class Tribe__Support__Template_Checker {
 	 * @return array
 	 */
 	public function get_views_tagged_this_release() {
-		$currently_tagged_views = [];
+		$currently_tagged_views = array();
 
 		foreach ( $this->get_versioned_views() as $key => $version ) {
 			if ( $version === $this->plugin_version ) {
@@ -225,7 +226,7 @@ class Tribe__Support__Template_Checker {
 	 * @return array
 	 */
 	public function get_versioned_overrides() {
-		$versioned_views = [];
+		$versioned_views = array();
 
 		foreach ( $this->overrides as $key => $version ) {
 			if ( ! empty( $version ) ) {
@@ -251,7 +252,7 @@ class Tribe__Support__Template_Checker {
 	 * @return array
 	 */
 	public function get_outdated_overrides( $include_unknown = false ) {
-		$outdated  = [];
+		$outdated  = array();
 		$originals = $this->get_versioned_views();
 
 		$overrides = $include_unknown

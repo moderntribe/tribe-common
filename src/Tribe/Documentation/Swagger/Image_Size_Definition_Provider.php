@@ -16,28 +16,28 @@ class Tribe__Documentation__Swagger__Image_Size_Definition_Provider
 	 * @return array An array description of a Swagger supported component.
 	 */
 	public function get_documentation() {
-		$documentation = [
+		$documentation = array(
 			'type'       => 'object',
-			'properties' => [
-				'width'     => [
-					'type'        => 'integer',
+			'properties' => array(
+				'width' => array(
+					'type' => 'integer',
 					'description' => __( 'The image width in pixels in the specified size', 'tribe-common' ),
-				],
-				'height'    => [
-					'type'        => 'integer',
+				),
+				'height' => array(
+					'type' => 'integer',
 					'description' => __( 'The image height in pixels in the specified size', 'tribe-common' ),
-				],
-				'mime-type' => [
-					'type'        => 'string',
+				),
+				'mime-type' => array(
+					'type' => 'string',
 					'description' => __( 'The image mime-type', 'tribe-common' ),
-				],
-				'url'       => [
-					'type'        => 'string',
-					'format'      => 'uri',
+				),
+				'url' => array(
+					'type' => 'string',
+					'format' => 'uri',
 					'description' => __( 'The link to the image in the specified size on the site', 'tribe-common' ),
-				],
-			],
-		];
+				),
+			),
+		);
 
 		/**
 		 * Filters the Swagger documentation generated for an image size in the TEC REST API.

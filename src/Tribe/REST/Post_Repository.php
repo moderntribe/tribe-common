@@ -14,11 +14,11 @@ class Tribe__REST__Post_Repository {
 		$full_url = get_attachment_link( $image_id );
 		$file     = get_attached_file( $image_id );
 
-		$data = [
+		$data = array(
 			'url'       => $full_url,
 			'id'        => $image_id,
 			'extension' => pathinfo( $file, PATHINFO_EXTENSION ),
-		];
+		);
 
 		$metadata = wp_get_attachment_metadata( $image_id );
 
@@ -49,26 +49,26 @@ class Tribe__REST__Post_Repository {
 	 */
 	protected function get_date_details( $date ) {
 		if ( empty( $date ) ) {
-			return [
+			return array(
 				'year'    => '',
 				'month'   => '',
 				'day'     => '',
 				'hour'    => '',
 				'minutes' => '',
 				'seconds' => '',
-			];
+			);
 		}
 
 		$time = strtotime( $date );
 
-		return [
+		return array(
 			'year'    => date( 'Y', $time ),
 			'month'   => date( 'm', $time ),
 			'day'     => date( 'd', $time ),
 			'hour'    => date( 'H', $time ),
 			'minutes' => date( 'i', $time ),
 			'seconds' => date( 's', $time ),
-		];
+		);
 	}
 
 	/**
@@ -80,19 +80,15 @@ class Tribe__REST__Post_Repository {
 	 *
 	 * @return array
 	 */
-	protected function format_and_sort_cost_couples( array $cost_couples = [] ) {
+	protected function format_and_sort_cost_couples( array $cost_couples = array() ) {
 		global $wp_locale;
 
-		$cost_values = [];
+		$cost_values = array();
 		foreach ( $cost_couples as $key => $value ) {
-			$value = str_replace(
-				[
-					$wp_locale->number_format['decimal_point'],
-					$wp_locale->number_format['thousands_sep'],
-				],
-				[ '.', '' ],
-				'' . $value
-			);
+			$value = str_replace( array(
+				$wp_locale->number_format['decimal_point'],
+				$wp_locale->number_format['thousands_sep'],
+			), array( '.', '' ), '' . $value );
 			if ( is_numeric( $value ) ) {
 				$cost_values[] = $value;
 			} else {

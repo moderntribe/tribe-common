@@ -7,7 +7,7 @@ class Tribe__Error {
 	 * All the Errors Registered
 	 * @var array
 	 */
-	private $items = [];
+	private $items = array();
 
 	/**
 	 * Static Singleton Holder
@@ -49,9 +49,9 @@ class Tribe__Error {
 	 *
 	 * @return WP_Error
 	 */
-	public function send( $indexes, $context = [], $sprintf = [] ) {
+	public function send( $indexes, $context = array(), $sprintf = array() ) {
 		if ( ! $this->exists( $indexes ) ) {
-			$indexes = [ 'unknown' ];
+			$indexes = array( 'unknown' );
 		}
 
 		// Fetches the Errors
@@ -170,7 +170,7 @@ class Tribe__Error {
 			$variable = $variable[ $index ];
 		}
 
-		$return        = [];
+		$return = array();
 		$was_namespace = is_array( $variable );
 
 		/**

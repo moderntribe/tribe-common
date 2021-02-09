@@ -7,7 +7,7 @@
  *
  * See more documentation about our views templating system.
  *
- * @link http://evnt.is/1aiy
+ * @link http://m.tri.be/1aiy
  *
  * @var array<string> $classes Additional classes to add to the svg icon.
  *
