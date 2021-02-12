@@ -68,6 +68,7 @@
 * Tweak - Add the `tribe_template_common_path` filter to allow controlling the path of the template file provided by common. [FBAR-148]
 * Tweak - Add the `tribe_without_filters` function to run a callback or closure suspending a set of filters and actions. [TEC-3579]
 * Tweak - Added hover and focus colors, update default colors to make them accessible. [FBAR-165]
+* Tweak - Modifications to Tooltip code to prevent enqueuing on all pages unnecessarily.
 * Fix - Prevent `register_rest_route` from throwing notices related to `permission_callback` (props @hanswitteprins)
 * Language - 0 new strings added, 2 updated, 1 fuzzied, and 0 obsoleted
 
@@ -82,6 +83,7 @@
 * Fix - Added IE11 compatibility for the toggles styles using `tribe-common-form-control-toggle` CSS class. [ET-865]
 * Tweak - Improve regular expressions used to parse UTC timezones by removing non-required grouping and characters. [TCMN-68]
 * Language - 0 new strings added, 0 updated, 1 fuzzied, and 0 obsoleted
+
 
 = [4.12.7] 2020-08-24 =
 

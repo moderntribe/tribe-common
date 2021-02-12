@@ -1,6 +1,9 @@
 <?php
 namespace Tribe\Service_Providers;
 
+use \Tribe\Tooltip\View;
+use \Tribe__Main as Common;
+
 /**
  * Class Tribe__Service_Providers__Tooltip
  *
@@ -16,34 +19,25 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 	 * @since 4.9.8
 	 */
 	public function register() {
-		tribe_singleton( 'tooltip.view', '\Tribe\Tooltip\View' );
+		tribe_singleton( 'tooltip.view', View::class );
 
-		$this->hook();
+		$this->register_assets();
 	}
 
 	/**
-	 * Setup hooks for classes.
+	 * Registers the assets for the Tooltip class.
 	 *
-	 * @since 4.9.8
+	 * @since TBD
 	 */
-	private function hook() {
-		add_action( 'tribe_common_loaded', [ $this, 'add_tooltip_assets' ] );
-	}
-
-	/**
-	 * Register assets associated with tooltip
-	 *
-	 * @since 4.9.8
-	 */
-	public function add_tooltip_assets() {
-		$main = \Tribe__Main::instance();
+	public function register_assets() {
+		$main = Common::instance();
 
 		tribe_asset(
 			$main,
 			'tribe-tooltip',
 			'tooltip.css',
 			[ 'tribe-common-skeleton-style' ],
-			[ 'wp_enqueue_scripts', 'admin_enqueue_scripts' ],
+			[],
 			[ 'groups' => 'tribe-tooltip' ]
 		);
 
