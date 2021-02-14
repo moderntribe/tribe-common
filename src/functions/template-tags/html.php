@@ -79,9 +79,9 @@ function tribe_required( $required, $echo = true ) {
 
 		if ( ! $echo ) {
 			return $required_string;
-		} else {
-			echo $required_string;
 		}
+
+		echo $required_string;
 	}
 }
 
@@ -103,9 +103,9 @@ function tribe_required_label( $required, $echo = true ) {
 
 		if ( ! $echo ) {
 			return $required_string;
-		} else {
-			echo $required_string;
 		}
+
+		echo $required_string;
 	}
 }
 
@@ -127,10 +127,81 @@ function tribe_disabled( $disabled, $echo = true ) {
 
 		if ( ! $echo ) {
 			return $disabled_string;
-		} else {
-			echo $disabled_string;
 		}
+
+		echo $disabled_string;
 	}
+}
+
+/**
+ * Adds rel attribute for links.
+ *
+ * @since TBD
+ *
+ * @param string|array $rel  Value(s) for rel attribute.
+ * @param boolean      $echo Whether to echo the string or return it.
+ *
+ * @return string The rel attribute.
+ */
+function tribe_rel( $rel, $echo = true ) {
+	if ( empty( $rel ) ) {
+		return;
+	}
+
+	if ( is_array( $rel )) {
+		$rel = implode( ' ', $rel );
+	}
+
+	$attr = 'rel="' . esc_attr( $rel ) . '"';
+
+	if ( ! $echo ) {
+		return $attr;
+	}
+
+	echo $attr;
+}
+
+/**
+ * Adds target attribute for links.
+ * If target is '_blank' also adds appropriate rel attributes.
+ *
+ * @since TBD
+ *
+ * @param string       $target Value for the target attribute.
+ * @param array|string $rel    Value(s) for rel attribute.
+ * @param boolean      $echo   Whether to echo the string or return it.
+ *
+ * @return string The target attribute. Potentially also the rel attribute.
+ */
+function tribe_target( $target, $rel = [], $echo = true ) {
+	if ( empty( $target ) ) {
+		return;
+	}
+
+	// Format $rel as an array.
+	if ( ! is_array( $rel ) ) {
+		$rel = explode( ' ', $rel );
+	}
+
+	$attr = 'target="' . esc_attr( $target ) . '"';
+
+	// If we're opening in a new window, let's be safe.
+	if ( '_blank' === $target ) {
+		$rel[] = 'noopener';
+		$rel[] = 'nofollow';
+	}
+
+	// If we have $rel, add a rel attribute.
+	if ( ! empty( $rel ) ) {
+		$attr .= ' ' . tribe_rel( $rel, false );
+	}
+
+
+	if ( ! $echo ) {
+		return $attr;
+	}
+
+	echo $attr;
 }
 
 /**
