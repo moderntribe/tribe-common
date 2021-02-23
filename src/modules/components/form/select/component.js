@@ -5,10 +5,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { noop, partial, find } from 'lodash';
 import classnames from 'classnames';
-import {
+const {
 	Dropdown,
 	Dashicon,
-} from '@wordpress/components';
+} = wp.components;
 import { ScrollTo, ScrollArea } from 'react-scroll-to';
 
 /**

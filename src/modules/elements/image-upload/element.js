@@ -9,8 +9,8 @@ import { noop } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { MediaUpload } from '@wordpress/editor';
+const { __ } = i18n;
+const { MediaUpload } = wp.editor;
 
 /**
  * Internal dependencies

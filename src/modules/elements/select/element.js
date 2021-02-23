@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ReactSelect, { components } from 'react-select';
-import { Dashicon } from '@wordpress/components';
+const { Dashicon } = wp.components;
 
 /**
  * Internal dependencies

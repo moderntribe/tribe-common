@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { Modal } from '@wordpress/components';
+const { Modal } = wp.components;
 
 /**
  * Internal dependencies

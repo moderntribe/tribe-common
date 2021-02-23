@@ -11,11 +11,11 @@ import { ScrollTo, ScrollArea } from 'react-scroll-to';
 /**
  * WordPress dependencies
  */
-import {
+const {
 	Dropdown,
 	Dashicon,
-} from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
+} = wp.components;
+const { __ } = i18n;
 
 /**
  * Internal dependencies

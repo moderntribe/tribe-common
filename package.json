@@ -43,8 +43,6 @@
     "@moderntribe/common": "file:src/modules",
     "@nfen/redux-reducer-injector": "0.0.3",
     "@wordpress/a11y": "1.0.3",
-    "@wordpress/data": "^1.1.0",
-    "@wordpress/i18n": "^1.2.2",
     "@wordpress/is-shallow-equal": "^1.1.4",
     "@wordpress/url": "1.0.0",
     "bezier-easing": "^2.1.0",

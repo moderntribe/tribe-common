@@ -8,7 +8,7 @@ import classNames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { Tooltip as WpTooltip } from '@wordpress/components';
+const { Tooltip: WpTooltip } = wp.components;
 
 /**
  * Internal dependencies

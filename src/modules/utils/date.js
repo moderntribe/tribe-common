@@ -7,7 +7,7 @@ import chrono from 'chrono-node';
 /**
  * Wordpress dependencies
  */
-import { __ } from '@wordpress/i18n';
+const { __ } = i18n;
 
 /**
  * Internal dependencies

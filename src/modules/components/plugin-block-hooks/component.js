@@ -4,8 +4,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { map, reduce, includes, isArray } from 'lodash';
-import { InnerBlocks } from '@wordpress/editor';
-import { select } from '@wordpress/data';
+const { InnerBlocks } = wp.editor;
+const { select } = wp.data;
 import './style.pcss';
 
 /**
