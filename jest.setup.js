@@ -14,6 +14,8 @@ global.jQuery = $;
 global.$ = $;
 global.wp = {
 	element: React,
+	editor: {},
+	components: {},
 };
 global.shallow = shallow;
 global.render = render;
