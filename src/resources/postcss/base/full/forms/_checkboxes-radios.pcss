@@ -73,15 +73,15 @@
 		@mixin desktop-body-2;
 
 		&:hover {
-			opacity: var(--opacity-icon-hover);
+			opacity: var(--tec-opacity-icon-hover);
 		}
 	}
 
 	.tribe-common-form-control-checkbox__input,
 	.tribe-common-form-control-radio__input {
 		appearance: none;
-		background-color: var(--form-color-background);
-		border: 1px solid var(--form-color-border-default);
+		background-color: var(--tec-form-color-background);
+		border: 1px solid var(--tec-form-color-border-default);
 		height: 20px;
 		position: relative;
 		width: 20px;
@@ -89,12 +89,12 @@
 		&:active,
 		&:focus,
 		&:hover {
-			border-color: var(--form-color-border-active);
-			opacity: var(--opacity-icon-hover);
+			border-color: var(--tec-form-color-border-active);
+			opacity: var(--tec-opacity-icon-hover);
 		}
 
 		&:checked {
-			background-color: var(--form-color-border-active);
+			background-color: var(--tec-form-color-border-active);
 		}
 	}
 
@@ -125,7 +125,7 @@
 		&:hover {
 
 			+ .tribe-common-form-control-checkbox__label {
-				opacity: var(--opacity-icon-hover);
+				opacity: var(--tec-opacity-icon-hover);
 			}
 		}
 	}
@@ -138,7 +138,7 @@
 		border-radius: 50%;
 
 		&:checked:before {
-			background-color: var(--form-color-background);
+			background-color: var(--tec-form-color-background);
 			border-radius: 50%;
 			content: '';
 			display: block;
@@ -155,7 +155,7 @@
 		&:hover {
 
 			+ .tribe-common-form-control-radio__label {
-				opacity: var(--opacity-icon-hover);
+				opacity: var(--tec-opacity-icon-hover);
 			}
 		}
 	}
@@ -188,8 +188,8 @@
 	#top .main_color & {
 
 		.tribe-common-form-control-checkbox__label {
-			font-weight: var(--font-weight-regular);
-			font-size: var(--font-size-2);
+			font-weight: var(--tec-font-weight-regular);
+			font-size: var(--tec-font-size-2);
 		}
 	}
 
@@ -205,8 +205,8 @@
 	#top .main_color & {
 
 		.tribe-common-form-control-radio__label {
-			font-weight: var(--font-weight-regular);
-			font-size: var(--font-size-2);
+			font-weight: var(--tec-font-weight-regular);
+			font-size: var(--tec-font-size-2);
 		}
 	}
 }
