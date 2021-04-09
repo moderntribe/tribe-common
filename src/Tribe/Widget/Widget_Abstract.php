@@ -134,8 +134,6 @@ abstract class Widget_Abstract extends \WP_Widget implements Widget_Interface {
 			$this->parse_widget_options( $widget_options ),
 			$this->parse_control_options( $control_options )
 		);
-
-		$this->setup();
 	}
 
 	/**

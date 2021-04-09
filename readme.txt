@@ -2,7 +2,15 @@
 
 == Changelog ==
 
-= [4.13.0] 2021-03-25 =
+= [4.13.1] TBD =
+
+
+
+= [4.13.0.1] 2021-04-05 =
+
+* Fix - Reduce overhead of widget setup on every page load by setting up the widgets only as needed. [TEC-3833]
+
+= [4.13.0] 2021-03-29 =
 
 * Feature - JavaScript and Styles can be set to be printed as soon as enqueued, allowing usages like shortcodes to not have jumpy styles.
 * Feature - Include code around administration notices to support recurring notices. [TEC-3809]
