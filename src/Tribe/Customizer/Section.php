@@ -236,8 +236,8 @@ abstract class Tribe__Customizer__Section {
 			$section_id = $this->ID;
 		}
 
-		$setting_value = tribe( 'customizer' )->get_option( [ $section_id, $setting ] );
 		$section       = tribe( 'customizer' )->get_section( $section_id );
+		$setting_value = tribe( 'customizer' )->get_option( [ $section_id, $setting ] );
 
 		return ! empty( $setting_value ) && $section->get_default(  $setting ) !== $setting_value;
 	}

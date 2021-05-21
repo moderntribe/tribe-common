@@ -12,6 +12,14 @@
 		color: var(--tec-color-accent-primary);
 	}
 
+	.tribe-common-c-svgicon__svg-fill {
+		fill: var(--tec-color-icon-active);
+	}
+
+	.tribe-common-c-svgicon__svg-stroke {
+		stroke: var(--tec-color-icon-active);
+	}
+
 	.tribe-common-c-svgicon--featured {
 
 		path {
@@ -20,10 +28,11 @@
 	}
 
 	.tribe-common-c-svgicon--recurring {
+		color: var(--tec-color-recurring-link);
 
 		path {
-			fill: var(--tec-color-icon-active);
-			stroke: var(--tec-color-icon-active);
+			fill: currentColor;
+			stroke: currentColor;
 		}
 	}
 
@@ -44,13 +53,5 @@
 		.tribe-common-c-svgicon__svg-stroke {
 			stroke: currentColor;
 		}
-	}
-
-	.tribe-common-c-svgicon__svg-fill {
-		fill: var(--tec-color-icon-active);
-	}
-
-	.tribe-common-c-svgicon__svg-stroke {
-		stroke: var(--tec-color-icon-active);
 	}
 }
