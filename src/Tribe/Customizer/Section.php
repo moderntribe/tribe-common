@@ -199,7 +199,6 @@ abstract class Tribe__Customizer__Section {
 		}
 
 		$settings = $this->get_content_settings();
-
 		if ( ! empty( $settings ) ) {
 			foreach( $settings as $name => $args ) {
 				$setting_name = $customizer->get_setting_name( $name, $section );
@@ -208,7 +207,6 @@ abstract class Tribe__Customizer__Section {
 		}
 
 		$controls = $this->get_content_controls();
-
 		if ( ! empty( $controls ) ) {
 			foreach( $controls as $name => $args ) {
 				$setting_name = $customizer->get_setting_name( $name, $section );
@@ -329,7 +327,7 @@ abstract class Tribe__Customizer__Section {
 		$reflection = new ReflectionClass( $class_name );
 
 		// Get the Slug without the Base name.
-		$slug = str_replace( $abstract_name . '_', '', $reflection->getName() );
+		$slug = str_replace( $abstract_name . '_', '', $reflection->getShortName() );
 
 		if ( false !== strpos( $slug, '__Customizer__' ) ) {
 			$slug = explode( '__Customizer__', $slug );
