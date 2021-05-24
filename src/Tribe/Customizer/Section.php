@@ -251,12 +251,18 @@ abstract class Tribe__Customizer__Section {
 	 *
 	 * @return string The setting value;
 	 */
-	public function get_option( $setting ) {
+	public function get_option( $setting, $section_id = null ) {
 		if ( empty( $setting ) ) {
 			return '';
 		}
 
-		return tribe( 'customizer' )->get_option( [ $this->ID, $setting ] );
+		if ( empty( $section_id ) ) {
+			$section_id = $this->ID;
+		}
+
+		$setting_value = tribe( 'customizer' )->get_option( [ $section_id, $setting ] );
+
+		return $setting_value;
 	}
 
 	public function to_rgb( $color ) {
@@ -292,7 +298,7 @@ abstract class Tribe__Customizer__Section {
 		if ( empty( $css_template ) ) {
 			return '';
 		}
-
+bdump($css_template);
 		return $css_template;
 	}
 
