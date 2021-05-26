@@ -1,8 +1,8 @@
 <?php
 /**
- * Models a Customizer heading, a Control just in name, it does not control any setting.
+ * Models a Customizer separator, a Control just in name, it does not control any setting.
  *
- * @since   4.12.14
+ * @since   TBD
  *
  * @package Tribe\Customizer\Controls
  */
@@ -11,14 +11,7 @@ namespace Tribe\Customizer\Controls;
 
 use Tribe\Customizer\Control;
 
-/**
- * Class Heading
- *
- * @since   4.12.14
- *
- * @package Tribe\Customizer\Controls
- */
-class Heading extends Control {
+class Separator extends Control {
 
 	/**
 	 * Control's Type.
@@ -27,12 +20,12 @@ class Heading extends Control {
 	 *
 	 * @var string
 	 */
-	public $type = 'heading';
+	public $type = 'separator';
 
 	/**
 	 * Anyone able to set theme options will be able to see the header.
 	 *
-	 * @since 4.12.14
+	 * @since TBD
 	 *
 	 * @var string
 	 */
@@ -41,7 +34,7 @@ class Heading extends Control {
 	/**
 	 * The heading does not control any setting.
 	 *
-	 * @since 4.12.14
+	 * @since TBD
 	 *
 	 * @var array<string,mixed>
 	 */
@@ -50,13 +43,13 @@ class Heading extends Control {
 	/**
 	 * Render the control's content
 	 *
-	 * @since 4.12.14
+	 * @since TBD
 	 */
 	public function render_content() {
 		?>
-		<h4 style="font-size: 20px; font-weight: normal; line-height: 1.75; margin-top: 0; margin-bottom: 0px;">
-			<?php echo esc_html( $this->label ); ?>
-		</h4>
+		<p>
+			<hr>
+		</p>
 		<?php
 	}
 }

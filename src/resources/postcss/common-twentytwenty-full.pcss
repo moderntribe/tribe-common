@@ -1,0 +1,109 @@
+/* -------------------------------------------------------------------------
+ *
+ * Twenty Twenty Full Theme Overrides
+ *
+ * ------------------------------------------------------------------------- */
+
+/* Utilities */
+@import "utilities/_all.pcss";
+
+.tribe-common {
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Reset Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	background-color: var(--color-background);
+	letter-spacing: normal;
+
+	input,
+	textarea {
+		letter-spacing: normal;
+	}
+
+	* {
+		word-break: normal;
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Base Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------
+	 * Form Control: Checkboxes
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentytwenty & {
+
+		.tribe-common-form-control-checkbox__input {
+
+			&:checked:before {
+				margin: 0;
+			}
+		}
+	}
+
+	/* -------------------------------------------
+	 * Form Control: Text
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentytwenty & {
+
+		.tribe-common-form-control-text__input {
+			line-height: inherit;
+		}
+	}
+
+	/* -------------------------------------------
+	 * Form Control: Toggles
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentytwenty & {
+
+		.tribe-common-form-control-toggle__input {
+			top: 0;
+		}
+
+		.tribe-common-form-control-toggle__input:checked::before {
+			content: none;
+		}
+	}
+
+	/* -------------------------------------------
+	 * Button
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentytwenty & {
+
+		button {
+			background-color: transparent;
+			text-transform: inherit;
+
+			&:hover,
+			&:focus {
+				text-decoration: none;
+			}
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Components Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------
+	 * Button: Solid
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentytwenty & {
+
+		.tribe-common-c-btn {
+			background-color: var(--color-accent-primary);
+
+			&:hover,
+			&:focus {
+				background-color: var(--color-accent-primary-hover);
+				color: var(--color-background);
+			}
+		}
+	}
+}

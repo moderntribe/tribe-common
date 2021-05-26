@@ -2,9 +2,12 @@
 
 namespace Tribe;
 
+use Tribe\Tests\Traits\With_Uopz;
 use Tribe__Cache as Cache;
 
 class CacheTest extends \Codeception\TestCase\WPTestCase {
+	use With_Uopz;
+
 	/**
 	 * It should be instantiatable
 	 *
@@ -367,5 +370,138 @@ class CacheTest extends \Codeception\TestCase\WPTestCase {
 		$this->assertFalse( $cache->data_size_over_packet_size( $large_size_value) );
 		$this->assertTrue( $cache->set_transient( 'test', $too_large_size_value ) );
 		$this->assertFalse( $cache->data_size_over_packet_size( $too_large_size_value ) );
+	}
+
+	/**
+	 * It should allow storing too large transients in chunks
+	 *
+	 * @test
+	 */
+	public function should_allow_storing_too_large_transients_in_chunks() {
+		// Set a size for the MySQL max_allowed_packet_size in bytes.
+		add_filter( 'tribe_max_allowed_packet_size', static function () {
+			return 100;
+		} );
+		// Create a value that, in string format, is 4+ times the max allowed packet size.
+		$value               = (object) [ 'value' => str_repeat( 'test', 100 ) ];
+		$set_transient_calls = [];
+		$this->set_fn_return( 'wp_using_ext_object_cache', false );
+		$this->set_fn_return( 'set_transient', static function ( $name, $value ) use ( &$set_transient_calls ) {
+			$set_transient_calls[$name] = $value;
+
+			return true;
+		}, true );
+
+		$cache = $this->make_instance();
+
+		$set = $cache->set_chunkable_transient( '__test__', $value, DAY_IN_SECONDS, [ 'save_post' ] );
+
+		$this->assertTrue( $set );
+		$this->assertCount( 5, array_filter( $set_transient_calls, static function ( $key ) {
+			return strpos( $key, '__test__' ) === 0;
+		}, ARRAY_FILTER_USE_KEY ) );
+		$this->assertSame( serialize( $value ), implode( '', $set_transient_calls ) );
+	}
+
+	/**
+	 * It should redirect chunkable not too large transients to normal transients
+	 *
+	 * @test
+	 */
+	public function should_redirect_chunkable_not_too_large_transients_to_normal_transients() {
+		// Set a size for the MySQL max_allowed_packet_size in bytes.
+		add_filter( 'tribe_max_allowed_packet_size', static function () {
+			return 100;
+		} );
+		// Create a value that, in string format, is below the max allowed packet size.
+		$value               = (object) [ 'value' => 'test' ];
+		$set_transient_calls = [];
+		$this->set_fn_return( 'wp_using_ext_object_cache', false );
+		$this->set_fn_return( 'set_transient', static function ( $name ) use ( &$set_transient_calls ) {
+			$set_transient_calls[] = $name;
+
+			return true;
+		}, true );
+
+		$cache = $this->make_instance();
+
+		$set = $cache->set_chunkable_transient( '__test__', $value, DAY_IN_SECONDS, [ 'save_post' ] );
+
+		$this->assertTrue( $set );
+		$this->assertCount( 1, array_filter( $set_transient_calls, static function ( $key ) {
+			return strpos( $key, '__test__' ) === 0;
+		} ) );
+	}
+
+	/**
+	 * It should delete inserted transients when one chunk insertion fails
+	 *
+	 * @test
+	 */
+	public function should_delete_inserted_transients_when_one_chunk_insertion_fails() {
+		// Set a size for the MySQL max_allowed_packet_size in bytes.
+		add_filter( 'tribe_max_allowed_packet_size', static function () {
+			return 100;
+		} );
+		// Create a value that, in string format, is below the max allowed packet size.
+		$value               = (object) [ 'value' => str_repeat( 'test', 100 ) ];
+		$set_transient_calls = [];
+		$delete_transient_calls = [];
+		$this->set_fn_return( 'wp_using_ext_object_cache', false );
+		$this->set_fn_return( 'set_transient', static function ( $name ) use ( &$set_transient_calls ) {
+			$set_transient_calls[] = $name;
+
+			// On the insertion of the 3rd one return `false`.
+			return count( $set_transient_calls ) <= 2;
+		}, true );
+		$this->set_fn_return( 'delete_transient', static function ( $name ) use ( &$delete_transient_calls ) {
+			$delete_transient_calls[] = $name;
+			return true;
+		}, true );
+
+		$cache = $this->make_instance();
+
+		$set = $cache->set_chunkable_transient( '__test__', $value, DAY_IN_SECONDS, [ 'save_post' ] );
+
+		$this->assertFalse( $set );
+		$this->assertCount( 3, array_filter( $set_transient_calls, static function ( $key ) {
+			return strpos( $key, '__test__' ) === 0;
+		} ) );
+		$this->assertCount( 2, array_filter( $delete_transient_calls, static function ( $key ) {
+			return strpos( $key, '__test__' ) === 0;
+		} ) );
+	}
+
+	/**
+	 * It should return false when getting chunkable in incoherent state
+	 *
+	 * @test
+	 */
+	public function should_return_false_when_getting_chunkable_in_incoherent_state() {
+		// Set a size for the MySQL max_allowed_packet_size in bytes.
+		add_filter( 'tribe_max_allowed_packet_size', static function () {
+			return 100;
+		} );
+		// Create a value that, in string format, is below the max allowed packet size.
+		$value                  = (object) [ 'value' => str_repeat( 'test', 100 ) ];
+		$set_transient_calls    = [];
+		$delete_transient_calls = [];
+		$this->set_fn_return( 'wp_using_ext_object_cache', false );
+		$this->set_fn_return( 'set_transient', static function ( $name, $value ) use ( &$set_transient_calls ) {
+			$set_transient_calls[] = $name;
+
+			// Log the call.
+			return set_transient( $name, $value );
+		}, true );
+
+		$cache = $this->make_instance();
+
+		$this->assertTrue( $cache->set_chunkable_transient( '__test__', $value, DAY_IN_SECONDS, [ 'save_post' ] ) );
+
+		// Delete the middle transient.
+		delete_transient( $set_transient_calls[2] );
+
+		// Then get the chunkable transient; when found broken, it should drop the other chunks.
+		$this->assertFalse( $cache->get_chunkable_transient( '__test__', [ 'save_post' ] ) );
 	}
 }

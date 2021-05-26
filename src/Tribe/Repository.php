@@ -3120,6 +3120,7 @@ abstract class Tribe__Repository
 		$default_post_status = [ 'publish' ];
 		if ( current_user_can( 'read_private_posts' ) ) {
 			$default_post_status[] = 'private';
+			$default_post_status[] = 'draft';
 		}
 
 		$query_args['post_status'] = Tribe__Utils__Array::get( $query_args, 'post_status', $default_post_status );

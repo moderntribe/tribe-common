@@ -1,6 +1,6 @@
 {
   "name": "tribe-common",
-  "version": "4.13.2",
+  "version": "4.13.3",
   "repository": "git@github.com:the-events-calendar/tribe-common.git",
   "_resourcepath": "src/resources",
   "_domainPath": "lang",
@@ -54,7 +54,7 @@
     "google-maps-react": "^1.1.11",
     "he": "^1.2.0",
     "jquery": "3.2.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "moment": "2.19.3",
     "moment-timezone": "0.5.13",
     "mt-a11y-dialog": "^5.1.1",

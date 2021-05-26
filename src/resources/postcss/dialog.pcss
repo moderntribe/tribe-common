@@ -174,10 +174,22 @@ This can include modals, toasters, confirms. alerts.
 	}
 
 	/* -------------------------------------------------------------------------
+	 * Theme Overrides - Twenty Seventeen
+	 * ------------------------------------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		/* dialogs are set to z-index of 1 by default. Twentyseventeen .site-branding (in page header) is set to 3. */
+		div.tribe-dialog {
+			z-index: 5 !important;
+		}
+	}
+
+	/* -------------------------------------------------------------------------
 	 * Theme Overrides - Avada
 	 * ------------------------------------------------------------------------- */
 
-	 .tribe-theme-avada & {
+	.tribe-theme-avada & {
 
 		div.tribe-dialog {
 			z-index: 99999;
@@ -188,7 +200,7 @@ This can include modals, toasters, confirms. alerts.
 	 * Theme Overrides - Divi
 	 * ------------------------------------------------------------------------- */
 
-	 .tribe-theme-divi & {
+	.tribe-theme-divi & {
 
 		div.tribe-dialog {
 			z-index: 99999;

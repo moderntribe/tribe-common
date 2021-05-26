@@ -191,7 +191,7 @@ final class Tribe__Customizer {
 		 * @deprecated
 		 * @since 4.0
 		 *
-		 * @param array $selection_class
+		 * @param array $sections_class
 		 * @param self  $customizer
 		 */
 		$this->sections_class = apply_filters( 'tribe_events_pro_customizer_sections_class', $this->sections_class, $this );
@@ -201,12 +201,31 @@ final class Tribe__Customizer {
 		 *
 		 * @since 4.4
 		 *
-		 * @param array $selection_class
+		 * @param array $sections_class
 		 * @param self  $customizer
 		 */
 		$this->sections_class = apply_filters( 'tribe_customizer_sections_class', $this->sections_class, $this );
 
 		return $this->sections_class;
+	}
+
+	/**
+	 * Returns the section requested by ID.
+	 *
+	 * @since TBD
+	 *
+	 * @param string $id The ID of the desired section.
+	 *
+	 * @return boolean|Tribe__Customizer__Section The requested section or boolean false if not found.
+	 */
+	public function get_section( $id ) {
+		$sections = $this->get_loaded_sections();
+
+		if ( empty( $sections[ $id ] ) ) {
+			return false;
+		}
+
+		return $sections[ $id ];
 	}
 
 	/**
@@ -267,11 +286,14 @@ final class Tribe__Customizer {
 	}
 
 	/**
-	 * Get an option from the database, using index search you can retrieve the full panel, a section or even a setting
+	 * Get an option from the database, using index search you can retrieve the full panel, a section or even a setting.
 	 *
-	 * @param  array $search   Index search, array( 'section_name', 'setting_name' )
-	 * @param  mixed $default  The default, if the requested variable doesn't exits
-	 * @return mixed           The requested option or the default
+	 * @since 4.4
+	 *
+	 * @param  array $search   Index search, array( 'section_name', 'setting_name' ).
+	 * @param  mixed $default  The default, if the requested variable doesn't exits.
+	 *
+	 * @return mixed           The requested option or the default.
 	 */
 	public function get_option( $search = null, $default = null ) {
 		$sections = get_option( $this->ID, $default );
@@ -553,7 +575,7 @@ final class Tribe__Customizer {
 	 * @return void
 	 */
 	public function register( WP_Customize_Manager $customizer ) {
-		// Set the Cutomizer on a class variable
+		// Set the Customizer on a class variable
 		$this->manager = $customizer;
 
 		/**
@@ -707,10 +729,10 @@ final class Tribe__Customizer {
 	 * @param  string $slug    The actual Setting name
 	 * @param  string|WP_Customize_Section $section [description]
 	 *
-	 * @return string          HTML name Attribute name o the setting
+	 * @return string          HTML name Attribute name of the setting.
 	 */
 	public function get_setting_name( $slug, $section = null ) {
-		$name = $this->panel->id;
+		$name = ! empty( $this->panel->id ) ? $this->panel->id : '';
 
 		// If there is a section set append it
 		if ( $section instanceof WP_Customize_Section ) {

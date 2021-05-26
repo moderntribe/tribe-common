@@ -1,6 +1,7 @@
 .DS_Store
 .idea
 node_modules
+.phpstorm*
 
 # Tests - local config files
 codeception.yml

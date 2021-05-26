@@ -1,4 +1,5 @@
 <?php
+
 namespace Tribe\Service_Providers;
 
 /**
@@ -43,7 +44,7 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 			'tribe-tooltip',
 			'tooltip.css',
 			[ 'tribe-common-skeleton-style' ],
-			[ 'wp_enqueue_scripts', 'admin_enqueue_scripts' ],
+			[ 'wp_register_style', 'admin_enqueue_scripts' ],
 			[ 'groups' => 'tribe-tooltip' ]
 		);
 
@@ -52,7 +53,7 @@ class Tooltip extends \tad_DI52_ServiceProvider {
 			'tribe-tooltip-js',
 			'tooltip.js',
 			[ 'jquery', 'tribe-common' ],
-			[],
+			[ 'wp_register_script', 'admin_enqueue_scripts' ],
 			[ 'groups' => 'tribe-tooltip' ]
 		);
 	}

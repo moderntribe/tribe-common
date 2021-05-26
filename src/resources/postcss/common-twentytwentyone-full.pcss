@@ -1,0 +1,83 @@
+/* -------------------------------------------------------------------------
+ *
+ * Twenty Twenty One Full Theme Overrides
+ *
+ * ------------------------------------------------------------------------- */
+
+/* Utilities */
+@import "utilities/_all.pcss";
+
+.tribe-common {
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Reset Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	&.tribe-theme-twentytwentyone {
+
+		.tribe-common .button:not(:hover):not(:active):not(.has-background),
+		.tribe-common button:not(:hover):not(:active):not(.has-background),
+		.tribe-common input[type=submit]:not(:hover):not(:active):not(.has-background),
+		.tribe-common input[type=reset]:not(:hover):not(:active):not(.has-background),
+		.tribe-common .wp-block-search .wp-block-search__button:not(:hover):not(:active):not(.has-background),
+		.tribe-common .wp-block-button .wp-block-button__link:not(:hover):not(:active):not(.has-background),
+		.tribe-common .wp-block-file a.wp-block-file__button:not(:hover):not(:active):not(.has-background) {
+			background-color: initial;
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Base Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------
+	 * Form Control: Toggles
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentytwentyone & {
+
+		.tribe-common-form-control-toggle__input:after {
+			display: none; /* Prevents theme adding a check mark to the toggle */
+		}
+	}
+
+	/* -------------------------------------------
+	 * Typography: Anchor
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentytwentyone &,
+	.tribe-theme-twentytwentyone .entry & {
+
+		a {
+			text-decoration: none;
+		}
+	}
+
+	/* -------------------------------------------
+	 * Button
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentytwentyone & {
+
+		button:not(:hover):not(:active) {
+			background-color: inherit;
+			color: inherit;
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Components Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------
+	 * Button: Solid
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentytwentyone & {
+
+		.tribe-common-c-btn:not(:hover):not(:active) {
+			background-color: var(--color-accent-primary);
+			color: var(--color-background);
+		}
+	}
+}

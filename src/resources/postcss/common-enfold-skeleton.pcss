@@ -1,0 +1,87 @@
+/* -------------------------------------------------------------------------
+ *
+ * Enfold Skeleton Theme Overrides
+ *
+ * ------------------------------------------------------------------------- */
+
+/* Utilities */
+@import "utilities/_all.pcss";
+
+.tribe-common {
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Reset Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		button[disabled] {
+			cursor: default;
+		}
+
+		form,
+		input {
+			margin: 0;
+		}
+	}
+
+	.entry-content-wrapper & {
+
+		li {
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Base Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------
+	 * Form Control: Checkboxes
+	 * ------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		.tribe-common-form-control-checkbox__input {
+			margin: 1px 0 0;
+		}
+	}
+
+	/* -------------------------------------------
+	 * Form Control: Text
+	 * ------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		.tribe-common-form-control-text__input {
+			padding: var(--spacer-2) var(--spacer-6) var(--spacer-2) 0;
+			width: 100%;
+		}
+
+		&.tribe-common--breakpoint-medium .tribe-common-form-control-text__input {
+			padding: var(--spacer-4) var(--spacer-4) var(--spacer-4) var(--spacer-8);
+		}
+	}
+
+	/* -------------------------------------------
+	 * Form Control: Toggles
+	 * ------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		.tribe-common-form-control-toggle__input {
+			display: inline-block;
+			margin: 5px 0;
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Components Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+}

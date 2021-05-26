@@ -1,0 +1,142 @@
+/* -------------------------------------------------------------------------
+ *
+ * Enfold Full Theme Overrides
+ *
+ * ------------------------------------------------------------------------- */
+
+/* Utilities */
+@import "utilities/_all.pcss";
+
+.tribe-common {
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Reset Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		button[disabled] {
+			opacity: 1;
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Base Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------
+	 * Form Control: Checkboxes
+	 * ------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		.tribe-common-form-control-checkbox__label {
+			font-weight: var(--font-weight-regular);
+			font-size: var(--font-size-2);
+		}
+	}
+
+	/* -------------------------------------------
+	 * Form Control: Radios
+	 * ------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		.tribe-common-form-control-radio__label {
+			font-weight: var(--font-weight-regular);
+			font-size: var(--font-size-2);
+		}
+	}
+
+	/* -------------------------------------------
+	 * Form Control: Sliders
+	 * ------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		.tribe-common-form-control-slider__label {
+			font-weight: var(--font-weight-regular);
+			font-size: var(--font-size-1);
+		}
+	}
+
+	/* -------------------------------------------
+	 * Form Control: Text
+	 * ------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		.tribe-common-form-control-text__input {
+			@mixin desktop-body-1;
+
+			background: var(--color-background);
+			border: 0;
+			border-bottom: 1px solid var(--color-border-default);
+
+			&:focus {
+				border-bottom-color: var(--color-border-active);
+				box-shadow: none;
+			}
+		}
+
+		&.tribe-common--breakpoint-medium .tribe-common-form-control-text__input {
+			@mixin desktop-body-2;
+
+			border: 0;
+		}
+	}
+
+	/* -------------------------------------------
+	 * Form Control: Toggles
+	 * ------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		.tribe-common-form-control-toggle__label {
+			font-weight: var(--font-weight-regular);
+			font-size: var(--font-size-1);
+		}
+	}
+
+	/* -------------------------------------------
+	 * Typography: Anchors
+	 * ------------------------------------------- */
+
+	.tribe-theme-enfold &,
+	.main_color .sidebar & {
+
+		a {
+			color: var(--color-text-primary);
+
+			&:hover,
+			&:focus,
+			&:active,
+			&:visited {
+				color: var(--color-text-primary);
+			}
+		}
+	}
+
+	/* -------------------------------------------
+	 * Tables
+	 * ------------------------------------------- */
+
+	.tribe-theme-enfold & {
+
+		th {
+			letter-spacing: 0;
+			text-transform: none;
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Components Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+}

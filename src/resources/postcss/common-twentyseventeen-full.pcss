@@ -1,0 +1,211 @@
+/* -------------------------------------------------------------------------
+ *
+ * Twenty Seventeen Full Theme Overrides
+ *
+ * ------------------------------------------------------------------------- */
+
+/* Utilities */
+@import "utilities/_all.pcss";
+
+.tribe-common {
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Reset Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		h5 {
+			letter-spacing: normal;
+			text-transform: none;
+		}
+
+		input[type="text"] {
+			border-radius: 0;
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Base Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------
+	 * Form Control: Text
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-form-control-text__input {
+			color: var(--color-text-primary);
+		}
+	}
+
+	/* -------------------------------------------
+	 * Typography: Anchor
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen &,
+	.tribe-theme-twentyseventeen .site-footer .widget-area &,
+	.site-footer .widget-area & {
+
+		a {
+			box-shadow: none;
+
+			&:hover,
+			&:focus {
+				box-shadow: none;
+				color: var(--color-text-primary);
+			}
+		}
+	}
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-anchor-alt,
+		.tribe-common-anchor-thin-alt {
+
+			&:hover,
+			&:focus {
+				color: var(--color-accent-primary);
+			}
+		}
+	}
+
+	.tribe-theme-twentyseventeen .site-footer .widget-area &,
+	.site-footer .widget-area & {
+
+		.tribe-common-anchor,
+		.tribe-common-anchor-thin {
+			transition: var(--transition-border-color);
+		}
+
+		.tribe-common-anchor-alt,
+		.tribe-common-anchor-thin-alt {
+			transition: var(--transition-color);
+		}
+	}
+
+	/* -------------------------------------------
+	 * Typography: CTA
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-cta--alt,
+		.tribe-common-cta--thin-alt {
+
+			&:hover,
+			&:focus {
+				color: var(--color-accent-primary);
+			}
+		}
+	}
+
+	/* -------------------------------------------
+	 * Button
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		button {
+
+			&:hover,
+			&:focus {
+				background-color: transparent;
+			}
+		}
+	}
+
+	/* -------------------------------------------------------------------------
+	 * : : : : :  Components Theme Overrides  : : : : :
+	 * ------------------------------------------------------------------------- */
+
+	/* -------------------------------------------
+	 * Button: Border
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-c-btn-border {
+
+			&:hover,
+			&:focus {
+				background-color: var(--color-accent-primary);
+			}
+		}
+	}
+
+	/* -------------------------------------------
+	 * Button: Border Secondary
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-c-btn-border--secondary {
+
+			&:hover,
+			&:focus {
+				background-color: var(--color-accent-secondary);
+			}
+		}
+	}
+
+	/* -------------------------------------------
+	 * Button: Border Alt
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-c-btn-border--alt {
+
+			&:hover,
+			&:focus {
+				background-color: var(--color-background);
+			}
+		}
+	}
+
+	/* -------------------------------------------
+	 * Button: Border Small
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-c-btn-border-small {
+
+			&:hover {
+				background-color: var(--color-background);
+			}
+		}
+	}
+
+	/* -------------------------------------------
+	 * Button: Icon Border
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-c-btn-icon--border {
+
+			&:hover {
+				background-color: var(--color-background);
+			}
+		}
+	}
+
+	/* -------------------------------------------
+	 * Button: Solid
+	 * ------------------------------------------- */
+
+	.tribe-theme-twentyseventeen & {
+
+		.tribe-common-c-btn {
+
+			&:hover,
+			&:focus {
+				background-color: var(--color-accent-primary-hover);
+				color: var(--color-background);
+			}
+		}
+	}
+}
