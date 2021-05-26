@@ -127,6 +127,9 @@ class Tribe__Rewrite {
 		$this->rewrite = $wp_rewrite;
 		$this->bases   = $this->get_bases( 'regex' );
 
+		// Since we are setting up fresh rules, we need to clear the cached rewrite rule.
+		tribe_unset_var( static::class . '::get_handled_rewrite_rules' );
+
 		return $this;
 	}
 

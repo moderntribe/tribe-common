@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the Tribe Common package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Tribe Common 4.13.0\n"
+"Project-Id-Version: Tribe Common 4.13.3\n"
 "Report-Msgid-Bugs-To: http://m.tri.be/191x\n"
-"POT-Creation-Date: 2021-03-19 04:39:34+00:00\n"
+"POT-Creation-Date: 2021-05-26 06:14:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2021-03-19 04:39\n"
+"PO-Revision-Date: 2021-05-26 06:14\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 
@@ -40,9 +40,9 @@ msgstr ""
 msgid "Press \"Cmd + C\" to copy"
 msgstr ""
 
-#. #-#-#-#-#  tribe-common.pot (Tribe Common 4.13.0)  #-#-#-#-#
+#. #-#-#-#-#  tribe-common.pot (Tribe Common 4.13.3)  #-#-#-#-#
 #. Author of the plugin/theme
-#: src/Tribe/Admin/Help_Page.php:79 src/Tribe/Customizer.php:625
+#: src/Tribe/Admin/Help_Page.php:79 src/Tribe/Customizer.php:647
 #: src/Tribe/Plugins_API.php:25
 msgid "The Events Calendar"
 msgstr ""
@@ -406,7 +406,7 @@ msgstr ""
 msgid "Rate %1$sEvent Tickets%2$s %3$s"
 msgstr ""
 
-#: src/Tribe/Customizer.php:626
+#: src/Tribe/Customizer.php:648
 msgid ""
 "Use the following panel of your customizer to change the styling of your "
 "Calendar and Event pages."
@@ -2652,7 +2652,7 @@ msgstr ""
 msgid "Select a Country:"
 msgstr ""
 
-#: src/Tribe/Widget/Widget_Abstract.php:185
+#: src/Tribe/Widget/Widget_Abstract.php:183
 msgid "Widget"
 msgstr ""
 
