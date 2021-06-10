@@ -1,5 +1,9 @@
 == Changelog ==
 
+= [4.13.6] TBD =
+
+
+
 = [4.13.4] 2021-06-09 =
 
 * Tweak - When using The Events Calendar and Event Tickets split the admin footer rating link 50/50. [ET-1120]
