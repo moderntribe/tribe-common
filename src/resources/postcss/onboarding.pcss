@@ -1,0 +1,158 @@
+/*
+ * Onboarding CSS (Tours & Hints)
+ * -------------------------------------------------------------
+ * This file includes styles for the Onboarding Tours and Hints.
+ * These styles go on top of the ones from Intro.js
+ */
+
+/* Utilities */
+@import "utilities/_all.pcss";
+
+.introjs-tooltipbuttons {
+	border-top: none;
+}
+
+.introjs-bullets {
+	ul {
+		li a.active {
+			background-color: var(--color-accent-primary);
+		}
+
+		li:only-child {
+			display: none;
+		}
+	}
+}
+
+.introjs-hint-pulse {
+	background-color: transparent;
+}
+
+.introjs-hint-pulse,
+.introjs-hint:hover > .introjs-hint-pulse,
+.introjs-hint-dot {
+	border-color: var(--color-accent-primary);
+}
+
+.introjs-hintReference .tribe-onboarding__tooltip .introjs-tooltiptext p {
+	font-size: 14px;
+	margin-top: 0;
+}
+
+.introjs-hint:focus {
+	box-shadow: none;
+}
+
+.tribe-onboarding__tooltip {
+
+	.introjs-tooltipReferenceLayer:not(.introjs-hintReference) & {
+		box-sizing: border-box;
+		min-width: 430px;
+		max-width: 450px;
+	}
+
+	.introjs-button {
+		border: 0;
+		text-shadow: none;
+
+		&:focus {
+			box-shadow: none;
+		}
+	}
+
+	.introjs-prevbutton {
+		color: #c9c9c9;
+
+		&,
+		&:hover {
+			background-color: transparent;
+			border-color: transparent;
+		}
+	}
+
+	.introjs-nextbutton {
+		background-color: #f7f6f6;
+	}
+
+	.introjs-donebutton {
+		background-color: var(--color-accent-primary);
+		color: var(--color-background);
+	}
+}
+
+.tribe-onboarding__tooltip--large {
+	.introjs-tooltipReferenceLayer:not(.introjs-hintReference) & {
+
+		min-width: 630px;
+		max-width: 100%;
+	}
+}
+
+.tribe-onboarding__tooltip--squared {
+	border-radius: 1px;
+}
+
+.tribe-onboarding__tooltip--rounded {
+	border-radius: 5px;
+}
+
+.tribe-onboarding__tooltip--dark {
+	h1,
+	* {
+		color: var(--color-background);
+	}
+}
+
+.tribe-onboarding__tooltip--no-bullets {
+	.introjs-bullets {
+		display: none;
+	}
+}
+
+.tribe-onboarding__tooltip--content-centered {
+	.introjs-tooltip-title {
+		float: initial;
+	}
+
+	.introjs-tooltip-title,
+	.introjs-tooltiptext {
+		text-align: center;
+	}
+}
+
+.tribe-onboarding__tooltip--title-large {
+	.introjs-tooltip-title {
+		font-size: 20px;
+	}
+}
+
+.tribe-onboarding__tooltip-only-step--button-centered,
+.tribe-onboarding__tooltip--button-centered {
+	.introjs-tooltipbuttons {
+		text-align: center;
+	}
+
+	.introjs-nextbutton {
+		float: initial;
+	}
+}
+
+.tribe-onboarding__tooltip--button-large {
+	.introjs-button {
+		font-size: 16px;
+		padding: 14px 28px;
+	}
+}
+
+.tribe-onboarding__tooltip--button-rounded {
+	.introjs-button {
+		border-radius: 28px;
+	}
+}
+
+.tribe-onboarding__tooltip--button-dark-skin {
+	.introjs-button {
+		color: var(--color-text-primary);
+		background-color: var(--color-background);
+	}
+}
