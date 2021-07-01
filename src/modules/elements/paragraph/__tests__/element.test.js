@@ -1,4 +1,11 @@
+/**
+ * External dependencies
+ */
 import React from 'react';
+
+/**
+ * Internal dependencies
+ */
 
 import Paragraph, { SIZES } from '../element';
 

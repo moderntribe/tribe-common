@@ -25,7 +25,9 @@ describe( 'Tests for proptypes utils', () => {
 			chainedValidator( props, 'time', 'component' );
 
 			expect( chainedValidator ).toHaveReturned();
-			expect( chainedValidator ).toHaveReturnedWith( Error( 'The prop `time` is marked as required in `component`, but its value is `undefined`.' ) );
+			expect( chainedValidator ).toHaveReturnedWith( Error(
+				'The prop `time` is marked as required in `component`, but its value is `undefined`.',
+			) );
 		} );
 
 		it( 'should return an error when prop is null and is required', () => {
@@ -36,10 +38,12 @@ describe( 'Tests for proptypes utils', () => {
 			chainedValidator( props, 'time', 'component' );
 
 			expect( chainedValidator ).toHaveReturned();
-			expect( chainedValidator ).toHaveReturnedWith( Error( 'The prop `time` is marked as required in `component`, but its value is `null`.' ) );
+			expect( chainedValidator ).toHaveReturnedWith( Error(
+				'The prop `time` is marked as required in `component`, but its value is `null`.',
+			) );
 		} );
 
-		it( 'should call the validator when prop is provided, not undefined or null, and is not required', () => {
+		it( 'should call the validator when prop is provided, not undefined or null, and is not required', () => { // eslint-disable-line max-len
 			const props = {
 				time: '15:34',
 			};
@@ -51,12 +55,14 @@ describe( 'Tests for proptypes utils', () => {
 			expect( validator ).toHaveBeenCalledTimes( 1 );
 		} );
 
-		it( 'should call the validator when prop is provided, not undefined or null, and is required', () => {
+		it( 'should call the validator when prop is provided, not undefined or null, and is required', () => { // eslint-disable-line max-len
 			const props = {
 				time: '15:34',
 			};
 			const validator = jest.fn( noop );
-			const chainedValidator = jest.fn( proptypes.createChainableValidator( validator ).isRequired );
+			const chainedValidator = jest.fn(
+				proptypes.createChainableValidator( validator ).isRequired,
+			);
 			chainedValidator( props, 'time', 'component' );
 
 			expect( validator ).toHaveBeenCalled();
@@ -106,7 +112,9 @@ describe( 'Tests for proptypes utils', () => {
 			timeFormat();
 
 			expect( timeFormat ).toHaveReturned();
-			expect( timeFormat ).toHaveReturnedWith( Error( 'Invalid prop `time` of type `boolean` supplied to `component`, expected `string`.' ) );
+			expect( timeFormat ).toHaveReturnedWith( Error(
+				'Invalid prop `time` of type `boolean` supplied to `component`, expected `string`.',
+			) );
 		} );
 
 		it( 'should return an error when not provided proper time format', () => {
@@ -117,7 +125,9 @@ describe( 'Tests for proptypes utils', () => {
 			timeFormat();
 
 			expect( timeFormat ).toHaveReturned();
-			expect( timeFormat ).toHaveReturnedWith( Error( 'Invalid prop `time` format supplied to `component`, expected `hh:mm`.' ) );
+			expect( timeFormat ).toHaveReturnedWith( Error(
+				'Invalid prop `time` format supplied to `component`, expected `hh:mm`.',
+			) );
 		} );
 	} );
 
@@ -125,7 +135,7 @@ describe( 'Tests for proptypes utils', () => {
 		test( 'valid prop types', () => {
 			const props = {
 				name: null,
-			}
+			};
 			const format = jest.fn( () => proptypes.nullType( props, 'name', 'Test Type' ) );
 			format();
 			expect( format ).toHaveReturned();
@@ -135,11 +145,13 @@ describe( 'Tests for proptypes utils', () => {
 		test( 'invalid prop types', () => {
 			const props = {
 				name: 'Modern Tribe',
-			}
+			};
 			const format = jest.fn( () => proptypes.nullType( props, 'name', 'Test Type' ) );
 			format();
 			expect( format ).toHaveReturned();
-			expect( format ).toHaveReturnedWith( Error( 'Invalid prop: `name` supplied to `Test Type`, expect null.') );
+			expect( format ).toHaveReturnedWith(
+				Error( 'Invalid prop: `name` supplied to `Test Type`, expect null.' ),
+			);
 		} );
 	} );
 } );

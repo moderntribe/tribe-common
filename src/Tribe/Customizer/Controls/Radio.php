@@ -62,10 +62,7 @@ class Radio extends Control {
 					<?php checked( $this->value(), $value ); ?>
 					/>
 				<label for="<?php echo esc_attr( $input_id . '-radio-' . $value ); ?>">
-					<?php
-					// intentionally not escaped - can contain HTML.
-					echo wp_kses_post( $label );
-					?>
+					<?php echo wp_kses_post( $label ); ?>
 				</label>
 			</span>
 		<?php endforeach; ?>

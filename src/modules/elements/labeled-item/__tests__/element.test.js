@@ -32,7 +32,7 @@ describe( 'Labeled Item Element', () => {
 				forId="test-id"
 			>
 				Test
-			</LabeledItem>
+			</LabeledItem>,
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );

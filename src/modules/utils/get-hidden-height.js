@@ -11,7 +11,7 @@ const getHiddenHeight = ( el ) => {
 	element.style.height = 'auto';
 	element.style.maxHeight = 'none';
 	element.style.position = 'fixed';
-	element.style.width = `${width}px`;
+	element.style.width = `${ width }px`;
 
 	const tHeight = element.offsetHeight;
 

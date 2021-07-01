@@ -19,8 +19,13 @@ $svg_classes = [ 'tribe-common-c-svgicon', 'tribe-common-c-svgicon--hybrid' ];
 if ( ! empty( $classes ) ) {
 	$svg_classes = array_merge( $svg_classes, $classes );
 }
+
+if ( empty( $icon_title ) ) {
+	$icon_title = __( 'Hybrid', 'tribe-common' );
+}
 ?>
 <svg <?php tribe_classes( $svg_classes ); ?> viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<title><?php echo esc_html( $icon_title ) ?></title>
 	<circle cx="3.661" cy="9.515" r="2.121" transform="rotate(-45 3.661 9.515)" stroke="#0F0F30" stroke-width="1.103"/>
 	<circle cx="7.54" cy="3.515" r="2.121" transform="rotate(-45 7.54 3.515)" stroke="#0F0F30" stroke-width="1.103"/>
 	<path d="M4.54 7.929l1.964-2.828" stroke="#0F0F30"/>

@@ -101,18 +101,23 @@ describe( 'Tests for date.js', () => {
 	describe( 'toNaturalLanguage', () => {
 		it( 'Should return empty string when non parsed', () => {
 			const defaultDetail = { month: '', day: '', year: '', time: '' };
-			expect( toNaturalLanguage( {} ) ).toEqual( { moment: null, text: '', detail: defaultDetail, isValid: false } );
+			expect( toNaturalLanguage( {} ) ).toEqual( {
+				moment: null,
+				text: '',
+				detail: defaultDetail,
+				isValid: false,
+			} );
 			expect( toNaturalLanguage( { date: undefined } ) ).toEqual( {
 				moment: undefined,
 				text: '',
 				detail: defaultDetail,
-				isValid: false
+				isValid: false,
 			} );
 			expect( toNaturalLanguage( { date: '' } ) ).toEqual( {
 				moment: '',
 				text: '',
 				detail: defaultDetail,
-				isValid: false
+				isValid: false,
 			} );
 		} );
 
@@ -182,8 +187,10 @@ describe( 'Tests for date.js', () => {
 		test( 'Valid dates', () => {
 			const momentDate = moment( '12-25-1995', 'MM-DD-YYYY' );
 			expect( labelToDate( momentDate ) )
-				.toEqual( { start: momentUtil.toDateTime( momentDate ), end: momentUtil.toDateTime( momentDate ) } );
+				.toEqual( {
+					start: momentUtil.toDateTime( momentDate ),
+					end: momentUtil.toDateTime( momentDate ),
+				} );
 		} );
 	} );
-
 } );

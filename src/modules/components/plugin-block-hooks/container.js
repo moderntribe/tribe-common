@@ -11,7 +11,7 @@ import { selectors } from '@moderntribe/common/data/plugins';
 import { withStore } from '@moderntribe/common/hoc';
 import PluginBlockHooks from './component';
 
-const mapStateToProps = ( state, ownProps ) => ( {
+const mapStateToProps = ( state ) => ( {
 	plugins: selectors.getPlugins( state ),
 } );
 

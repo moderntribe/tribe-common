@@ -43,18 +43,18 @@ class ModalButton extends PureComponent {
 		this.props.isOpen === undefined && this.setState( { isOpen: true } );
 	};
 
-	onRequestClose = (e) => {
-		this.onClose(e);
+	onRequestClose = ( e ) => {
+		this.onClose( e );
 		this.props.isOpen === undefined && this.setState( { isOpen: false } );
 	}
 
 	onOpen = () => this.props.onOpen && this.props.onOpen();
 
-	onClose = (e) => this.props.onClose && this.props.onClose(e);
+	onClose = ( e ) => this.props.onClose && this.props.onClose( e );
 
-	preventClick = (e) => e.stopPropagation();
+	preventClick = ( e ) => e.stopPropagation();
 
-	preventBlur = (e) => e.stopPropagation();
+	preventBlur = ( e ) => e.stopPropagation();
 
 	renderModal = () => {
 		const {

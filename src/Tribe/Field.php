@@ -231,7 +231,7 @@ if ( ! class_exists( 'Tribe__Field' ) ) {
 				} else {
 
 					// fail, log the error
-					Tribe__Main::debug( esc_html__( 'Invalid field type specified', 'tribe-common' ), $this->type, 'notice' );
+					Tribe__Debug::debug( esc_html__( 'Invalid field type specified', 'tribe-common' ), $this->type, 'notice' );
 
 				}
 			}

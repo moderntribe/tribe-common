@@ -100,7 +100,7 @@ describe( 'ImageUpload', () => {
 				image={ image }
 				onSelect={ onSelect }
 				onRemove={ onRemove }
-			/>
+			/>,
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
@@ -112,7 +112,7 @@ describe( 'ImageUpload', () => {
 				onSelect={ onSelect }
 				onRemove={ onRemove }
 				title="Modern Tribe"
-			/>
+			/>,
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
@@ -121,10 +121,10 @@ describe( 'ImageUpload', () => {
 		const component = renderer.create(
 			<ImageUpload
 				image={ image }
-				onSelect={ onSelect}
+				onSelect={ onSelect }
 				onRemove={ onRemove }
 				description="The Next Generation of Digital Agency"
-			/>
+			/>,
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
@@ -136,7 +136,7 @@ describe( 'ImageUpload', () => {
 				onSelect={ onSelect }
 				onRemove={ onRemove }
 				className="test-class"
-			/>
+			/>,
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
@@ -152,7 +152,7 @@ describe( 'ImageUpload', () => {
 				image={ image }
 				onSelect={ onSelect }
 				onRemove={ onRemove }
-			/>
+			/>,
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
@@ -163,7 +163,7 @@ describe( 'ImageUpload', () => {
 				image={ image }
 				onSelect={ onSelect }
 				onRemove={ onRemove }
-			/>
+			/>,
 		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );

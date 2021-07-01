@@ -11,7 +11,6 @@ import { store } from '@moderntribe/common/store';
 const getStore = () => store;
 
 export default ( additionalProps = {} ) => ( WrappedComponent ) => {
-
 	const WithStore = ( props ) => {
 		const extraProps = {
 			...additionalProps,
@@ -22,5 +21,4 @@ export default ( additionalProps = {} ) => ( WrappedComponent ) => {
 	};
 
 	return WithStore;
-
 };

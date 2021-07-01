@@ -98,7 +98,6 @@
 		}
 	}
 
-
 	/* -----------------------------------------------------------------------------
 	 * Form Control: Checkboxes
 	 * ----------------------------------------------------------------------------- */
@@ -167,10 +166,24 @@
 	 * ----------------------------------------------------------------------------- */
 
 	/* -----------------------------------------------------------------------------
+	 * Theme Overrides - Enfold
+	 * ----------------------------------------------------------------------------- */
+
+	#top.tribe-theme-enfold &,
+	#top .main_color & {
+
+		.tribe-common-form-control-checkbox__label,
+		.tribe-common-form-control-radio__label {
+			font-size: var(--font-size-2);
+			font-weight: var(--font-weight-regular);
+		}
+	}
+
+	/* -----------------------------------------------------------------------------
 	 * Form Control: Checkboxes Theme Overrides
 	 * ----------------------------------------------------------------------------- */
 
-	 .tribe-theme-twentytwenty & {
+	.tribe-theme-twentytwenty & {
 
 		.tribe-common-form-control-checkbox__input {
 
@@ -178,35 +191,9 @@
 				margin: 0;
 			}
 		}
-	 }
-
-	/* -----------------------------------------------------------------------------
-	 * Theme Overrides - Enfold
-	 * ----------------------------------------------------------------------------- */
-
-	#top.tribe-theme-enfold &,
-	#top .main_color & {
-
-		.tribe-common-form-control-checkbox__label {
-			font-weight: var(--font-weight-regular);
-			font-size: var(--font-size-2);
-		}
 	}
 
 	/* -----------------------------------------------------------------------------
 	 * Form Control: Radios Theme Overrides
 	 * ----------------------------------------------------------------------------- */
-
-	/* -----------------------------------------------------------------------------
-	 * Theme Overrides - Enfold
-	 * ----------------------------------------------------------------------------- */
-
-	#top.tribe-theme-enfold &,
-	#top .main_color & {
-
-		.tribe-common-form-control-radio__label {
-			font-weight: var(--font-weight-regular);
-			font-size: var(--font-size-2);
-		}
-	}
 }

@@ -45,7 +45,7 @@ export const replaceWithObject = ( str = '', pairs = {} ) => {
  * Extract the words from a string into an array of words removing all the empty spaces.
  *
  * @param {string} text The initial text
- * @returns {array} Return an array with the words
+ * @returns {Array} Return an array with the words
  */
 export const getWords = ( text = '' ) => {
 	if ( ! isString( text ) ) {
@@ -59,19 +59,20 @@ export const getWords = ( text = '' ) => {
  * separators except the last is different from the rest, and if there are only 2 words it only uses
  * the last separator instead
  *
- * @param {array} words The list of words to join
- * @param {string} startSeparator the separator applied if there are more than 2 words between all the words except the last one
+ * @param {Array} words The list of words to join
+ * @param {string} startSeparator the separator applied if there are more than 2 words between all
+ *                                the words except the last one
  * @param {string} endSeparator separator applied between the last words
  * @returns {string} return a string with custom separators between words
  */
 export const wordsAsList = ( words, startSeparator = ', ', endSeparator = ' & ' ) => {
 	if ( words.length <= 1 ) {
 		return words.join( '' );
-	} else {
-		const start = words.slice( 0, words.length - 1 ).join( startSeparator );
-		const last = words[ words.length - 1 ];
-		return `${ start }${ endSeparator }${ last }`;
 	}
+
+	const start = words.slice( 0, words.length - 1 ).join( startSeparator );
+	const last = words[ words.length - 1 ];
+	return `${ start }${ endSeparator }${ last }`;
 };
 
 /**
@@ -95,7 +96,6 @@ export const normalize = ( text = '' ) => {
  * Remove invalid characters from a string that aren't consider as valid for a block name.
  *
  * @since 4.8
- *
  * @param {string} text The text to be formatted as block name
  * @returns {string} The formatted text
  */
@@ -105,5 +105,5 @@ export const toBlockName = ( text = '' ) => {
 	}
 
 	// Remove any non numeric, a-z or - value
-	return text.replace(/[^a-zA-Z0-9-]/g, '' );
-}
+	return text.replace( /[^a-zA-Z0-9-]/g, '' );
+};

@@ -4,7 +4,6 @@ tribe.dialogs = tribe.dialogs || {};
 ( function( $, obj ) {
 	'use strict';
 
-	var $document = $( document );
 	obj.dialogs = obj.dialogs || [];
 	obj.events = obj.events || {};
 

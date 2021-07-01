@@ -17,22 +17,22 @@ const Accordion = ( {
 	rows,
 } ) => (
 	rows.length
-	? (
-		<div
-			aria-multiselectable="true"
-			className={ classNames(
-				'tribe-editor__accordion',
-				className,
-			) }
-			role="tablist"
-			{ ...containerAttrs }
-		>
-			{ rows.map( ( row, index ) => (
-				<Row key={ index } { ...row } />
-			) ) }
-		</div>
-	)
-	: null
+		? (
+			<div
+				aria-multiselectable="true"
+				className={ classNames(
+					'tribe-editor__accordion',
+					className,
+				) }
+				role="tablist"
+				{ ...containerAttrs }
+			>
+				{ rows.map( ( row, index ) => (
+					<Row key={ index } { ...row } />
+				) ) }
+			</div>
+		)
+		: null
 );
 
 Accordion.defaultProps = {

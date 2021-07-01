@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable inclusive-language/use-inclusive-words */
 /**
  * External dependencies
  */
@@ -22,7 +22,7 @@ export default ( WrappedComponent ) => {
 	 * @extends {PureComponent}
 	 */
 	class WithBlockCloser extends PureComponent {
-		static displayName = `WithBlockCloser( ${ WrappedComponent.displayName || WrappedComponent.name || 'Component ' }`
+		static displayName = `WithBlockCloser( ${ WrappedComponent.displayName || WrappedComponent.name || 'Component ' }` // eslint-disable-line max-len
 
 		static propTypes = {
 			onClose: PropTypes.func,
@@ -101,9 +101,15 @@ export default ( WrappedComponent ) => {
 
 		_addEventListeners() {
 			// Intercept custom events bubbled in block or blacklisted nodes
-			this.node.addEventListener( this._eventNamespace, this._interceptClickProxyEvent );
+			this.node.addEventListener(
+				this._eventNamespace,
+				this._interceptClickProxyEvent,
+			);
 			this.blacklistedNodes.forEach(
-				node => node.addEventListener( this._eventNamespace, this._interceptClickProxyEvent )
+				node => node.addEventListener(
+					this._eventNamespace,
+					this._interceptClickProxyEvent,
+				),
 			);
 
 			// Wait to receive custom events, if not intercepted, then go to click handler
@@ -116,9 +122,15 @@ export default ( WrappedComponent ) => {
 		}
 
 		_removeEventListeners() {
-			this.node.removeEventListener( this._eventNamespace, this._interceptClickProxyEvent );
+			this.node.removeEventListener(
+				this._eventNamespace,
+				this._interceptClickProxyEvent,
+			);
 			this.blacklistedNodes.forEach(
-				node => node.removeEventListener( this._eventNamespace, this._interceptClickProxyEvent )
+				node => node.removeEventListener(
+					this._eventNamespace,
+					this._interceptClickProxyEvent,
+				),
 			);
 
 			document.removeEventListener( 'keydown', this.handleKeyDown );
@@ -131,7 +143,10 @@ export default ( WrappedComponent ) => {
 
 			return (
 				<div ref={ this.nodeRef }>
-					<WrappedComponent { ...this.props } { ...additionalProps } />
+					<WrappedComponent
+						{ ...this.props }
+						{ ...additionalProps }
+					/>
 				</div>
 			);
 		}

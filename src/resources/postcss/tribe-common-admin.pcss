@@ -2377,3 +2377,57 @@ body.tribe-welcome #fs_connect {
 		}
 	}
 }
+
+/* -- CSS Switch based off https://codepen.io/mallendeo/pen/eLIiG  -- */
+input[type="checkbox"].tribe-common-switch__input {
+	display: none;
+
+	+ .tribe-common-switch__label {
+		background: #fff;
+		border: 1px solid #aaa;
+		border-radius: 4px;
+		box-sizing: border-box;
+		cursor: pointer;
+		display: block;
+		height: 18px;
+		outline: 0;
+		padding: 3px;
+		position: relative;
+		transition: all 0.2s ease;
+		user-select: none;
+		width: 27px;
+
+		&:after,
+		&:before {
+			content: "";
+			display: block;
+			height: 10px;
+			position: relative;
+			width: 10px;
+		}
+
+		&:after {
+			background: #878787;
+			border-radius: 2px;
+			content: "";
+			left: 0;
+			transition: all 0.2s ease;
+		}
+
+		&:before {
+			display: none;
+		}
+
+		&::selection {
+			background: none;
+		}
+	}
+
+	&:checked + .tribe-common-switch__label {
+
+		&:after {
+			background: #2e709d;
+			left: 50%;
+		}
+	}
+}

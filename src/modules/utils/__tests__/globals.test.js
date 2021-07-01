@@ -13,7 +13,6 @@ import {
 } from '@moderntribe/common/utils/globals';
 
 describe( 'Tests for globals.js', () => {
-
 	beforeAll( () => {
 		window.tribe_editor_config = {
 			common: {

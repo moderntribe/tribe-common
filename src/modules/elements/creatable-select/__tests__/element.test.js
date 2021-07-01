@@ -20,12 +20,16 @@ describe( 'CreatableSelect element', () => {
 	} );
 
 	it( 'Should render the component with class', () => {
-		const component = renderer.create( <CreatableSelect options={ options } className="test-class" /> );
+		const component = renderer.create(
+			<CreatableSelect options={ options } className="test-class" />,
+		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 
 	it( 'Should render the component with extra props', () => {
-		const component = renderer.create( <CreatableSelect options={ options } isSearchable={ false } /> );
+		const component = renderer.create(
+			<CreatableSelect options={ options } isSearchable={ false } />,
+		);
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 } );

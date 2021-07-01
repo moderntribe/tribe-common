@@ -11,7 +11,8 @@ describe( '[STORE] - form reducer', () => {
 	} );
 
 	it( 'Should add a new form', () => {
-		expect( form( DEFAULT_STATE, actions.registerForm( 20, 'tribe_organizers' ) ) ).toMatchSnapshot();
+		expect( form( DEFAULT_STATE, actions.registerForm( 20, 'tribe_organizers' ) ) )
+			.toMatchSnapshot();
 	} );
 
 	it( 'Should clear a form', () => {

@@ -30,8 +30,8 @@ describe( 'Image Element', () => {
 	} );
 
 	it( 'renders image with extra props', () => {
-		imageProps.width = "42";
-		imageProps.height = "42";
+		imageProps.width = '42';
+		imageProps.height = '42';
 		const component = renderer.create( <Image { ...imageProps } /> );
 		expect( component.toJSON() ).toMatchSnapshot();
 	} );

@@ -1,6 +1,7 @@
 /**
  * @todo: handle globals in a better way
  */
+
 export const get = ( key, defaultValue ) => window[ key ] || defaultValue;
 export const google = () => get( 'google' );
 export const wpApi = wp.api;

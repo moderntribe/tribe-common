@@ -45,7 +45,7 @@ const Checkbox = ( {
 Checkbox.defaultProps = {
 	checked: false,
 	onChange: noop,
-}
+};
 
 Checkbox.propTypes = {
 	checked: PropTypes.bool.isRequired,

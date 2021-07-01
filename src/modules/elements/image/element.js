@@ -9,7 +9,7 @@ const Image = ( {
 	alt,
 	className,
 	src,
-	...rest,
+	...rest
 } ) => (
 	<img
 		src={ src }

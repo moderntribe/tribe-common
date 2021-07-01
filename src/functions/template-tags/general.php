@@ -26,7 +26,29 @@ if ( ! function_exists( 'tribe_get_option' ) ) {
 	 * @todo Abstract this function out of template tags or otherwise secure it from other namespace conflicts.
 	 */
 	function tribe_get_option( $optionName, $default = '' ) {
-		return apply_filters( 'tribe_get_option', Tribe__Settings_Manager::get_option( $optionName, $default ), $optionName, $default );
+		$value = Tribe__Settings_Manager::get_option( $optionName, $default );
+
+		/**
+		 * Allow filtering of all options retrieved via tribe_get_option().
+		 *
+		 * @since 4.0.1
+		 *
+		 * @param mixed $value Value of the option if found.
+		 * @param string $optionName Name of the option to retrieve.
+		 * @param string $default    Value to return if no such option is found.
+		 */
+		$value = apply_filters( 'tribe_get_option', $value, $optionName, $default );
+
+		/**
+		 * Allow filtering of a specific option retrieved via tribe_get_option().
+		 *
+		 * @since 4.0.1
+		 *
+		 * @param mixed $value Value of the option if found.
+		 * @param string $optionName Name of the option to retrieve.
+		 * @param string $default    Value to return if no such option is found.
+		 */
+		return apply_filters( "tribe_get_option_{$optionName}", $value, $optionName, $default );
 	}
 }//end if
 

@@ -14,7 +14,7 @@ export const percentage = ( value = 0, total = 0 ) => {
 
 	if ( isNaN( result ) ) {
 		throw new RangeError(
-			`Make sure ${value} and ${total} are valid numbers, operation result in NaN value`
+			`Make sure ${ value } and ${ total } are valid numbers, operation result in NaN value`,
 		);
 	}
 

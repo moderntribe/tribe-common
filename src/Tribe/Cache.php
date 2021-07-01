@@ -556,14 +556,17 @@ class Tribe__Cache implements ArrayAccess {
 		}
 
 		$chunks = [];
-		$i      = 1;
+		$i      = 0;
 		do {
 			$chunk_transient            = $transient . '_' . $i++;
 			$chunk                      = get_transient( $chunk_transient );
 			$chunks[ $chunk_transient ] = (string) $chunk;
 		} while ( ! empty( $chunk ) );
 
-		if ( empty( array_filter( $chunks ) ) ) {
+		// Remove any piece of data that was added but is not relevant.
+		$chunks = array_filter( $chunks );
+
+		if ( empty( $chunks ) ) {
 			return false;
 		}
 
@@ -571,12 +574,13 @@ class Tribe__Cache implements ArrayAccess {
 			$data          = implode( '', $chunks );
 			$is_serialized = preg_match( '/^[aO]:\\d+:/', $data );
 			$unserialized  = maybe_unserialize( implode( '', $chunks ) );
+
 			if ( is_string( $unserialized ) && $unserialized === $data && $is_serialized ) {
 				// Something was messed up.
 				return false;
 			}
 
-			return true;
+			return $unserialized;
 		} catch ( Exception $e ) {
 			return false;
 		}

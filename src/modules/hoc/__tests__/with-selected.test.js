@@ -30,14 +30,14 @@ describe( 'withSelected', () => {
 
 	test( 'onBlur called when is not selected on mount', () => {
 		props.isSelected = false;
-		const component = mount( <HOC { ...props } /> );
+		const component = mount( <HOC { ...props } /> ); // eslint-disable-line no-unused-vars
 		expect( props.onBlockBlur ).toHaveBeenCalled();
 		expect( props.onBlockFocus ).not.toHaveBeenCalled();
 	} );
 
 	test( 'onFocus called when is selected on mount', () => {
 		props.isSelected = true;
-		const component = mount( <HOC { ...props } /> );
+		const component = mount( <HOC { ...props } /> ); // eslint-disable-line no-unused-vars
 		expect( props.onBlockFocus ).toHaveBeenCalled();
 		expect( props.onBlockBlur ).not.toHaveBeenCalled();
 	} );

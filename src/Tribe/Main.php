@@ -19,7 +19,7 @@ class Tribe__Main {
 	const OPTIONNAME          = 'tribe_events_calendar_options';
 	const OPTIONNAMENETWORK   = 'tribe_events_calendar_network_options';
 
-	const VERSION             = '4.13.6';
+	const VERSION             = '4.14.1';
 
 	const FEED_URL            = 'https://theeventscalendar.com/feed/';
 
@@ -259,6 +259,15 @@ class Tribe__Main {
 				'conditionals' => [ $this, 'should_load_common_admin_css' ],
 				'priority'     => 5,
 			]
+		);
+
+		// Register the asset for Customizer controls.
+		tribe_asset(
+			$this,
+			'tribe-customizer-controls',
+			'customizer-controls.css',
+			[],
+			'customize_controls_print_styles'
 		);
 
 		tribe( Tribe__Admin__Help_Page::class )->register_assets();

@@ -45,7 +45,6 @@ const TimePicker = ( {
 	step,
 	timeFormat,
 } ) => {
-
 	const renderLabel = ( onAllDayClick ) => {
 		if ( allDay ) {
 			return (
@@ -89,6 +88,12 @@ const TimePicker = ( {
 		</Fragment>
 	);
 
+	const formatLabel = ( seconds ) => {
+		return momentUtil
+			.setTimeInSeconds( moment(), seconds )
+			.format( momentUtil.toFormat( timeFormat ) );
+	};
+
 	const getItems = () => {
 		const items = [];
 
@@ -112,10 +117,6 @@ const TimePicker = ( {
 		}
 
 		return items;
-	};
-
-	const formatLabel = ( seconds ) => {
-		return momentUtil.setTimeInSeconds( moment(), seconds ).format( momentUtil.toFormat( timeFormat ) );
 	};
 
 	const renderItem = ( item, onClose ) => {

@@ -13,7 +13,7 @@ import './style.pcss';
 const Input = ( {
 	className,
 	type,
-	...rest,
+	...rest
 } ) => (
 	<input
 		className={ classNames( 'tribe-editor__input', className ) }

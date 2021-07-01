@@ -34,6 +34,7 @@ const IndicatorSeparator = () => null;
  * - https://github.com/JedWatson/react-select/issues/2630
  * - https://github.com/JedWatson/react-select/issues/2944
  */
+
 const CreatableSelect = ( { className, ...rest } ) => (
 	<ReactCreatableSelect
 		className={ classNames( 'tribe-editor__creatable-select', className ) }

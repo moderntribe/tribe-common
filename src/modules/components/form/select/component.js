@@ -55,7 +55,7 @@ export default class Select extends PureComponent {
 			<button
 				className={ classnames(
 					'tribe-common-form-select__options__option',
-					this.props.optionClassName
+					this.props.optionClassName,
 				) }
 				key={ option.value }
 				onClick={ partial( this._onOptionClick, onClose, option.value ) }
@@ -103,8 +103,9 @@ export default class Select extends PureComponent {
 	render() {
 		return (
 			<Dropdown
-				className={ classnames( 'tribe-common-form-select',
-					this.props.className
+				className={ classnames(
+					'tribe-common-form-select',
+					this.props.className,
 				) }
 				position="bottom center"
 				contentClassName="tribe-common-form-select__content"

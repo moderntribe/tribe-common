@@ -30,7 +30,7 @@ export default class PluginBlockHooks extends PureComponent {
 		] ),
 		/**
 		 * Plugins to be used
-		*/
+		 */
 		plugins: PropTypes.arrayOf( PropTypes.string ).isRequired,
 		/**
 		 * Plugin template structure needed to properly

@@ -48,7 +48,7 @@ export default () => ( next ) => async ( action ) => {
 	actions.start( endpoint, params );
 
 	const headers = {
-		'Accept': 'application/json',
+		Accept: 'application/json',
 		'Content-Type': 'application/json',
 		...get( params, 'headers', {} ),
 		'X-WP-Nonce': wpRESTNonce,

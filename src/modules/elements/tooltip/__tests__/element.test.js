@@ -10,7 +10,7 @@ import renderer from 'react-test-renderer';
 import Tooltip from '@moderntribe/common/elements/tooltip/element';
 
 jest.mock( '@wordpress/components', () => ( {
-	Tooltip: ({ text, position, children }) => (
+	Tooltip: ( { text, position, children } ) => (
 		<div>
 			<span>{ text }</span>
 			<span>{ position }</span>
@@ -27,7 +27,7 @@ describe( 'Tooltip Element', () => {
 			position: 'bottom left',
 			text: 'here is the tooltip text',
 		};
-		const component = renderer.create( <Tooltip { ...props } />)
-		expect( component.toJSON() ).toMatchSnapshot()
+		const component = renderer.create( <Tooltip { ...props } /> );
+		expect( component.toJSON() ).toMatchSnapshot();
 	} );
 } );

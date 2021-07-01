@@ -32,7 +32,7 @@ describe( 'HOC - With Form', () => {
 	beforeEach( () => {
 		setFormID = jest.fn( () => 'posts' );
 		Wrapper = withForm( setFormID )( Block );
-		component = renderer.create( <Wrapper store={ store } postType="post"/> );
+		component = renderer.create( <Wrapper store={ store } postType="post" /> );
 		instance = component.root;
 	} );
 

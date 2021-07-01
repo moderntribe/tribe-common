@@ -84,8 +84,8 @@
 	#top .main_color & {
 
 		.tribe-common-form-control-toggle__label {
-			font-weight: var(--font-weight-regular);
 			font-size: var(--font-size-1);
+			font-weight: var(--font-weight-regular);
 		}
 	}
 
@@ -93,12 +93,13 @@
 	 * Theme Overrides - Twenty Twenty
 	 * ------------------------------------------------------------------------- */
 
-	 .tribe-theme-twentytwenty & {
+	.tribe-theme-twentytwenty & {
+
 		.tribe-common-form-control-toggle__input {
 			top: 0;
 		}
 
-		.tribe-common-form-control-toggle__input:checked::before {
+		.tribe-common-form-control-toggle__input:checked:before {
 			content: none;
 		}
 	}
@@ -107,7 +108,8 @@
 	 * Theme Overrides - Twenty Twentyone
 	 * ------------------------------------------------------------------------- */
 
-	 .tribe-theme-twentytwentyone & {
+	.tribe-theme-twentytwentyone & {
+
 		.tribe-common-form-control-toggle__input:after {
 			display: none; /* Prevents theme adding a check mark to the toggle */
 		}

@@ -10,7 +10,7 @@ const Link = ( {
 	className,
 	href,
 	target,
-	...props,
+	...props
 } ) => {
 	const getProps = () => {
 		const elemProps = { ...props };

@@ -346,7 +346,7 @@ class Tribe__Cost_Utils {
 		}
 
 		$output_costs = [];
-		$costs        = call_user_func_array( 'array_merge', $costs );
+		$costs        = call_user_func_array( 'array_merge', array_values( $costs ) );
 
 		foreach ( $costs as $cost ) {
 			$numeric_cost = str_replace( $this->get_separators(), '.', $cost );

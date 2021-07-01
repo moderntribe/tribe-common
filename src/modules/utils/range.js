@@ -4,35 +4,6 @@
 import { trim, isEmpty, split } from 'lodash';
 
 /**
- * Parse a string into a range type of string {a} - {b} where a and b are numbers
- *
- * @param {string} input The original string
- * @returns {string} A formatted range string.
- */
-export const parser = ( input ) => {
-	const range = trim( input );
-
-	if ( isEmpty( range ) ) {
-		return range;
-	}
-
-	const chars = parseChars( input );
-
-	if ( isEmpty( chars ) ) {
-		return chars;
-	}
-
-	const [ a, b ] = extractParts( chars );
-	const [ num_a, num_b ] = [ parseFloat( a ), parseFloat( b ) ];
-
-	if ( ! num_b || num_b === num_a ) {
-		return num_a === 0 ? '' : trim( a );
-	}
-
-	return num_a >= num_b ? `${ trim( b ) } - ${ trim( a ) }` : `${ trim( a ) } - ${ trim( b ) }`;
-};
-
-/**
  * Remove any char that is not a: number, dash, dot or comma.
  *
  * @param {string} input The string from where to extract the chars
@@ -52,7 +23,7 @@ export const parseChars = ( input = '' ) => (
  * Extract only valid numbers from the string
  *
  * @param {string} chars The chars to be split into parts.
- * @returns {array} An array with the parts
+ * @returns {Array} An array with the parts
  */
 export const extractParts = ( chars ) => (
 	split( chars.replace( /,/g, '.' ), '-' )
@@ -71,6 +42,35 @@ export const extractParts = ( chars ) => (
 		.filter( ( item ) => ! isNaN( item ) )
 		.slice( 0, 2 )
 );
+
+/**
+ * Parse a string into a range type of string {a} - {b} where a and b are numbers
+ *
+ * @param {string} input The original string
+ * @returns {string} A formatted range string.
+ */
+export const parser = ( input ) => {
+	const range = trim( input );
+
+	if ( isEmpty( range ) ) {
+		return range;
+	}
+
+	const chars = parseChars( input );
+
+	if ( isEmpty( chars ) ) {
+		return chars;
+	}
+
+	const [ a, b ] = extractParts( chars );
+	const [ numA, numB ] = [ parseFloat( a ), parseFloat( b ) ];
+
+	if ( ! numB || numB === numA ) {
+		return numA === 0 ? '' : trim( a );
+	}
+
+	return numA >= numB ? `${ trim( b ) } - ${ trim( a ) }` : `${ trim( a ) } - ${ trim( b ) }`;
+};
 
 /**
  * Test to see if an input range is free of cost

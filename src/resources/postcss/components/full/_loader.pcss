@@ -14,10 +14,10 @@
 	 * ----------------------------------------------------------------------------- */
 
 	.tribe-common-c-loader__dot circle {
-		animation-name: tribe-common-c-loader-bounce;
+		animation-direction: normal;
 		animation-duration: 2.24s;
 		animation-iteration-count: infinite;
-		animation-direction: normal;
+		animation-name: tribe-common-c-loader-bounce;
 		fill: currentColor;
 		opacity: var(--opacity-background);
 	}
@@ -35,12 +35,8 @@
 	}
 
 	@keyframes tribe-common-c-loader-bounce {
-		0% {}
-
 		50% {
 			opacity: var(--opacity-default);
 		}
-
-		100% {}
 	}
 }

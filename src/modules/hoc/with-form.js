@@ -15,7 +15,7 @@ import { actions, selectors } from '@moderntribe/common/data/forms';
 /**
  * HOC that register a new object associated with set of fields for a form
  *
- * @param {function} getName Function used to set the name of the form, has a props param to generate the name
+ * @param {Function} getName Function used to set the name of the form, has a props param to generate the name
  * @returns {function(*): *} Returns a function that takes a Component as argument and returns a component.
  */
 export default ( getName = noop ) => ( WrappedComponent ) => {

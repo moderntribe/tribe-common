@@ -1,3 +1,6 @@
+/**
+ * Internal dependencies
+ */
 import * as date from './date';
 import * as dom from './dom';
 import * as globals from './globals';

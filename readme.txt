@@ -1,8 +1,21 @@
 == Changelog ==
 
-= [4.13.6] TBD =
+= [4.14.1] TBD =
 
 
+
+= [4.14.0] 2021-07-01 =
+
+* Feature - Add new custom Customizer controls.
+* Tweak - Add central compatibility functionality. A step in the move from using body classes to container classes.
+* Language - 0 new strings added, 22 updated, 1 fuzzied, and 0 obsoleted
+
+= [4.13.5] 2021-06-23 =
+
+* Feature - Add checkbox switch template and css [VE-353]
+* Fix - Fix call to call_user_func_array( 'array_merge'... ) to make PHP8 compatible
+* Tweak - Set up recurring, featured, and virtual icons to not rely on aria-labeled. [TEC-3396]
+* Language - 3 new strings added, 1 updated, 2 fuzzied, and 0 obsoleted
 
 = [4.13.4] 2021-06-09 =
 
@@ -11,7 +24,7 @@
 
 = [4.13.3] 2021-05-27 =
 
-* Feature - Create new functionality in Tribe__Customizer__Section to allow for simpler craetion of controls and sections. [TEC-3836]
+* Feature - Create new functionality in Tribe__Customizer__Section to allow for simpler creation of controls and sections. [TEC-3836]
 * Feature - Added the `set_chunkable_transient` and `get_chunkable_transient` functions to the Cache class, see doc-blocks. [TEC-3627]
 * Fix - Compatibility with Avada themes and third party plugins or themes loading `selectWoo` at the same time. [ECP-737]
 * Tweak - Adjust the actions used to register and load the styles for the tooltip component [TEC-3796]

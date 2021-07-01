@@ -485,7 +485,6 @@ class CacheTest extends \Codeception\TestCase\WPTestCase {
 		// Create a value that, in string format, is below the max allowed packet size.
 		$value                  = (object) [ 'value' => str_repeat( 'test', 100 ) ];
 		$set_transient_calls    = [];
-		$delete_transient_calls = [];
 		$this->set_fn_return( 'wp_using_ext_object_cache', false );
 		$this->set_fn_return( 'set_transient', static function ( $name, $value ) use ( &$set_transient_calls ) {
 			$set_transient_calls[] = $name;
@@ -504,4 +503,33 @@ class CacheTest extends \Codeception\TestCase\WPTestCase {
 		// Then get the chunkable transient; when found broken, it should drop the other chunks.
 		$this->assertFalse( $cache->get_chunkable_transient( '__test__', [ 'save_post' ] ) );
 	}
+
+	/**
+	 * should return the chunks from the cache correctly when the cache is stored
+	 *
+	 * @test
+	 */
+	 public function should_return_the_chunks_from_the_cache_correctly_when_the_cache_is_stored() {
+		 // Set a size for the MySQL max_allowed_packet_size in bytes.
+		 add_filter( 'tribe_max_allowed_packet_size', static function () {
+			 return 100;
+		 } );
+		 // Create a value that, in string format, is higher the max allowed packet size.
+		 $value                  = [ 'value' => str_repeat( 'test', 250 ) ];
+		 $set_transient_calls    = [];
+		 $this->set_fn_return( 'wp_using_ext_object_cache', false );
+		 $this->set_fn_return( 'set_transient', static function ( $name, $value ) use ( &$set_transient_calls ) {
+			 $set_transient_calls[] = $name;
+
+			 // Log the call.
+			 return set_transient( $name, $value );
+		 }, true );
+
+		 $cache = $this->make_instance();
+
+		 $this->assertTrue( $cache->set_chunkable_transient( '__test___retrival__from__cache', $value, DAY_IN_SECONDS, [ 'save_post' ] ) );
+
+		 // The value from the cache should be the same that was stored.
+		 $this->assertSame( $value, $cache->get_chunkable_transient( '__test___retrival__from__cache', [ 'save_post' ] ) );
+	 }
 }

@@ -106,7 +106,7 @@ describe( '[STORE] - wp-request middleware', () => {
 			id: 201,
 			date: '2018-05-26T23:07:05',
 			meta: {
-				title: 'Creating a post....'
+				title: 'Creating a post....',
 			},
 		};
 
