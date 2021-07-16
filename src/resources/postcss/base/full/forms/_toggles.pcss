@@ -38,7 +38,7 @@
 		@mixin form-control-slider-toggle-track;
 
 		appearance: none;
-		background-color: var(--form-color-border-secondary);
+		background-color: var(--tec-form-color-border-secondary);
 		width: 40px;
 
 		&::-ms-check {
@@ -52,11 +52,11 @@
 			left: 0;
 			position: absolute;
 			top: 0;
-			transition: var(--transition-transform);
+			transition: var(--tec-transition-transform);
 		}
 
 		&:checked {
-			background-color: var(--form-color-accent-primary);
+			background-color: var(--tec-form-color-accent-primary);
 
 			+ label:before {
 				transform: translateX(20px);
@@ -67,7 +67,7 @@
 	.tribe-common-form-control-toggle__label {
 		@mixin desktop-body-3;
 
-		color: var(--color-text-secondary);
+		color: var(--tec-color-text-secondary);
 	}
 
 	/* -----------------------------------------------------------------------------
@@ -84,8 +84,8 @@
 	#top .main_color & {
 
 		.tribe-common-form-control-toggle__label {
-			font-size: var(--font-size-1);
-			font-weight: var(--font-weight-regular);
+			font-size: var(--tec-font-size-1);
+			font-weight: var(--tec-font-weight-regular);
 		}
 	}
 

@@ -82,10 +82,7 @@ class Theme_CompatibilityTest extends WPTestCase {
 	 * @test
 	 */
 	public function should_not_need_compatibility_for_non_supported_themes() {
-		update_option( 'template', 'invalid-value-for-theme' );
-		update_option( 'stylesheet', 'invalid-value-for-theme' );
-
-		$is_compatibility_required = Theme_Compatibility::is_compatibility_required();
+		$is_compatibility_required = Theme_Compatibility::is_compatibility_required( 'invalid-value-for-theme' );
 
 		$this->assertFalse( $is_compatibility_required );
 	}

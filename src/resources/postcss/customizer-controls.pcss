@@ -1,5 +1,7 @@
 /* = Customizer Controls (V2)
 ============================ */
+@import "utilities/_variables-full.pcss";
+@import "utilities/_all.pcss";
 
 .wp-customizer {
 
@@ -7,19 +9,19 @@
 
 		.customize-control-description {
 			font-style: normal;
-			margin-bottom: 12px;
+			margin-bottom: var(--tec-spacer-2);
 		}
 
 		.customize-control-title {
 			margin-bottom: 0;
 
 			& ~ .customize-control-content {
-				margin-top: 8px;
+				margin-top: var(--tec-spacer-1);
 			}
 
 			& ~ .customize-control-description {
-				margin-top: 4px;
 				margin-bottom: 3px;
+				margin-top: var(--tec-spacer-0);
 			}
 		}
 
@@ -28,27 +30,260 @@
 		}
 
 		.button.wp-color-result {
-			border-color: #141827;
+			border-color: var(--tec-color-text-primary);
 
 			&:active,
 			&:focus,
 			&:hover {
-				border-color: #141827;
-				box-shadow: 0px 0px 0px .75px rgba(20, 24, 39, .5);
+				border-color: var(--tec-color-text-primary);
+				box-shadow: 0 0 0 0.75px rgba(20, 24, 39, 0.5);
 			}
 		}
 
-		/* This handles a hidden color control based on a radio option - brings it closer to the radio control. */
-		/* Note it requires the radio name end in "_choice" and the color control end in "_color" */
+		/*
+		 * This handles a hidden color control based on a radio option - brings it closer to the radio control.
+		 * Note it requires the radio name end in "_choice" and the color control end in "_color"
+		 */
 		&[id$="_choice"].customize-control-radio + [id^="customize-control-tribe_customizer"][id$="_color"] {
 			margin-top: -18px;
 		}
 
-		/* This handles a hidden color control based on a toggle option - brings it closer to the toggle control. */
-		/* Note it requires the toggle name end in "_choice" and the color control end in "_color" */
+		/* Range Slider, TEC-style */
+
+		.tec-range-slider-label {
+			@mixin visually-hide;
+		}
+
+		input[type=range].tec-range-slider {
+			-webkit-appearance: none;
+			background-color: transparent;
+			border-radius: 9px;
+			width: calc(100% - 24px);
+
+			&:active,
+			&:focus,
+			&:focus-visible {
+				box-shadow: 0 0 0 2px var(--tec-color-accent-primary);
+				outline: none;
+			}
+
+			/* Track styles for allthebrowsers */
+
+			&::-moz-range-track {
+				background-color: var(--tec-color-background);
+				border: 0;
+				border-radius: 3px;
+				cursor: pointer;
+				height: 3px;
+				width: 100%;
+			}
+
+			&::-webkit-slider-runnable-track {
+				background-color: #fff;
+				border: 0;
+				border-radius: 3px;
+				cursor: pointer;
+				height: 3px;
+				width: 100%;
+			}
+
+			&::-ms-track {
+				background-color: var(--tec-color-background);
+				border: 0;
+				border-radius: 3px;
+				cursor: pointer;
+				height: 3px;
+				width: 100%;
+			}
+
+			&::-moz-range-progress {
+				background-color: var(--tec-color-accent-primary);
+				border-radius: 3px;
+				height: 3px;
+			}
+
+			&::-webkit-progress-value {
+				background-color: var(--tec-color-accent-primary);
+			}
+
+			&::-ms-fill-lower {
+				background-color: var(--tec-color-accent-primary);
+			}
+
+			/* Thumb styles for allthebrowsers */
+
+			&::-moz-range-thumb {
+				background-color: var(--tec-color-background);
+				border: 5px solid var(--tec-color-accent-primary);
+				border-radius: 50%;
+				cursor: pointer;
+				height: 5px;
+				width: 5px;
+
+				&:active,
+				&:focus {
+					border-color: var(--tec-color-link-accent-hover);
+				}
+			}
+
+			&::-webkit-slider-thumb {
+				background-color: var(--tec-color-background);
+				border: 5px solid var(--tec-color-accent-primary);
+				border-radius: 50%;
+				cursor: pointer;
+				height: 16px;
+				margin-top: -7px;
+				width: 16px;
+				-webkit-appearance: none;
+
+				&:active,
+				&:focus {
+					border-color: var(--tec-color-link-accent-hover);
+				}
+			}
+
+			&::-ms-thumb {
+				background-color: var(--tec-color-background);
+				border: 5px solid var(--tec-color-accent-primary);
+				border-radius: 50%;
+				cursor: pointer;
+				height: 5px;
+				width: 5px;
+
+				&:active,
+				&:focus {
+					border-color: var(--tec-color-link-accent-hover);
+				}
+			}
+		}
+
+		.tec-range-slider-datalist {
+			display: flex;
+			justify-content: space-between;
+			width: calc(100% - 24px);
+		}
+
+		.tec-range-slider-option {
+			text-align: center;
+
+			&:first-child {
+				text-align: left;
+			}
+
+			&:last-child {
+				text-align: right;
+			}
+		}
+
+		/* Toggle Switch, TEC-style */
+
+		&.customize-control-toggle {
+
+			.customize-inside-control-row {
+				display: flex;
+				justify-content: space-between;
+				margin-left: 0;
+				padding-left: 0;
+			}
+
+			.tec-switch-label {
+				align-items: center;
+				display: inline-flex;
+				margin: 5px 0;
+
+				&:active,
+				&:focus,
+				&:focus-visible {
+					outline: none;
+
+					.tec-switch-toggle {
+						box-shadow: 0 0 0 2px var(--tec-color-accent-primary);
+					}
+				}
+			}
+
+			.tec-switch-toggle {
+				border-radius: 12px;
+				cursor: pointer;
+				font-size: 16px;
+				padding: 2px;
+				position: relative;
+
+				&:before,
+				&:after {
+					content: '';
+					display: block;
+					margin: 0;
+					transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+				}
+
+				&:before {
+					background-color: var(--tec-color-background-secondary);
+					border: 1px solid var(--tec-color-icon-secondary);
+					border-radius: 0.55em;
+					height: 1.125em;
+					opacity: 0.6;
+					width: 2.75em;
+				}
+
+				&:after {
+					background-color: var(--tec-color-icon-disabled);
+					border-radius: 50%;
+					height: 16px;
+					left: 3px;
+					position: absolute;
+					top: 50%;
+					transform: translate(0, -50%);
+					width: 16px;
+				}
+			}
+
+			.tec-switch-input {
+				@mixin visually-hide;
+
+				&:checked {
+					+ .tec-switch-toggle:before {
+						background-color: var(--tec-color-accent-primary);
+						border-color: rgba(51, 74, 255, 0.6);
+						opacity: 1;
+					}
+
+					+ .tec-switch-toggle:after {
+						background-color: var(--tec-color-background);
+						transform: translate(calc(41px - 100%), -50%);
+					}
+				}
+
+				&:disabled {
+					+ .tec-switch-toggle {
+						cursor: not-allowed;
+						filter: grayscale(100%);
+						opacity: 0.6;
+					}
+				}
+
+				&:focus {
+					+ .tec-switch-toggle:before {
+						border-color: var(--tec-color-accent-primary);
+					}
+				}
+			}
+
+			.toggle-label-off {
+				margin-right: 4px;
+			}
+
+			.toggle-label-on {
+				margin-left: 4px;
+			}
+		}
+
+		/*
+		 * This handles a hidden color control based on a toggle option - brings it closer to the toggle control.
+		 * Note it requires the toggle name end in "_choice" and the color control end in "_color"
+		 */
 		&[id$="_choice"].customize-control-toggle + [id^="customize-control-tribe_customizer"][id$="_color"] {
 			margin-top: -8px;
 		}
-
 	}
 }

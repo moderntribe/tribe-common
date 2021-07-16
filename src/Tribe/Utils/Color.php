@@ -7,6 +7,8 @@ defined( 'WPINC' ) or die;
  *
  * @package Common
  * @since 4.3
+ *
+ * @since TBD Added getHexWithHash function.
  */
 
 /**
@@ -330,10 +332,16 @@ class Tribe__Utils__Color {
 		return $this->_hsl;
 	}
 	/**
-	 * Returns your original color
+	 * Returns your original color minus any hash mark.
 	 */
 	public function getHex() {
 		return $this->_hex;
+	}
+	/**
+	 * Returns your original color with the hash mark.
+	 */
+	public function getHexWithHash() {
+		return '#' . $this->_hex;
 	}
 	/**
 	 * Returns your color's RGB array

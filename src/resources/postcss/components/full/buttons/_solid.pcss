@@ -13,7 +13,7 @@
 	a.tribe-common-c-btn {
 		@mixin button-solid;
 
-		background-color: var(--color-accent-primary);
+		background-color: var(--tec-color-button-primary);
 		padding: 11px 20px 11px;
 		width: 100%;
 
@@ -23,15 +23,15 @@
 
 		&:focus,
 		&:hover {
-			background-color: var(--color-accent-primary-hover);
+			background-color: var(--tec-color-button-primary-hover);
 		}
 
 		&:active {
-			background-color: var(--color-accent-primary-active);
+			background-color: var(--tec-color-button-primary-active);
 		}
 
 		&:disabled {
-			background-color: var(--color-accent-primary-background);
+			background-color: var(--tec-color-button-primary-background);
 		}
 	}
 
@@ -51,8 +51,8 @@
 
 			&:hover,
 			&:focus {
-				background-color: var(--color-accent-primary-hover);
-				color: var(--color-background);
+				background-color: var(--tec-color-button-primary-hover);
+				color: var(--tec-color-background);
 			}
 		}
 	}
@@ -64,12 +64,12 @@
 	.tribe-theme-twentytwenty & {
 
 		.tribe-common-c-btn {
-			background-color: var(--color-accent-primary);
+			background-color: var(--tec-color-button-primary);
 
 			&:hover,
 			&:focus {
-				background-color: var(--color-accent-primary-hover);
-				color: var(--color-background);
+				background-color: var(--tec-color-button-primary-hover);
+				color: var(--tec-color-background);
 			}
 		}
 	}
@@ -80,9 +80,13 @@
 
 	.tribe-theme-twentytwentyone & {
 
-		.tribe-common-c-btn:not(:hover):not(:active) {
-			background-color: var(--color-accent-primary);
-			color: var(--color-background);
+		.tribe-common-c-btn {
+			outline: none;
+
+			&:not(:hover):not(:active) {
+				background-color: var(--tec-color-button-primary);
+				color: var(--tec-color-background);
+			}
 		}
 	}
 }

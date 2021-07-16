@@ -113,6 +113,7 @@ final class Tribe__Customizer {
 		add_action( 'customize_register', [ $this, 'register' ], 15 );
 
 		add_action( 'wp_print_footer_scripts', [ $this, 'print_css_template' ], 15 );
+		add_action( 'customize_controls_print_footer_scripts', [ $this, 'tribe_customize_controls_print_footer_scripts' ], 15 );
 
 		// front end styles from customizer
 		add_action( 'tribe_events_pro_widget_render', [ $this, 'inline_style' ], 101 );
@@ -392,6 +393,22 @@ final class Tribe__Customizer {
 	}
 
 	/**
+	 * Undocumented function
+	 *
+	 * @since TBD
+	 *
+	 * @return void
+	 */
+	public function tribe_customize_controls_print_footer_scripts() {
+		/**
+		 * Allows plugins to hook in and add any scripts they need at the right time.
+		 *
+		 * @param Tribe__Customizer $customizer The current instance of Tribe__Customizer.
+		 */
+		do_action( 'tribe_enqueue_customizer_scripts', $this );
+	}
+
+	/**
 	 * Print the CSS for the customizer on `wp_print_footer_scripts`
 	 *
 	 * @since 4.12.6 Moved the template building code to the `get_styles_scripts` method.
@@ -519,7 +536,7 @@ final class Tribe__Customizer {
 
 				if ( $just_print ) {
 					printf(
-						"<style id='%s-inline-css' type='text/css'>\n%s\n</style>\n",
+						"<style id='%s-inline-css' class='tec-customizer-inline-style' type='text/css'>\n%s\n</style>\n",
 						esc_attr( $sheet ),
 						$inline_style
 					);

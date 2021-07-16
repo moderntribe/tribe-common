@@ -81,8 +81,31 @@ abstract class Tribe__Customizer__Section {
 	 */
 	private static $instances;
 
+	/**
+	 * Contains the arguments for the section headings.
+	 *
+	 * @since TBD
+	 *
+	 * @var array
+	 */
 	protected $content_headings = [];
+
+	/**
+	 * Contains the arguments for the section settings.
+	 *
+	 * @since TBD
+	 *
+	 * @var array
+	 */
 	protected $content_settings = [];
+
+	/**
+	 * Contains the arguments for the section controls.
+	 *
+	 * @since TBD
+	 *
+	 * @var array
+	 */
 	protected $content_controls = [];
 
 	/**
@@ -197,7 +220,7 @@ abstract class Tribe__Customizer__Section {
 	/**
 	 * Function that encapsulates the logic for if a setting should be added to the Customizer style template.
 	 * Note: this depends on a default value being set -
-	 *       if the setting value is empty OR the default value it's not displayed.
+	 *       if the setting value is empty OR set to the default value, it's not displayed.
 	 *
 	 * @since 4.13.3
 	 *
@@ -207,7 +230,7 @@ abstract class Tribe__Customizer__Section {
 	 * @return boolean If the setting should be added to the style template.
 	 */
 	public function should_include_setting_css( $setting, $section_id = null ) {
-		if ( empty( $setting ) ) {
+		if ( empty( $setting ) || ! is_string( $setting ) ) {
 			return false;
 		}
 
@@ -218,7 +241,12 @@ abstract class Tribe__Customizer__Section {
 		$setting_value = tribe( 'customizer' )->get_option( [ $section_id, $setting ] );
 		$section       = tribe( 'customizer' )->get_section( $section_id );
 
-		return ! empty( $setting_value ) && $section->get_default(  $setting ) !== $setting_value;
+		// Something has gone wrong and we can't get the section.
+		if ( false === $section ) {
+			return;
+		}
+
+		return ! empty( $setting_value ) && $section->get_default( $setting ) !== $setting_value;
 	}
 
 	/**
@@ -381,6 +409,11 @@ abstract class Tribe__Customizer__Section {
 	public function get_defaults( $settings = [] ) {
 		// Create Ghost Options
 		$settings = $this->create_ghost_settings( wp_parse_args( $settings, $this->setup_defaults() ) );
+
+		return $this->filter_defaults( $settings );
+	}
+
+	public function filter_defaults( $settings ) {
 
 		/**
 		 * Allows filtering the default values for all sections.
@@ -868,5 +901,22 @@ abstract class Tribe__Customizer__Section {
 		$template = apply_filters( "tribe_customizer_section_{$section_slug}_css_template", $template, $this );
 
 		return $template;
+	}
+
+	/**
+	 * Utility function for when we need a color in RGB format,
+	 * since the Customizer always works with hex. Keepin' it DRY.
+	 *
+	 * @since TBD
+	 *
+	 * @param string $option The option slug, like "grid-lines-color"
+	 *
+	 * @return string $color_rgb The hex color expressed as an rgb string, like "255,255,255"
+	 */
+	public function get_rgb_color( $option ) {
+		$color_obj   = new Tribe__Utils__Color( $this->get_option( $option ) );
+		$color_arr   = $color_obj->getRgb();
+		$color_rgb   = $color_arr['R'] . ',' . $color_arr['G'] . ',' . $color_arr['B'];
+		return $color_rgb;
 	}
 }

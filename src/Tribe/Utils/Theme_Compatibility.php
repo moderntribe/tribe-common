@@ -35,7 +35,7 @@ class Theme_Compatibility {
 	 *
 	 * @since  4.14.0
 	 *
-	 * @param string $theme Optionally, pass a specific theme name in to see if compatibility
+	 * @param null|string $theme Optionally, pass a specific theme name in to see if compatibility
 	 *                      is required for that theme.
 	 *
 	 * @return boolean
@@ -54,7 +54,17 @@ class Theme_Compatibility {
 
 		$required = in_array( $theme, static::get_registered_themes() );
 
-		return tribe_is_truthy( apply_filters( 'tribe_compatibility_required', $required, $theme ) );
+		/**
+		 * Allows hooking in to enforce compatibility by other plugins.
+		 *
+		 * @since 4.14.0
+		 *
+		 * @param boolean $required  If compatibility is required.
+		 * @param null|string $theme The optional theme name string.
+		 */
+		$required = apply_filters( 'tribe_compatibility_required', $required, $theme );
+
+		return tribe_is_truthy( $required );
 	}
 
 	/**
