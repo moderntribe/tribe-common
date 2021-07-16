@@ -1,5 +1,7 @@
 == Changelog ==
 
+* Fix - Updated dropdowns controlled via ajax to return unescaped html entities instead of the escaped version. [CE-97]
+
 = [4.14.0] 2021-07-01 =
 
 * Feature - Add new custom Customizer controls.

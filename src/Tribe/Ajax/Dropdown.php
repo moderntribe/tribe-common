@@ -88,6 +88,10 @@ class Tribe__Ajax__Dropdown {
 			}
 		}
 
+		foreach ( $results as $result ) {
+			$result->text = wp_kses_post( htmlspecialchars_decode( $result->text ) );
+		}
+
 		$data['results']    = $results;
 		$data['taxonomies'] = get_taxonomies();
 
