@@ -305,7 +305,7 @@ class Tribe__Settings_Manager {
 		 * Include Help tab Assets here
 		 */
 
-		include_once Tribe__Main::instance()->plugin_path . 'src/admin-views/tribe-options-help.php';
+		include_once Tribe__Main::instance()->plugin_path . 'src/admin-views/help.php';
 	}
 
 	/**

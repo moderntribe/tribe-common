@@ -350,7 +350,7 @@ if ( ! class_exists( 'Tribe__Support' ) ) {
 		}
 
 		/*
-		 * Create Unique Enpoint Per Site
+		 * Create Unique Endpoint Per Site
 		 */
 		public static function create_sysinfo_endpoint() {
 			$optin_key = get_option( 'tribe_systeminfo_optin' );
