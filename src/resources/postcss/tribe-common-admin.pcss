@@ -1,5 +1,5 @@
 /* = Shared CSS Elements
-=============================================*/
+============================================= */
 .invalid input,
 input:out-of-range {
 	border: 2px solid red !important;
@@ -69,7 +69,7 @@ td.tribe_message {
 }
 
 /* = Upgrade Screen
-=============================================*/
+============================================= */
 #tribe-upgrade {
 	background: #f6f6f6;
 	border: 1px solid #ccc;
@@ -88,7 +88,7 @@ td.tribe_message {
 }
 
 /* = Plugin Screen
-=============================================*/
+============================================= */
 table.plugins {
 
 	.tribe-plugin-update-message {
@@ -116,7 +116,7 @@ table.plugins {
 }
 
 /* = Settings Screen
-=============================================*/
+============================================= */
 .tribe-settings-form {
 	max-width: 1000px;
 
@@ -149,13 +149,13 @@ table.plugins {
 	.tribe-field-radio,
 	.tribe-field-checkbox_list {
 		label {
-			display:     block;
-			margin:      5px 0 5px 20px;
+			display: block;
+			margin: 5px 0 5px 20px;
 			text-indent: -20px;
 
 			> p {
-				text-indent: 0;
 				margin-left: 1px;
+				text-indent: 0;
 			}
 
 			input {
@@ -173,6 +173,7 @@ table.plugins {
 	.tribe-settings-form-wrap {
 
 		fieldset {
+
 			.description {
 				margin-left: 0;
 				max-width: 450px;
@@ -183,7 +184,9 @@ table.plugins {
 				margin-bottom: 18px;
 			}
 		}
+
 		#tribe-field-stylesheetOption {
+
 			.description {
 				color: #999;
 				margin-left: 1px;
@@ -319,7 +322,7 @@ table.plugins {
 .tribe-field-wrapped_html.tribe-size-large .tribe-field-wrap {
 	max-width: 600px;
 
-	.description{
+	.description {
 		max-width: 100%;
 	}
 }
@@ -358,7 +361,7 @@ table.plugins {
 			padding-right: 12px;
 		}
 
-		&.tribe-field-radio{
+		&.tribe-field-radio {
 
 			.tribe-field-wrap {
 				clear: left;
@@ -436,7 +439,7 @@ table.plugins {
 }
 
 .tribe-arrangeable-item {
-	border: 1px solid lightGrey;
+	border: 1px solid lightgrey;
 	border-radius: 3px;
 }
 
@@ -458,7 +461,7 @@ table.plugins {
 
 .tribe-arrangeable-child {
 	background-color: #f9f9f9;
-	border-top: 1px solid lightGrey;
+	border-top: 1px solid lightgrey;
 	display: none;
 	padding: 25px;
 }
@@ -494,7 +497,7 @@ table.plugins {
 }
 
 /* = Help Screen
-=============================================*/
+============================================= */
 
 #tribe-help-general,
 #tribe-help-sidebar {
@@ -605,7 +608,7 @@ table.plugins {
 }
 
 #tribe-system-info dl.support-stats dd,
-.template-updates-wrapper  dd {
+.template-updates-wrapper dd {
 	margin-left: 25%;
 	padding-left: 10px;
 }
@@ -645,13 +648,13 @@ table.plugins {
 	font-weight: bold;
 }
 
-.tribe-help-plugin-info dd::after {
+.tribe-help-plugin-info dd:after {
 	content: '';
 	display: block;
-	height: .4em;
+	height: 0.4em;
 }
 
-.tribe-help-plugin-info dd:last-child::after {
+.tribe-help-plugin-info dd:last-child:after {
 	height: 0;
 }
 
@@ -691,19 +694,19 @@ table.plugins {
 }
 
 /* = jQuery UI
-=============================================*/
+============================================= */
 .ui-widget-overlay {
 	background: #666;
-	filter: Alpha(Opacity=50);
-	opacity: .50;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
 }
 
 .ui-widget-shadow {
 	background: #000;
 	border-radius: 5px;
-	filter: Alpha(Opacity=20);
+	filter: alpha(opacity=20);
 	margin: -5px 0 0 -5px;
-	opacity: .20;
+	opacity: 0.2;
 	padding: 5px;
 }
 
@@ -713,7 +716,7 @@ table.plugins {
 
 .ui-resizable-handle {
 	display: block;
-	font-size: .1px;
+	font-size: 0.1px;
 	position: absolute;
 	z-index: 99999;
 }
@@ -788,19 +791,19 @@ table.plugins {
 }
 
 .ui-dialog {
-	padding: .2em;
+	padding: 0.2em;
 	position: relative;
 	width: 375px;
 }
 
 .ui-dialog .ui-dialog-titlebar {
-	padding: .5em .3em .3em 1em;
+	padding: 0.5em 0.3em 0.3em 1em;
 	position: relative;
 }
 
 .ui-dialog .ui-dialog-title {
 	float: left;
-	margin: .1em 0 .2em;
+	margin: 0.1em 0 0.2em;
 }
 
 .ui-dialog .ui-dialog-titlebar-close {
@@ -808,7 +811,7 @@ table.plugins {
 	margin: -10px 0 0 0;
 	padding: 1px;
 	position: absolute;
-	right: .3em;
+	right: 0.3em;
 	top: 50%;
 	width: 19px;
 }
@@ -828,24 +831,24 @@ table.plugins {
 	background: none;
 	border: 0;
 	overflow: auto;
-	padding: .5em 1em;
+	padding: 0.5em 1em;
 	zoom: 1;
 }
 
 .ui-dialog .ui-dialog-buttonpane {
 	background-image: none;
 	border-width: 1px 0 0 0;
-	margin: .5em 0 0 0;
-	padding: .3em 1em .5em !important;
+	margin: 0.5em 0 0 0;
+	padding: 0.3em 1em 0.5em !important;
 	text-align: right;
 }
 
 .ui-dialog .ui-dialog-buttonpane button {
 	cursor: pointer;
 	line-height: 1.4em;
-	margin: .5em .4em .5em !important;
+	margin: 0.5em 0.4em 0.5em !important;
 	overflow: visible;
-	padding: .2em .6em .3em;
+	padding: 0.2em 0.6em 0.3em;
 	text-shadow: none;
 	width: auto;
 }
@@ -867,7 +870,7 @@ table.plugins {
 }
 
 .ui-button-text-only .ui-button-text {
-	padding: .4em 1em;
+	padding: 0.4em 1em;
 }
 
 .ui-button .ui-button-text {
@@ -881,7 +884,7 @@ table.plugins {
 
 #tribe-loading {
 	background: #fff;
-	background: rgba(255, 255, 255, .8);
+	background: rgba(255, 255, 255, 0.8);
 	display: none;
 	height: 100%;
 	left: 0;
@@ -893,7 +896,7 @@ table.plugins {
 }
 
 #tribe-loading span {
-	background: url(../images/tribe-loading.gif) 0 0 no-repeat;
+	background: url('../images/tribe-loading.gif') 0 0 no-repeat;
 	background-size: 32px 32px;
 	height: 32px;
 	left: 50%;
@@ -904,20 +907,20 @@ table.plugins {
 }
 
 /* = Admin Retina Bits
-=============================================*/
-@media
-only screen and (min--moz-device-pixel-ratio: 2),
-only screen and (-o-min-device-pixel-ratio: 2/1),
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min-device-pixel-ratio: 2) {
-
+============================================= */
+/* stylelint-disable media-feature-name-no-unknown */
+@media only screen and (min--moz-device-pixel-ratio: 2),
+	only screen and (-o-min-device-pixel-ratio: 2/1),
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (min-device-pixel-ratio: 2) {
+	/* stylelint-enable media-feature-name-no-unknown */
 	#tribe-loading span {
-		background-image: url(../images/tribe-loading@2x.gif);
+		background-image: url('../images/tribe-loading@2x.gif');
 	}
 }
 
 /* = Update Pages // Displays after plugin update
-===============================================================================*/
+=============================================================================== */
 
 .tribe_update_page {
 	max-width: 850px;
@@ -980,7 +983,7 @@ p.tribe-update-message {
 
 .tribe_update_page h4:before {
 	content: '\f145';
-	font-family: dashicons;
+	font-family: dashicons; /* stylelint-disable-line font-family-no-missing-generic-family-keyword */
 	font-size: 34px;
 	line-height: 1;
 	margin-right: 5px;
@@ -1022,13 +1025,11 @@ a.tribe-rating-link {
 }
 
 .tribe-events-widget-admin-form__input-section h4 {
-	margin: .5em 0;
+	margin: 0.5em 0;
 }
-
 
 /* Media Queries for Mobile Dashboard */
 @media screen and (max-width: 782px) {
-
 	.tribe-half-column,
 	.tribe-row .tribe-half-column:last-child {
 		margin: 0 0 20px 0;
@@ -1040,8 +1041,7 @@ a.tribe-rating-link {
 	}
 }
 
-@media screen and ( max-width: 782px ) {
-
+@media screen and (max-width: 782px) {
 	.events-cal .subsubsub {
 		float: none;
 	}
@@ -1072,13 +1072,9 @@ a.tribe-rating-link {
 }
 
 .tribe-update-bar .progress .bar {
-	background: #ffba00;
+	background: #7ad03a;
 	height: 1rem;
 	width: 1%;
-}
-
-.tribe-update-bar .progress .bar {
-	background: #7ad03a;
 }
 
 /* = Modals/thickbox dialogs
@@ -1104,8 +1100,8 @@ a.tribe-rating-link {
 
 	.select-single-container {
 		border: 1px solid #888;
-		overflow-y: scroll;
 		height: 300px;
+		overflow-y: scroll;
 
 		label {
 			opacity: 1;
@@ -1150,8 +1146,8 @@ a.tribe-rating-link {
 }
 
 .api-check {
-	padding: 1em;
 	min-height: 100px;
+	padding: 1em;
 
 	& + .notice-dismiss {
 
@@ -1183,11 +1179,11 @@ a.tribe-rating-link {
 
 		img {
 			display: inline-block;
+			height: 100%;
 			max-height: 150px;
 			max-width: 150px;
-			height: 100%;
-			width: auto;
 			vertical-align: middle;
+			width: auto;
 		}
 
 		@media screen and (min-width: 500px) {
@@ -1196,7 +1192,6 @@ a.tribe-rating-link {
 	}
 
 	.notice-content {
-
 		@media screen and (min-width: 500px) {
 			margin-right: 180px;
 		}
@@ -1236,6 +1231,7 @@ a.tribe-rating-link {
 		}
 	}
 }
+
 .tribe-marketing-notice {
 	padding: 1em;
 
@@ -1279,7 +1275,7 @@ a.tribe-rating-link {
 	}
 
 	.tribe-marketing-notice__content {
-		@media screen and (min-width: 600px) and (max-width: 782px ) {
+		@media screen and (min-width: 600px) and (max-width: 782px) {
 			margin-left: 145px;
 		}
 
@@ -1309,7 +1305,7 @@ a.tribe-rating-link {
 
 #wpcontent .notice-tribe-banner {
 	align-items: center;
-	background: #161B7D;
+	background: #161b7d;
 	border: 0;
 	box-shadow: none;
 	display: flex;
@@ -1335,7 +1331,7 @@ a.tribe-rating-link {
 			margin-left: 22px;
 		}
 
-		@media screen and (min-width: 600px) and (max-width: 782px ) {
+		@media screen and (min-width: 600px) and (max-width: 782px) {
 			margin-left: 22px;
 			padding: 0;
 		}
@@ -1448,7 +1444,6 @@ a.tribe-rating-link {
 	}
 }
 
-
 .tribe-ea-dropdown,
 .tribe-dropdown {
 	max-width: 100%;
@@ -1486,13 +1481,13 @@ a.tribe-rating-link {
 		}
 
 		.select2-dropdown--below {
-			margin-top: -1px;
 			border-top: 1px solid #aaa;
+			margin-top: -1px;
 		}
 
 		.select2-dropdown--above {
-			margin-bottom: -16px;
 			border-bottom: 1px solid #aaa;
+			margin-bottom: -16px;
 		}
 
 		.select2-selection--single {
@@ -1508,8 +1503,8 @@ a.tribe-rating-link {
 
 	&.select2-selection--single {
 		background-image: none;
-		border-radius: 3px;
 		border: 1px solid #ccc;
+		border-radius: 3px;
 		overflow: hidden;
 
 		> .select2-selection__rendered {
@@ -1517,8 +1512,8 @@ a.tribe-rating-link {
 		}
 
 		.select2-selection__arrow {
-			background-image: none;
 			background: transparent;
+			background-image: none;
 			border-left: 0;
 			top: 2px;
 			width: 26px;
@@ -1528,15 +1523,15 @@ a.tribe-rating-link {
 				background-size: auto;
 				background-size: 16px 16px;
 				border: 0;
-				top: 0;
 				bottom: 0;
-				left: 0;
-				right: 0;
 				display: block;
-				width: auto;
 				height: auto;
+				left: 0;
 				margin: 0;
 				padding: 0;
+				right: 0;
+				top: 0;
+				width: auto;
 			}
 		}
 	}
@@ -1544,24 +1539,24 @@ a.tribe-rating-link {
 	.select2-selection--multiple {
 		.select2-selection__rendered {
 			background-image: none;
-			border-radius: 3px;
 			border: 1px solid #ccc;
+			border-radius: 3px;
 			min-height: 25px;
 
 			.select2-search--inline {
 				line-height: 25px;
 
 				input {
-					padding-top: 0;
 					padding-bottom: 0;
+					padding-top: 0;
 				}
 			}
 
 			.select2-selection__choice {
-				margin-top: 2px;
-				padding-top: 0;
-				padding-bottom: 0;
 				line-height: 19px;
+				margin-top: 2px;
+				padding-bottom: 0;
+				padding-top: 0;
 
 				div {
 					line-height: inherit;
@@ -1569,9 +1564,9 @@ a.tribe-rating-link {
 			}
 
 			.select2-selection__choice__remove {
-				top: 3px;
 				left: 4px;
-				transition-property: border,color;
+				top: 3px;
+				transition-property: border, color;
 			}
 		}
 	}
@@ -1589,7 +1584,6 @@ a.tribe-rating-link {
 		}
 	}
 
-
 	&.select2-results__option--highlighted {
 		background-color: #efefef;
 		color: #a1a1a1;
@@ -1602,15 +1596,14 @@ a.tribe-rating-link {
 Red button styles.
 
 Credit to https://github.com/jensjns/wp-admin-red-button
-=============================================*/
+============================================= */
 .wp-core-ui .button-red {
 	background-color: #a00;
-	border-bottom-color: #8D1F21;
-	border-color: #9B2124;
-	box-shadow: inset 0 1px 0 rgba(120,200,230,0.5);
+	border-color: #9b2124;
+	box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.5);
 	color: #fff;
 	text-decoration: none;
-	text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .wp-core-ui .button-red.hover,
@@ -1618,38 +1611,38 @@ Credit to https://github.com/jensjns/wp-admin-red-button
 .wp-core-ui .button-red.focus,
 .wp-core-ui .button-red:focus {
 	background-color: #a00;
-	border-color: #7F1C1F;
-	box-shadow: inset 0 1px 0 rgba(120,200,230,0.6);
+	border-color: #7f1c1f;
+	box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6);
 	color: #fff;
-	text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
 .wp-core-ui .button-red.focus,
 .wp-core-ui .button-red:focus {
-	border-color: #500F0E;
-	box-shadow: inset 0 1px 0 rgba(120,200,230,0.6), 1px 1px 2px rgba(0,0,0,0.4);
+	border-color: #500f0e;
+	box-shadow: inset 0 1px 0 rgba(120, 200, 230, 0.6), 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .wp-core-ui .button-red.active,
 .wp-core-ui .button-red.active:hover,
 .wp-core-ui .button-red.active:focus,
 .wp-core-ui .button-red:active {
-	background: #7F1C1F;
-	border-color: #601312 #AE2426 #AE2426 #AE2426;
-	box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
-	color: rgba(255,255,255,0.95);
-	text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+	background: #7f1c1f;
+	border-color: #601312 #ae2426 #ae2426 #ae2426;
+	box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.1);
+	color: rgba(255, 255, 255, 0.95);
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .wp-core-ui .button-red[disabled],
 .wp-core-ui .button-red:disabled,
 .wp-core-ui .button-red-disabled {
-	color: #E79496 !important;
-	background: #BA292B !important;
-	border-color: #7F1C1F !important;
+	background: #ba292b !important;
+	border-color: #7f1c1f !important;
 	box-shadow: none !important;
-	text-shadow: 0 -1px 0 rgba(0,0,0,0.1) !important;
+	color: #e79496 !important;
 	cursor: default;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
 .ticket_form {
@@ -1683,20 +1676,18 @@ Credit to https://github.com/jensjns/wp-admin-red-button
 .checkmark {
 
 	&:after {
-		/*Add another block-level blank space*/
+		/* Add a white border on the bottom and left, creating that 'L' */
+		border: solid #0ab152;
+		border-width: 0 3px 3px 0;
+
+		/* Add another block-level blank space */
 		content: '';
 		display: block;
 
-		/*Make it a small rectangle so the border will create an L-shape*/
-		width: 8px;
+		/* Make it a small rectangle so the border will create an L-shape, rotate the L 45 degrees to turn it into a checkmark */
 		height: 15px;
-
-		/*Add a white border on the bottom and left, creating that 'L' */
-		border: solid #0AB152;
-		border-width: 0 3px 3px 0;
-
-		/*Rotate the L 45 degrees to turn it into a checkmark*/
 		transform: rotate(45deg);
+		width: 8px;
 	}
 
 	&.checkmark-right:after {
@@ -1722,7 +1713,7 @@ Credit to https://github.com/jensjns/wp-admin-red-button
 [data-status="ok"],
 [data-status="yes"],
 [data-status="on"] {
-	color: #0AB152;
+	color: #0ab152;
 }
 
 .incomplete,
@@ -1733,7 +1724,7 @@ Credit to https://github.com/jensjns/wp-admin-red-button
 [data-status="ko"],
 [data-status="no"],
 [data-status="off"] {
-	color: #FF2500;
+	color: #ff2500;
 }
 
 /*
@@ -1757,13 +1748,12 @@ Credit to https://github.com/jensjns/wp-admin-red-button
 	}
 }
 
-
 /* = TEC Welcome & new BEM tribe admin styles
-==============================================*/
+============================================== */
 body.tribe-welcome {
+	background-color: white;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: white;
 
 	/* hide WordPress update notices on this page */
 	.update-nag {
@@ -1797,29 +1787,28 @@ body.tribe-welcome {
 	}
 }
 
-
 .tribe-events-admin-content-wrapper {
-	font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 	font-style: normal;
 	margin: 0 auto;
 	padding: 20px;
-	width: calc( 100% - 40px );
+	width: calc(100% - 40px);
 
 	@media screen and (min-width: 710px) {
 		width: 670px;
 	}
 
 	@media screen and (min-width: 1217px) {
-		width: 100%;
 		max-width: 1060px;
+		width: 100%;
 	}
 }
 
 .tribe-events-admin-card {
-	background: #FFFFFF;
-	border: 1px solid #E1E1E4;
-	box-sizing: border-box;
+	background: #fff;
+	border: 1px solid #e1e1e4;
 	border-radius: 16px;
+	box-sizing: border-box;
 	display: block;
 	margin: 0 auto 36px auto;
 	padding: 27px;
@@ -1832,8 +1821,8 @@ body.tribe-welcome {
 	/* treat the one-up card like a three-up card at the middle break */
 	@media screen and (min-width: 710px) {
 		display: inline-block;
-		width: calc( 50% - 18px );
 		margin-left: 32px;
+		width: calc(50% - 18px);
 
 		.tribe-events-admin-card__description {
 			height: 71px;
@@ -1858,19 +1847,18 @@ body.tribe-welcome {
 			float: left;
 			margin: 0 48px 10px 0;
 		}
-
 	}
 }
 
 .tribe-events-admin-video {
-	-webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
-	-webkit-transform: rotate(0.000001deg);
 	-webkit-border-radius: 16px;
 	-moz-border-radius: 16px;
 	border-radius: 16px;
 	height: 200px; /* this is overridden by JS, but is a starting point for less flicker */
 	margin-bottom: 72px;
+	-webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
 	overflow: hidden;
+	-webkit-transform: rotate(0.000001deg);
 
 	iframe {
 		width: 100%;
@@ -1901,8 +1889,8 @@ body.tribe-welcome {
 		}
 
 		.tribe-events-admin-card__title {
-			max-width: 340px;
 			margin-bottom: 27px;
+			max-width: 340px;
 		}
 	}
 
@@ -1913,11 +1901,10 @@ body.tribe-welcome {
 }
 
 .tribe-events-admin-card--3up {
-
 	@media screen and (min-width: 710px) {
 		display: inline-block;
 		margin-bottom: 32px;
-		width: calc( 50% - 18px );
+		width: calc(50% - 18px);
 
 		&.tribe-events-admin-card--first {
 			margin-right: 32px;
@@ -1954,8 +1941,8 @@ body.tribe-welcome {
 }
 
 .tribe-events-admin-card--promo-blue {
-	background-color: #3D54FF;
-	background-image: url("../images/welcome/promo.jpg");
+	background-color: #3d54ff;
+	background-image: url('../images/welcome/promo.jpg');
 
 	@media screen and (min-width: 710px) {
 		display: block;
@@ -1971,8 +1958,8 @@ body.tribe-welcome {
 	.tribe-events-admin-card__description {
 		color: white;
 		font-size: 16px;
-		text-align: left;
 		margin-bottom: 16px;
+		text-align: left;
 
 		@media screen and (min-width: 710px) {
 			float: left;
@@ -1982,24 +1969,23 @@ body.tribe-welcome {
 		@media screen and (min-width: 1217px) {
 			max-width: 450px;
 		}
-
 	}
 
 	.tribe-events-admin-card__title {
-		text-align: left;
 		color: white;
+		text-align: left;
 	}
 }
 
 .tribe-events-admin-graphic {
 	position: absolute;
-	top: 106px;
 	right: 0;
+	top: 106px;
 	z-index: -1;
 
 	@media screen and (min-width: 710px) {
-		top: 0;
 		max-width: 250px;
+		top: 0;
 	}
 
 	@media screen and (min-width: 1217px) {
@@ -2038,10 +2024,10 @@ body.tribe-welcome {
 
 /* including the specificity on input type to override base WP admin styles */
 input[type="email"].tribe-events-admin-card__input {
-	background: #FFFFFF;
-	border: 1px solid #E1E1E4;
-	box-sizing: border-box;
+	background: #fff;
+	border: 1px solid #e1e1e4;
 	border-radius: 16px;
+	box-sizing: border-box;
 	font-size: 14px;
 	height: 54px;
 
@@ -2063,7 +2049,7 @@ input[type="email"].tribe-events-admin-card__input {
 .tribe-events-admin-card__button {
 	background-color: white;
 	border: none;
-	color: #3D54FF;
+	color: #3d54ff;
 	font-size: 14px;
 	font-weight: bold;
 	letter-spacing: 1px;
@@ -2074,13 +2060,12 @@ input[type="email"].tribe-events-admin-card__input {
 	top: 17px;
 
 	&:hover {
-		color: #161B7D;
+		color: #161b7d;
 	}
 }
 
 .tribe-events-admin-card__description {
-	color: #000000;
-
+	color: #000;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: normal;
@@ -2090,12 +2075,12 @@ input[type="email"].tribe-events-admin-card__input {
 
 .tribe-events-admin-card__image {
 	display: block;
-	margin: 0 auto 0 auto;
 	height: 100px;
+	margin: 0 auto;
 }
 
 .tribe-events-admin-card__link {
-	color: #3D54FF;
+	color: #3d54ff;
 	display: inline-block;
 	font-size: 16px;
 	font-style: normal;
@@ -2106,7 +2091,7 @@ input[type="email"].tribe-events-admin-card__input {
 	text-decoration: none;
 
 	&:hover {
-		color: #161B7D;
+		color: #161b7d;
 	}
 
 	&:after {
@@ -2121,7 +2106,7 @@ input[type="email"].tribe-events-admin-card__input {
 }
 
 .tribe-events-admin-card__title {
-	color: #0F1031;
+	color: #0f1031;
 	font-size: 20px;
 	font-weight: bold;
 	line-height: 23px;
@@ -2138,26 +2123,26 @@ input[type="email"].tribe-events-admin-card__input {
 }
 
 .tribe-events-admin-quick-nav {
-	background: #FFFFFF;
+	background: #fff;
+	border: 1px solid #e1e1e4;
 	border-radius: 16px;
-	border: 1px solid #E1E1E4;
 	box-sizing: border-box;
 	display: block;
-	margin: 40px 0 78px 0;
-	padding: 18px 23px 2px 23px;
+	margin: 40px 0 78px;
+	padding: 18px 23px 2px;
 
 	@media screen and (min-width: 1217px) {
-		display: inline-block;
 		border-radius: 100px;
-		margin: 24px 0 94px 0;
-		max-width: 1010px;
-		padding: 0 36px 0 0;
+		display: inline-block;
 		height: 54px;
+		margin: 24px 0 94px;
+		max-width: 1010px;
+		padding: 0 36px 0;
 	}
 }
 
 .tribe-events-admin-quick-nav__link {
-	color: #3D54FF;
+	color: #3d54ff;
 	font-size: 16px;
 	font-weight: bold;
 	line-height: 18px;
@@ -2165,16 +2150,17 @@ input[type="email"].tribe-events-admin-card__input {
 	text-decoration: none;
 
 	&:hover {
-		color: #161B7D;
+		color: #161b7d;
 	}
 }
+
 .tribe-events-admin-quick-nav__link-item {
 	display: block;
 	padding-bottom: 19px;
 
 	@media screen and (min-width: 1217px) {
 		display: inline-block;
-		padding: 18px 10px 0 10px;
+		padding: 18px 10px 0;
 	}
 }
 
@@ -2197,11 +2183,11 @@ input[type="email"].tribe-events-admin-card__input {
 }
 
 .tribe-events-admin-section-header {
-	color: #000000;
+	color: #000;
 	font-size: 24px;
 	font-weight: bold;
 	line-height: 28px;
-	margin: 21px 0 24px 0;
+	margin: 21px 0 24px;
 
 	@media screen and (min-width: 710px) {
 		font-size: 28px;
@@ -2219,7 +2205,7 @@ input[type="email"].tribe-events-admin-card__input {
 }
 
 .tribe-events-admin-title__description {
-	color: #0F1031;
+	color: #0f1031;
 	font-size: 16px;
 	font-weight: normal;
 	line-height: 24px;
@@ -2232,12 +2218,12 @@ input[type="email"].tribe-events-admin-card__input {
 }
 
 .tribe-events-admin-title__heading {
-	color: #0F1031;
+	color: #0f1031;
 	display: inline-block;
 	font-size: 24px;
 	font-weight: bold;
 	line-height: 28px;
-	margin: 5px 0 0 0;
+	margin: 5px 0 0;
 
 	@media screen and (min-width: 710px) {
 		font-size: 48px;
@@ -2259,21 +2245,21 @@ input[type="email"].tribe-events-admin-card__input {
 }
 
 .tribe-events-admin-notice {
-	background-color: #3D54FF;
+	background-color: #3d54ff;
 	height: 65px;
 
 	.tribe-events-admin-content-wrapper {
-		padding-top: 8px;
 		padding-bottom: 0;
+		padding-top: 8px;
 	}
 
 	p {
 		color: #fff;
 		display: inline-block;
-		font-family: Helvetica;
+		font-family: Helvetica; /* stylelint-disable-line font-family-no-missing-generic-family-keyword */
 		font-size: 16px;
 		line-height: 18px;
-		margin-top: 0px;
+		margin-top: 0;
 		padding-bottom: 12px;
 		padding-left: 16px;
 		vertical-align: middle;
@@ -2298,8 +2284,8 @@ input[type="email"].tribe-events-admin-card__input {
 	}
 
 	.tribe-events-admin-graphic--mobile-only {
-		width: 300px;
 		top: 230px;
+		width: 300px;
 	}
 
 	.tribe-events-admin-title__heading {
@@ -2335,37 +2321,36 @@ input[type="email"].tribe-events-admin-card__input {
 	}
 }
 
-
 /* -- Freemius tweaks -- */
 body.tribe-welcome #fs_connect {
-	border: 1px solid #E1E1E4;
-	box-sizing: border-box;
+	border: 1px solid #e1e1e4;
 	border-radius: 16px;
-	margin-left: 22px;
 	box-shadow: none;
+	box-sizing: border-box;
+	margin-left: 22px;
 
 	.fs-actions {
 		background-color: transparent;
 	}
 
 	.fs-permissions {
-		border-top: 1px solid #E1E1E4;
+		border-top: 1px solid #e1e1e4;
 		margin: 0 16px;
 	}
 
 	button {
-		background-color: #3D54FF;
-		border-color: #3D54FF;
+		background-color: #3d54ff;
+		border-color: #3d54ff;
 	}
 
 	.button-secondary {
-		border-color: #3D54FF;
-		color: #3D54FF;
 		background: white;
+		border-color: #3d54ff;
+		color: #3d54ff;
 	}
 
 	a {
-		color: #3D54FF;
+		color: #3d54ff;
 
 		&:focus {
 			box-shadow: none;
@@ -2373,7 +2358,7 @@ body.tribe-welcome #fs_connect {
 		}
 
 		&:hover {
-			color: #161B7D;
+			color: #161b7d;
 		}
 	}
 }
